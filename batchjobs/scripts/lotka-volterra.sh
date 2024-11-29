@@ -29,7 +29,7 @@
 
 
 # -- Activate the virtual environment --
-source /zhome/32/9/137127/Master-Thesis/.venv/bin/activate
+source /zhome/32/9/137127/.venv/bin/activate
 
 # Execute Python file
 python scripts/lotka-volterra-upinn.py
