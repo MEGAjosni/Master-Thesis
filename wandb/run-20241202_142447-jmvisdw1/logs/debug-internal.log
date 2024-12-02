@@ -1,0 +1,16 @@
+{"time":"2024-12-02T14:24:47.210451139+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-02T14:24:47.210514057+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241202_142447-jmvisdw1/logs/debug-core.log"}
+{"time":"2024-12-02T14:24:47.97391332+01:00","level":"INFO","msg":"created new stream","id":"jmvisdw1"}
+{"time":"2024-12-02T14:24:47.973945729+01:00","level":"INFO","msg":"stream: started","id":"jmvisdw1"}
+{"time":"2024-12-02T14:24:48.212516304+01:00","level":"INFO","msg":"handler: started","stream_id":"jmvisdw1"}
+{"time":"2024-12-02T14:24:48.212556436+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"jmvisdw1"}
+{"time":"2024-12-02T14:24:48.214291716+01:00","level":"INFO","msg":"sender: started","stream_id":"jmvisdw1"}
+{"time":"2024-12-02T14:24:48.620224564+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-02T14:35:00.504115175+01:00","level":"INFO","msg":"stream: closing","id":"jmvisdw1"}
+{"time":"2024-12-02T14:35:00.504236634+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-02T14:35:00.505204657+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-02T14:35:02.704310268+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-02T14:35:03.13172164+01:00","level":"INFO","msg":"handler: closed","stream_id":"jmvisdw1"}
+{"time":"2024-12-02T14:35:03.1317486+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"jmvisdw1"}
+{"time":"2024-12-02T14:35:03.131957554+01:00","level":"INFO","msg":"sender: closed","stream_id":"jmvisdw1"}
+{"time":"2024-12-02T14:35:03.133618073+01:00","level":"INFO","msg":"stream: closed","id":"jmvisdw1"}

@@ -1,0 +1,8 @@
+Loaded dependency [python3/3.11.9]: sqlite3/3.45.3
+Loaded dependency [python3/3.11.9]: gcc/12.3.0-binutils-2.40
+Loaded module: python3/3.11.9
+
+Loading python3/3.11.9
+  Loading requirement: sqlite3/3.45.3 gcc/12.3.0-binutils-2.40
+Loaded module: cuda/11.8
+/zhome/32/9/137127/.lsbatch/1732884025.23301914.shell: line 36: /zhome/32/9/137127/Master-Thesis/.venv/bin/activate: No such file or directory

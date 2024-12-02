@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/zhome/32/9/137127/Master-Thesis/scripts/lotka-volterra-upinn.py", line 130, in <module>
+    optimizer.step(closure)  # Pass the closure to the optimizer
+    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/optim/optimizer.py", line 487, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/optim/optimizer.py", line 91, in _use_grad
+    ret = func(self, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/optim/adam.py", line 202, in step
+    loss = closure()
+           ^^^^^^^^^
+  File "/zhome/32/9/137127/Master-Thesis/scripts/lotka-volterra-upinn.py", line 126, in closure
+    loss.backward(retain_graph=True)
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/_tensor.py", line 581, in backward
+    torch.autograd.backward(
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/autograd/graph.py", line 825, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 39.50 GiB of which 6.69 MiB is free. Process 1394245 has 416.00 MiB memory in use. Process 1460165 has 37.92 GiB memory in use. Process 1460932 has 594.00 MiB memory in use. Including non-PyTorch memory, this process has 572.00 MiB memory in use. Of the allocated memory 57.95 MiB is allocated by PyTorch, and 6.05 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

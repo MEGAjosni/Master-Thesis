@@ -4,37 +4,64 @@ import torch.nn as nn
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
-
-class ScalingLayer(nn.Module):
-    def __init__(self, scale_init_value=1, bias_init_value=0):
-        super().__init__()
-        self.scale = nn.Parameter(torch.FloatTensor([scale_init_value]))
-        self.bias = nn.Parameter(torch.FloatTensor([bias_init_value]))
-
-    def forward(self, input):
-        return input * self.scale + self.bias
-
 # FEEDFORWARD NEURAL NETWORK
 class FNN(nn.Module):
-    def __init__(self, dims, activation=nn.Sigmoid(), scaling=True):
+    def __init__(self, dims, hidden_act=nn.Tanh(), output_act=nn.Identity(), weight_init=None, bias_init=None, scale_fn=lambda x: x):
 
         super(FNN, self).__init__()
 
-        if scaling:
-            if type(scaling) == bool:
-                scaling = ScalingLayer()
-        self.scaling = scaling
-
         self.dims = dims
         self.layers = nn.ModuleList([nn.Linear(dims[i], dims[i+1]) for i in range(len(dims)-1)])
-        self.act_fn = activation
+        self.hidden_act_fn = hidden_act
+        self.output_act_fn = output_act
+        self.scale_fn = scale_fn
+        self.inititialize_weights(weight_init, bias_init)
+
+
+    def inititialize_weights(self, weight_init, bias_init):
+        if weight_init:
+            for layer in self.layers:
+                weight_init(layer.weight)
+        if bias_init:
+            for layer in self.layers:
+                bias_init(layer.bias)
+
     
     def forward(self, x):
-        if self.scaling:
-            x = self.scaling(x)
+        x = self.scale_fn(x)
         for i, layer in enumerate(self.layers):
             x = layer(x)
             if i < len(self.layers)-1:
-                x = self.act_fn(x)
-        return x
+                x = self.hidden_act_fn(x)
+        return self.output_act_fn(x)
+    
+
+# class ResNet(nn.Module):
+#     def __init__(self, dims, hidden_act=nn.Tanh(), output_act=nn.Identity(), weight_init=None, bias_init=None, scale_fn=lambda x: x):
+#         super(ResNet, self).__init__()
+
+#         self.dims = dims
+#         self.layers = nn.ModuleList([nn.Linear(dims[i], dims[i+1]) for i in range(len(dims)-1)])
+#         self.hidden_act_fn = hidden_act
+#         self.output_act_fn = output_act
+#         self.scale_fn = scale_fn
+#         self.inititialize_weights(weight_init, bias_init)
+
+
+#     def inititialize_weights(self, weight_init, bias_init):
+#         if weight_init:
+#             for layer in self.layers:
+#                 weight_init(layer.weight)
+#         if bias_init:
+#             for layer in self.layers:
+#                 bias_init(layer.bias)
+
+    
+#     def forward(self, x):
+#         x = self.scale_fn(x)
+#         for i, layer in enumerate(self.layers):
+#             x = layer(x)
+#             if i < len(self.layers)-1:
+#                 x = self.hidden_act_fn(x)
+#         return self.output_act_fn(x) + x
     

@@ -1,11 +1,11 @@
 #!/bin/sh
 ### General options
 ### –- specify queue --
-#BSUB -q gpuh100
+#BSUB -q gpua100
 ### -- set the job Name --
 #BSUB -J CUDA_test
 ### -- ask for number of cores (default: 1) --
-#BSUB -n 1
+#BSUB -n 4
 ### -- Select the resources: 1 gpu in exclusive process mode --
 #BSUB -gpu "num=1"
 ### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now
@@ -33,7 +33,7 @@ nvidia-smi
 module load cuda
 
 # -- Activate the virtual environment --
-source /zhome/32/9/137127/Master-Thesis/.venv/bin/activate
+source /zhome/32/9/137127/.venv/bin/activate
 
 # Execute Python file
 python test.py

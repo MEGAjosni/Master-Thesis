@@ -1,0 +1,66 @@
+diff --git a/scripts/lotka-volterra-upinn.py b/scripts/lotka-volterra-upinn.py
+index 2a69560..96a5304 100644
+--- a/scripts/lotka-volterra-upinn.py
++++ b/scripts/lotka-volterra-upinn.py
+@@ -38,8 +38,8 @@ X = LV.solve(t)
+ t_s, X_s = sample_with_noise(10, t, X, epsilon=5e-3)
+ 
+ # Setup neural networks
+-# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+-device = torch.device('cpu')
++device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
++print("Running on:", device)
+ f_known = FNN([1, 64, 64, 2])
+ f_known.to(device)
+ f_unknown = FNN([2, 16, 16, 2])
+@@ -75,12 +75,14 @@ X_f = X.to(device)
+ t_f = t.to(device).unsqueeze(-1).requires_grad_(True)
+ t_s = t_s.to(device).unsqueeze(-1)
+ X_s = X_s.to(device)
++X0 = LV.X0.unsqueeze(0).to(device)
+ 
+ # Data for evaluation
+ t_eval = torch.linspace(time_int[0], time_int[0]+2*(time_int[1]-time_int[0]), 1000)
+ X_true = LV.solve(t_eval)
+ 
+ for epoch in range(wandb.config["Epochs"]):
++    print("Epoch", epoch)
+ 
+     # Stop training of f_unknown after 30000 epochs and make collacation points outside the training data
+     if epoch == 30000:
+@@ -93,7 +95,7 @@ for epoch in range(wandb.config["Epochs"]):
+         # Initial condition loss
+         t0 = torch.tensor([[0.0]], device=device).float()
+         X0_pred = f_known(t0)
+-        ic_loss = nn.MSELoss()(X0_pred, LV.X0.unsqueeze(0))
++        ic_loss = nn.MSELoss()(X0_pred, X0)
+ 
+         # Known dynamics loss
+         X_f = f_known(t_f)
+diff --git a/test.sh b/test.sh
+index 00d3f43..5e27d47 100644
+--- a/test.sh
++++ b/test.sh
+@@ -1,11 +1,11 @@
+ #!/bin/sh
+ ### General options
+ ### –- specify queue --
+-#BSUB -q gpuh100
++#BSUB -q gpua100
+ ### -- set the job Name --
+ #BSUB -J CUDA_test
+ ### -- ask for number of cores (default: 1) --
+-#BSUB -n 1
++#BSUB -n 4
+ ### -- Select the resources: 1 gpu in exclusive process mode --
+ #BSUB -gpu "num=1"
+ ### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now
+diff --git a/utils/__pycache__/DataGenerators.cpython-311.pyc b/utils/__pycache__/DataGenerators.cpython-311.pyc
+index 4931582..b5f1872 100644
+Binary files a/utils/__pycache__/DataGenerators.cpython-311.pyc and b/utils/__pycache__/DataGenerators.cpython-311.pyc differ
+diff --git a/utils/__pycache__/NeuralNets.cpython-311.pyc b/utils/__pycache__/NeuralNets.cpython-311.pyc
+index 17ad8c2..0b2158d 100644
+Binary files a/utils/__pycache__/NeuralNets.cpython-311.pyc and b/utils/__pycache__/NeuralNets.cpython-311.pyc differ
+diff --git a/utils/__pycache__/Utils.cpython-311.pyc b/utils/__pycache__/Utils.cpython-311.pyc
+index 8fc8bb7..c3297c4 100644
+Binary files a/utils/__pycache__/Utils.cpython-311.pyc and b/utils/__pycache__/Utils.cpython-311.pyc differ

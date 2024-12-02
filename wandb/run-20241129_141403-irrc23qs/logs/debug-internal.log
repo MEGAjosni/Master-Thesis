@@ -1,0 +1,16 @@
+{"time":"2024-11-29T14:14:04.018008882+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-29T14:14:04.018041015+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241129_141403-irrc23qs/logs/debug-core.log"}
+{"time":"2024-11-29T14:14:04.137050901+01:00","level":"INFO","msg":"created new stream","id":"irrc23qs"}
+{"time":"2024-11-29T14:14:04.137082362+01:00","level":"INFO","msg":"stream: started","id":"irrc23qs"}
+{"time":"2024-11-29T14:14:04.137144146+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"irrc23qs"}
+{"time":"2024-11-29T14:14:04.137144182+01:00","level":"INFO","msg":"sender: started","stream_id":"irrc23qs"}
+{"time":"2024-11-29T14:14:04.137158071+01:00","level":"INFO","msg":"handler: started","stream_id":"irrc23qs"}
+{"time":"2024-11-29T14:14:04.522147472+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-29T14:14:06.878450457+01:00","level":"INFO","msg":"stream: closing","id":"irrc23qs"}
+{"time":"2024-11-29T14:14:06.878494969+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-29T14:14:06.879077927+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-29T14:14:09.746861254+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-29T14:14:13.996339371+01:00","level":"INFO","msg":"handler: closed","stream_id":"irrc23qs"}
+{"time":"2024-11-29T14:14:13.99639786+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"irrc23qs"}
+{"time":"2024-11-29T14:14:13.99645539+01:00","level":"INFO","msg":"sender: closed","stream_id":"irrc23qs"}
+{"time":"2024-11-29T14:14:13.99964503+01:00","level":"INFO","msg":"stream: closed","id":"irrc23qs"}

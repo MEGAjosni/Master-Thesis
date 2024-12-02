@@ -1,0 +1,32 @@
+{
+  "os": "Linux-6.1.112-1.el9.elrepo.x86_64-x86_64-with-glibc2.34",
+  "python": "3.11.9",
+  "startedAt": "2024-12-02T13:08:00.932086Z",
+  "program": "/zhome/32/9/137127/Master-Thesis/scripts/lotka-volterra-upinn.py",
+  "codePath": "scripts/lotka-volterra-upinn.py",
+  "git": {
+    "remote": "https://github.com/MEGAjosni/Master-Thesis.git",
+    "commit": "0075f10aff3d3d96ab453982fbb17f24396d8c33"
+  },
+  "email": "s183529@dtu.dk",
+  "root": "/zhome/32/9/137127/Master-Thesis",
+  "host": "gbarlogin1",
+  "username": "s183529",
+  "executable": "/zhome/32/9/137127/.venv/bin/python",
+  "codePathLocal": "scripts/lotka-volterra-upinn.py",
+  "cpu_count": 64,
+  "cpu_count_logical": 64,
+  "disk": {
+    "/": {
+      "total": "76817485824",
+      "used": "7061327872"
+    }
+  },
+  "memory": {
+    "total": "1081357918208"
+  },
+  "cpu": {
+    "count": 64,
+    "countLogical": 64
+  }
+}

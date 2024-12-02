@@ -1,0 +1,25 @@
+Epoch 0
+Traceback (most recent call last):
+  File "/zhome/32/9/137127/Master-Thesis/scripts/lotka-volterra-upinn.py", line 143, in <module>
+    fig.add_scatter(x=t_eval, y=X_true[:, 0].cpu().numpy(), mode='lines', name='Prey', line=dict(dash='dash', color='green'))
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/plotly/graph_objs/_figure.py", line 14576, in add_scatter
+    new_trace = Scatter(
+                ^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/plotly/graph_objs/_scatter.py", line 3634, in __init__
+    self["x"] = _v
+    ~~~~^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/plotly/basedatatypes.py", line 4868, in __setitem__
+    self._set_prop(prop, value)
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/plotly/basedatatypes.py", line 5207, in _set_prop
+    val = validator.validate_coerce(val)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/_plotly_utils/basevalidators.py", line 407, in validate_coerce
+    elif is_homogeneous_array(v):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/_plotly_utils/basevalidators.py", line 201, in is_homogeneous_array
+    v_numpy = np.array(v)
+              ^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/_tensor.py", line 1149, in __array__
+    return self.numpy()
+           ^^^^^^^^^^^^
+TypeError: can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.

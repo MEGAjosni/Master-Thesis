@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "/zhome/32/9/137127/Master-Thesis/scripts/lotka-volterra-upinn.py", line 129, in <module>
+    optimizer.step(closure)  # Pass the closure to the optimizer
+    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/optim/optimizer.py", line 487, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/optim/optimizer.py", line 91, in _use_grad
+    ret = func(self, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/optim/adam.py", line 202, in step
+    loss = closure()
+           ^^^^^^^^^
+  File "/zhome/32/9/137127/Master-Thesis/scripts/lotka-volterra-upinn.py", line 96, in closure
+    ic_loss = nn.MSELoss()(X0_pred, LV.X0.unsqueeze(0))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 608, in forward
+    return F.mse_loss(input, target, reduction=self.reduction)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/nn/functional.py", line 3792, in mse_loss
+    return torch._C._nn.mse_loss(
+           ^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!

@@ -1,0 +1,3 @@
+tensor([[nan, nan]], grad_fn=<SoftplusBackward0>)
+tensor([[1., 1.]])
+Epoch 0: Loss: nan, IC Loss: nan, PDE Loss: 0.8765647411346436, Data Loss: 0.20378562808036804

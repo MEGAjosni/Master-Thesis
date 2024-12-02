@@ -1,0 +1,10 @@
+{"time":"2024-12-02T14:05:50.529943826+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-02T14:05:50.52996623+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241202_140550-ydpsw5fc/logs/debug-core.log"}
+{"time":"2024-12-02T14:05:50.643753727+01:00","level":"INFO","msg":"created new stream","id":"ydpsw5fc"}
+{"time":"2024-12-02T14:05:50.643800227+01:00","level":"INFO","msg":"stream: started","id":"ydpsw5fc"}
+{"time":"2024-12-02T14:05:50.643896072+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"ydpsw5fc"}
+{"time":"2024-12-02T14:05:50.643886427+01:00","level":"INFO","msg":"handler: started","stream_id":"ydpsw5fc"}
+{"time":"2024-12-02T14:05:50.644156104+01:00","level":"INFO","msg":"sender: started","stream_id":"ydpsw5fc"}
+{"time":"2024-12-02T14:05:51.033380399+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-02T14:27:06.668601783+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/megajosni/Master-Thesis/ydpsw5fc/file_stream"}
+{"time":"2024-12-02T14:27:06.669064+01:00","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/megajosni/Master-Thesis/ydpsw5fc/file_stream: {\"error\":\"run Master-Thesis/ydpsw5fc not found while streaming file\"}"}
