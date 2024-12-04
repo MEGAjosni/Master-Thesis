@@ -1,0 +1,16 @@
+{"time":"2024-12-04T13:33:57.847794773+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T13:33:57.847809446+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241204_133357-ixa9dmh1/logs/debug-core.log"}
+{"time":"2024-12-04T13:33:57.961296467+01:00","level":"INFO","msg":"created new stream","id":"ixa9dmh1"}
+{"time":"2024-12-04T13:33:57.961331514+01:00","level":"INFO","msg":"stream: started","id":"ixa9dmh1"}
+{"time":"2024-12-04T13:33:57.961393866+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"ixa9dmh1"}
+{"time":"2024-12-04T13:33:57.961395824+01:00","level":"INFO","msg":"sender: started","stream_id":"ixa9dmh1"}
+{"time":"2024-12-04T13:33:57.961445362+01:00","level":"INFO","msg":"handler: started","stream_id":"ixa9dmh1"}
+{"time":"2024-12-04T13:33:58.425549598+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T13:34:03.934852465+01:00","level":"INFO","msg":"stream: closing","id":"ixa9dmh1"}
+{"time":"2024-12-04T13:34:03.934931385+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-04T13:34:03.936406208+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-04T13:34:06.894537405+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-04T13:34:07.160955261+01:00","level":"INFO","msg":"handler: closed","stream_id":"ixa9dmh1"}
+{"time":"2024-12-04T13:34:07.16098927+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"ixa9dmh1"}
+{"time":"2024-12-04T13:34:07.161003815+01:00","level":"INFO","msg":"sender: closed","stream_id":"ixa9dmh1"}
+{"time":"2024-12-04T13:34:07.161872552+01:00","level":"INFO","msg":"stream: closed","id":"ixa9dmh1"}

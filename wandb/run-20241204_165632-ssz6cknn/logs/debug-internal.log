@@ -1,0 +1,16 @@
+{"time":"2024-12-04T16:56:32.115542488+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T16:56:32.115555683+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241204_165632-ssz6cknn/logs/debug-core.log"}
+{"time":"2024-12-04T16:56:32.328335778+01:00","level":"INFO","msg":"created new stream","id":"ssz6cknn"}
+{"time":"2024-12-04T16:56:32.328380708+01:00","level":"INFO","msg":"stream: started","id":"ssz6cknn"}
+{"time":"2024-12-04T16:56:32.328439767+01:00","level":"INFO","msg":"handler: started","stream_id":"ssz6cknn"}
+{"time":"2024-12-04T16:56:32.328441901+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"ssz6cknn"}
+{"time":"2024-12-04T16:56:32.328481355+01:00","level":"INFO","msg":"sender: started","stream_id":"ssz6cknn"}
+{"time":"2024-12-04T16:56:32.640018097+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T17:02:42.388075003+01:00","level":"INFO","msg":"stream: closing","id":"ssz6cknn"}
+{"time":"2024-12-04T17:02:42.388150657+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-04T17:02:42.388858571+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-04T17:02:45.320876945+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-04T17:02:45.707375878+01:00","level":"INFO","msg":"handler: closed","stream_id":"ssz6cknn"}
+{"time":"2024-12-04T17:02:45.70742651+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"ssz6cknn"}
+{"time":"2024-12-04T17:02:45.707455179+01:00","level":"INFO","msg":"sender: closed","stream_id":"ssz6cknn"}
+{"time":"2024-12-04T17:02:45.708583305+01:00","level":"INFO","msg":"stream: closed","id":"ssz6cknn"}

@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch.nn.init import xavier_normal_, zeros_
 import math
 
 def count_parameters(model):
@@ -8,7 +9,7 @@ def count_parameters(model):
 
 # FEEDFORWARD NEURAL NETWORK
 class FNN(nn.Module):
-    def __init__(self, dims, hidden_act=nn.Tanh(), output_act=nn.Identity(), weight_init=None, bias_init=None, scale_fn=lambda x: x):
+    def __init__(self, dims, hidden_act=nn.Tanh(), output_act=nn.Identity(), weight_init=xavier_normal_, bias_init=zeros_, scale_fn=lambda x: x):
 
         super(FNN, self).__init__()
 

@@ -24,3 +24,14 @@ def sample_with_noise(N, t, X, epsilon=5e-3):
     X_noise = X + epsilon * X_bar * torch.randn(*X.shape)
 
     return t, X_noise
+
+
+def SoftAdapt(cur_losses, prev_losses, beta=0, loss_weigthed=False):
+    f = cur_losses.detach()
+    fm1 = prev_losses.detach()
+    s = f - fm1
+    if loss_weigthed:
+        return f*torch.exp(beta*s) / torch.sum(f*torch.exp(beta*s))
+    else:
+        return torch.nn.functional.softmax(beta*s, dim=0)
+

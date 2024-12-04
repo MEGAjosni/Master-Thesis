@@ -1,0 +1,154 @@
+diff --git a/models/lotka-volterra/lotka-volterra-upinn-KAN.pt b/models/lotka-volterra/lotka-volterra-upinn-KAN.pt
+index e369d25..a7bce3c 100644
+Binary files a/models/lotka-volterra/lotka-volterra-upinn-KAN.pt and b/models/lotka-volterra/lotka-volterra-upinn-KAN.pt differ
+diff --git a/scripts/lotka-volterra-upinn.py b/scripts/lotka-volterra-upinn.py
+index 53f138b..ddcb57b 100644
+--- a/scripts/lotka-volterra-upinn.py
++++ b/scripts/lotka-volterra-upinn.py
+@@ -10,7 +10,7 @@ import sys
+ sys.path.append('./')
+ from utils.NeuralNets import FNN, KAN
+ from utils.DataGenerators import LotkaVolterra
+-from utils.Utils import sample_with_noise
++from utils.Utils import sample_with_noise, SoftAdapt
+ 
+ # Plotly
+ import plotly.graph_objects as go
+@@ -49,22 +49,22 @@ t_s, X_s = sample_with_noise(10, t[train_idx], X, epsilon=5e-3)
+ 
+ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+ print("Running on:", device)
+-# f_known = FNN(
+-#     dims=[1, 16, 16, 16, 2],
+-#     hidden_act=nn.Tanh(),
+-#     output_act=nn.Softplus(),
+-#     weight_init=init.xavier_normal_,
+-#     bias_init=init.zeros_
+-# ).to(device)
+-# f_unknown = FNN(
+-#     dims=[2, 16, 16, 16, 2],
+-#     hidden_act=nn.Tanh(),
+-#     output_act=nn.Identity(),
+-#     weight_init=init.xavier_normal_,
+-#     bias_init=init.zeros_
+-# ).to(device)
+-f_known = KAN([1, 8, 8, 8, 2]).to(device)
+-f_unknown = KAN([2, 8, 8, 8, 2]).to(device)
++f_known = FNN(
++    dims=[1, 16, 16, 16, 2],
++    hidden_act=nn.Tanh(),
++    output_act=nn.Softplus(),
++    weight_init=init.xavier_normal_,
++    bias_init=init.zeros_
++).to(device)
++f_unknown = FNN(
++    dims=[2, 16, 16, 16, 2],
++    hidden_act=nn.Tanh(),
++    output_act=nn.Identity(),
++    weight_init=init.xavier_normal_,
++    bias_init=init.zeros_
++).to(device)
++# f_known = KAN([1, 8, 8, 8, 2]).to(device)
++# f_unknown = KAN([2, 8, 8, 8, 2]).to(device)
+ 
+ # Setup Weights and Biases for online logging
+ wandb.init(
+@@ -78,18 +78,17 @@ wandb.init(
+         "learning_rate": 1e-3,
+         "Archtechture": "KAN",
+         "Problem": "Lotka-Volterra",
+-        "Epochs": 100000,
++        "Epochs": 10,
+         "Optimizer": "AdamW",
+     }
+ )
+ table = wandb.Table(columns=["Solution"])
+ 
+ optimizer = torch.optim.AdamW([*f_known.parameters(), *f_unknown.parameters()], lr=wandb.config["learning_rate"], weight_decay=1e-4)
+-# optimizer = torch.optim.LBFGS([*f_known.parameters(), *f_unknown.parameters()], lr=1, history_size=10, line_search_fn="strong_wolfe", tolerance_grad=1e-32, tolerance_change=1e-32)
++prev_losses = torch.tensor([0.0, 0.0, 0.0], device=device)
+ 
++# optimizer = torch.optim.LBFGS([*f_known.parameters(), *f_unknown.parameters()], lr=1, history_size=10, line_search_fn="strong_wolfe", tolerance_grad=1e-32, tolerance_change=1e-32)
+ 
+-# Weight scaling for the loss function
+-lambda1, lambda2, lambda3 = 1, 1, 1
+ 
+ # Move the data to the device and convert to float
+ t_f = t[train_idx].to(device).unsqueeze(-1).requires_grad_(True)
+@@ -136,8 +135,14 @@ for epoch in range(wandb.config["Epochs"]):
+         X_pred = f_known(t_s)
+         data_loss = nn.MSELoss()(X_pred, X_s)
+ 
++        # Tensor of losses
++        cur_losses = torch.stack([ic_loss, pde_loss, data_loss])
++
+         # Total loss
+-        loss = lambda1 * ic_loss + lambda2 * pde_loss + lambda3 * data_loss
++        lambda_ = SoftAdapt(cur_losses, prev_losses, beta=0.0)
++        loss = torch.dot(lambda_, cur_losses)
++
++        # loss = ic_loss + pde_loss + data_loss
+         wandb.log({
+             "Loss": loss.item(),
+             "IC Loss": ic_loss.item(),
+@@ -146,10 +151,11 @@ for epoch in range(wandb.config["Epochs"]):
+         })
+ 
+         loss.backward(retain_graph=True)
++        print(loss.item())
+ 
+-        return loss
++        return loss, cur_losses.clone()
+ 
+-    optimizer.step(closure)  # Pass the closure to the optimizer
++    _, prev_losses = optimizer.step(closure)  # Pass the closure to the optimizer
+ 
+     # Plot solution
+     if epoch % 1000 == 0:
+diff --git a/utils/Utils.py b/utils/Utils.py
+index 7d24f4f..98a3aef 100644
+--- a/utils/Utils.py
++++ b/utils/Utils.py
+@@ -23,4 +23,10 @@ def sample_with_noise(N, t, X, epsilon=5e-3):
+     # Add noise to the data
+     X_noise = X + epsilon * X_bar * torch.randn(*X.shape)
+ 
+-    return t, X_noise
+\ No newline at end of file
++    return t, X_noise
++
++
++def SoftAdapt(cur_losses, prev_losses, beta=0):
++    s = cur_losses.detach() - prev_losses.detach()
++    return torch.nn.functional.softmax(beta*s, dim=0)
++
+diff --git a/utils/__pycache__/Utils.cpython-311.pyc b/utils/__pycache__/Utils.cpython-311.pyc
+index c3297c4..623dd00 100644
+Binary files a/utils/__pycache__/Utils.cpython-311.pyc and b/utils/__pycache__/Utils.cpython-311.pyc differ
+diff --git a/wandb/debug-internal.log b/wandb/debug-internal.log
+index 825b4db..52a25a0 120000
+--- a/wandb/debug-internal.log
++++ b/wandb/debug-internal.log
+@@ -1 +1 @@
+-run-20241202_185341-qw5tmtdq/logs/debug-internal.log
+\ No newline at end of file
++run-20241204_143627-q2rd2wlo/logs/debug-internal.log
+\ No newline at end of file
+diff --git a/wandb/debug.log b/wandb/debug.log
+index d7a4ef0..26de54a 120000
+--- a/wandb/debug.log
++++ b/wandb/debug.log
+@@ -1 +1 @@
+-run-20241202_185341-qw5tmtdq/logs/debug.log
+\ No newline at end of file
++run-20241204_143627-q2rd2wlo/logs/debug.log
+\ No newline at end of file
+diff --git a/wandb/latest-run b/wandb/latest-run
+index e64e002..d4e677b 120000
+--- a/wandb/latest-run
++++ b/wandb/latest-run
+@@ -1 +1 @@
+-run-20241202_185341-qw5tmtdq
+\ No newline at end of file
++run-20241204_143627-q2rd2wlo
+\ No newline at end of file

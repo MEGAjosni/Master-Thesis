@@ -1,0 +1,9 @@
+Beginning training...
+Running on: cuda
+Traceback (most recent call last):
+  File "/zhome/32/9/137127/Master-Thesis/scripts/lotka-volterra-upinn.py", line 246, in <module>
+    train(u, G, data, optimizer=torch.optim.AdamW, lr=1e-3, epochs=30000, loss_tol_stop=None, device=torch.device('cuda'), beta_softadapt=0.1, plotting=dict(log_plots=True, plot_interval=1000), save_model=dict(save=False, path='models/lotka-volterra', name='LV-UPINN'))
+  File "/zhome/32/9/137127/Master-Thesis/scripts/lotka-volterra-upinn.py", line 129, in train
+    t_d = data["t_s"].to(device)                      # Data points
+          ~~~~^^^^^^^
+KeyError: 't_s'

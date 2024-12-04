@@ -1,0 +1,10 @@
+{"time":"2024-12-04T13:52:52.632001632+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T13:52:52.632019756+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241204_135252-alxg4crv/logs/debug-core.log"}
+{"time":"2024-12-04T13:52:53.448309218+01:00","level":"INFO","msg":"created new stream","id":"alxg4crv"}
+{"time":"2024-12-04T13:52:53.448357881+01:00","level":"INFO","msg":"stream: started","id":"alxg4crv"}
+{"time":"2024-12-04T13:52:53.448384518+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"alxg4crv"}
+{"time":"2024-12-04T13:52:53.448400291+01:00","level":"INFO","msg":"handler: started","stream_id":"alxg4crv"}
+{"time":"2024-12-04T13:52:53.448389022+01:00","level":"INFO","msg":"sender: started","stream_id":"alxg4crv"}
+{"time":"2024-12-04T13:52:53.84812324+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T14:42:54.555953823+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/megajosni/Master-Thesis/alxg4crv/file_stream"}
+{"time":"2024-12-04T14:42:54.556339351+01:00","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/megajosni/Master-Thesis/alxg4crv/file_stream: {\"error\":\"run Master-Thesis/alxg4crv not found while streaming file\"}"}

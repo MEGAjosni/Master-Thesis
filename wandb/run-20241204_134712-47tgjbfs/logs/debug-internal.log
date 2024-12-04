@@ -1,0 +1,16 @@
+{"time":"2024-12-04T13:47:12.775536321+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T13:47:12.77555418+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241204_134712-47tgjbfs/logs/debug-core.log"}
+{"time":"2024-12-04T13:47:12.88843487+01:00","level":"INFO","msg":"created new stream","id":"47tgjbfs"}
+{"time":"2024-12-04T13:47:12.888468978+01:00","level":"INFO","msg":"stream: started","id":"47tgjbfs"}
+{"time":"2024-12-04T13:47:12.888533103+01:00","level":"INFO","msg":"sender: started","stream_id":"47tgjbfs"}
+{"time":"2024-12-04T13:47:12.888530979+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"47tgjbfs"}
+{"time":"2024-12-04T13:47:12.888537111+01:00","level":"INFO","msg":"handler: started","stream_id":"47tgjbfs"}
+{"time":"2024-12-04T13:47:13.238932914+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T13:47:16.070718833+01:00","level":"INFO","msg":"stream: closing","id":"47tgjbfs"}
+{"time":"2024-12-04T13:47:16.07077786+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-04T13:47:16.072375922+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-04T13:47:19.005512651+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-04T13:47:19.286579891+01:00","level":"INFO","msg":"handler: closed","stream_id":"47tgjbfs"}
+{"time":"2024-12-04T13:47:19.286607375+01:00","level":"INFO","msg":"sender: closed","stream_id":"47tgjbfs"}
+{"time":"2024-12-04T13:47:19.28660121+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"47tgjbfs"}
+{"time":"2024-12-04T13:47:19.287608197+01:00","level":"INFO","msg":"stream: closed","id":"47tgjbfs"}

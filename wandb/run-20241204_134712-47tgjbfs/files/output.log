@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/zhome/32/9/137127/Master-Thesis/scripts/lotka-volterra-upinn.py", line 156, in <module>
+    _, prev_losses = optimizer.step(closure)  # Pass the closure to the optimizer
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/optim/optimizer.py", line 487, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/optim/optimizer.py", line 91, in _use_grad
+    ret = func(self, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/optim/adamw.py", line 197, in step
+    loss = closure()
+           ^^^^^^^^^
+  File "/zhome/32/9/137127/Master-Thesis/scripts/lotka-volterra-upinn.py", line 152, in closure
+    loss.backward(retain_graph=True)
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/_tensor.py", line 581, in backward
+    torch.autograd.backward(
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "/zhome/32/9/137127/.venv/lib/python3.11/site-packages/torch/autograd/graph.py", line 825, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: element 0 of tensors does not require grad and does not have a grad_fn

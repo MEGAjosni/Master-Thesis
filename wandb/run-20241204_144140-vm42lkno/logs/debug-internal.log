@@ -1,0 +1,16 @@
+{"time":"2024-12-04T14:41:40.750599014+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T14:41:40.750612569+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241204_144140-vm42lkno/logs/debug-core.log"}
+{"time":"2024-12-04T14:41:40.861536099+01:00","level":"INFO","msg":"created new stream","id":"vm42lkno"}
+{"time":"2024-12-04T14:41:40.861569957+01:00","level":"INFO","msg":"stream: started","id":"vm42lkno"}
+{"time":"2024-12-04T14:41:40.861597661+01:00","level":"INFO","msg":"handler: started","stream_id":"vm42lkno"}
+{"time":"2024-12-04T14:41:40.861594691+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"vm42lkno"}
+{"time":"2024-12-04T14:41:40.86161128+01:00","level":"INFO","msg":"sender: started","stream_id":"vm42lkno"}
+{"time":"2024-12-04T14:41:41.235655283+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T14:43:10.866279803+01:00","level":"INFO","msg":"stream: closing","id":"vm42lkno"}
+{"time":"2024-12-04T14:43:10.866317406+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-04T14:43:10.867078781+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-04T14:43:13.561211615+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-04T14:43:13.81298438+01:00","level":"INFO","msg":"handler: closed","stream_id":"vm42lkno"}
+{"time":"2024-12-04T14:43:13.813039258+01:00","level":"INFO","msg":"sender: closed","stream_id":"vm42lkno"}
+{"time":"2024-12-04T14:43:13.813039592+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"vm42lkno"}
+{"time":"2024-12-04T14:43:13.84880496+01:00","level":"INFO","msg":"stream: closed","id":"vm42lkno"}

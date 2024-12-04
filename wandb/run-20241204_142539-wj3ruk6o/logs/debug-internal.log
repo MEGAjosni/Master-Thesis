@@ -1,0 +1,16 @@
+{"time":"2024-12-04T14:25:39.197630683+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T14:25:39.197643441+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241204_142539-wj3ruk6o/logs/debug-core.log"}
+{"time":"2024-12-04T14:25:39.611201839+01:00","level":"INFO","msg":"created new stream","id":"wj3ruk6o"}
+{"time":"2024-12-04T14:25:39.611237198+01:00","level":"INFO","msg":"stream: started","id":"wj3ruk6o"}
+{"time":"2024-12-04T14:25:39.611260214+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"wj3ruk6o"}
+{"time":"2024-12-04T14:25:39.611262276+01:00","level":"INFO","msg":"sender: started","stream_id":"wj3ruk6o"}
+{"time":"2024-12-04T14:25:39.611305911+01:00","level":"INFO","msg":"handler: started","stream_id":"wj3ruk6o"}
+{"time":"2024-12-04T14:25:39.954688027+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T14:25:42.225702817+01:00","level":"INFO","msg":"stream: closing","id":"wj3ruk6o"}
+{"time":"2024-12-04T14:25:42.225767156+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-04T14:25:42.226291908+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-04T14:25:44.923996819+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-04T14:25:45.169680726+01:00","level":"INFO","msg":"handler: closed","stream_id":"wj3ruk6o"}
+{"time":"2024-12-04T14:25:45.16970307+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"wj3ruk6o"}
+{"time":"2024-12-04T14:25:45.169728112+01:00","level":"INFO","msg":"sender: closed","stream_id":"wj3ruk6o"}
+{"time":"2024-12-04T14:25:45.170751635+01:00","level":"INFO","msg":"stream: closed","id":"wj3ruk6o"}

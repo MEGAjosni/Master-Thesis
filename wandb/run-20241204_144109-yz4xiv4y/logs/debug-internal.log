@@ -1,0 +1,10 @@
+{"time":"2024-12-04T14:41:09.42002118+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T14:41:09.420037379+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241204_144109-yz4xiv4y/logs/debug-core.log"}
+{"time":"2024-12-04T14:41:09.532581124+01:00","level":"INFO","msg":"created new stream","id":"yz4xiv4y"}
+{"time":"2024-12-04T14:41:09.532619132+01:00","level":"INFO","msg":"stream: started","id":"yz4xiv4y"}
+{"time":"2024-12-04T14:41:09.532648286+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"yz4xiv4y"}
+{"time":"2024-12-04T14:41:09.532690307+01:00","level":"INFO","msg":"handler: started","stream_id":"yz4xiv4y"}
+{"time":"2024-12-04T14:41:09.532728973+01:00","level":"INFO","msg":"sender: started","stream_id":"yz4xiv4y"}
+{"time":"2024-12-04T14:41:09.887352392+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T14:42:55.59226768+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/megajosni/Master-Thesis/yz4xiv4y/file_stream"}
+{"time":"2024-12-04T14:42:55.592527932+01:00","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/megajosni/Master-Thesis/yz4xiv4y/file_stream: {\"error\":\"run Master-Thesis/yz4xiv4y not found while streaming file\"}"}

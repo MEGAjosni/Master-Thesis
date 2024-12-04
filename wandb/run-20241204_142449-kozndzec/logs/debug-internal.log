@@ -1,0 +1,10 @@
+{"time":"2024-12-04T14:24:49.61856543+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T14:24:49.618578479+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241204_142449-kozndzec/logs/debug-core.log"}
+{"time":"2024-12-04T14:24:50.332922231+01:00","level":"INFO","msg":"created new stream","id":"kozndzec"}
+{"time":"2024-12-04T14:24:50.332957146+01:00","level":"INFO","msg":"stream: started","id":"kozndzec"}
+{"time":"2024-12-04T14:24:50.333020979+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"kozndzec"}
+{"time":"2024-12-04T14:24:50.333053583+01:00","level":"INFO","msg":"sender: started","stream_id":"kozndzec"}
+{"time":"2024-12-04T14:24:50.333059776+01:00","level":"INFO","msg":"handler: started","stream_id":"kozndzec"}
+{"time":"2024-12-04T14:24:50.789849031+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T14:42:51.489731369+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/megajosni/Master-Thesis/kozndzec/file_stream"}
+{"time":"2024-12-04T14:42:51.490005078+01:00","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/megajosni/Master-Thesis/kozndzec/file_stream: {\"error\":\"run Master-Thesis/kozndzec not found while streaming file\"}"}

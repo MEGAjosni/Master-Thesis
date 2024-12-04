@@ -1,0 +1,10 @@
+{"time":"2024-12-04T13:48:07.912184597+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T13:48:07.912200878+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241204_134807-4rq65p7e/logs/debug-core.log"}
+{"time":"2024-12-04T13:48:08.024512289+01:00","level":"INFO","msg":"created new stream","id":"4rq65p7e"}
+{"time":"2024-12-04T13:48:08.024553911+01:00","level":"INFO","msg":"stream: started","id":"4rq65p7e"}
+{"time":"2024-12-04T13:48:08.024577235+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"4rq65p7e"}
+{"time":"2024-12-04T13:48:08.024575796+01:00","level":"INFO","msg":"handler: started","stream_id":"4rq65p7e"}
+{"time":"2024-12-04T13:48:08.024623726+01:00","level":"INFO","msg":"sender: started","stream_id":"4rq65p7e"}
+{"time":"2024-12-04T13:48:08.352579955+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T14:43:24.007125294+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/megajosni/Master-Thesis/4rq65p7e/file_stream"}
+{"time":"2024-12-04T14:43:24.00779328+01:00","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/megajosni/Master-Thesis/4rq65p7e/file_stream: {\"error\":\"run Master-Thesis/4rq65p7e not found while streaming file\"}"}
