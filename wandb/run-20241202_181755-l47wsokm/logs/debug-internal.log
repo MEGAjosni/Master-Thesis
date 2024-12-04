@@ -1,0 +1,16 @@
+{"time":"2024-12-02T18:17:55.322061965+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-02T18:17:55.322086117+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241202_181755-l47wsokm/logs/debug-core.log"}
+{"time":"2024-12-02T18:17:55.437716636+01:00","level":"INFO","msg":"created new stream","id":"l47wsokm"}
+{"time":"2024-12-02T18:17:55.43776525+01:00","level":"INFO","msg":"stream: started","id":"l47wsokm"}
+{"time":"2024-12-02T18:17:55.437865821+01:00","level":"INFO","msg":"sender: started","stream_id":"l47wsokm"}
+{"time":"2024-12-02T18:17:55.437873682+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"l47wsokm"}
+{"time":"2024-12-02T18:17:55.43790646+01:00","level":"INFO","msg":"handler: started","stream_id":"l47wsokm"}
+{"time":"2024-12-02T18:17:55.754143907+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-02T18:35:13.102281936+01:00","level":"INFO","msg":"stream: closing","id":"l47wsokm"}
+{"time":"2024-12-02T18:35:13.102386079+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-02T18:35:13.103512181+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-02T18:35:15.596048403+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-02T18:35:15.844190256+01:00","level":"INFO","msg":"handler: closed","stream_id":"l47wsokm"}
+{"time":"2024-12-02T18:35:15.844219215+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"l47wsokm"}
+{"time":"2024-12-02T18:35:15.844262031+01:00","level":"INFO","msg":"sender: closed","stream_id":"l47wsokm"}
+{"time":"2024-12-02T18:35:15.845275416+01:00","level":"INFO","msg":"stream: closed","id":"l47wsokm"}
