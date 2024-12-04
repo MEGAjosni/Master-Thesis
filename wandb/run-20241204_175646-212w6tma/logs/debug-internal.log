@@ -1,0 +1,8 @@
+{"time":"2024-12-04T17:56:46.6358422+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T17:56:46.6363382+01:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\run-20241204_175646-212w6tma\\logs\\debug-core.log"}
+{"time":"2024-12-04T17:56:46.7459549+01:00","level":"INFO","msg":"created new stream","id":"212w6tma"}
+{"time":"2024-12-04T17:56:46.7459549+01:00","level":"INFO","msg":"stream: started","id":"212w6tma"}
+{"time":"2024-12-04T17:56:46.7459549+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"212w6tma"}
+{"time":"2024-12-04T17:56:46.7464501+01:00","level":"INFO","msg":"sender: started","stream_id":"212w6tma"}
+{"time":"2024-12-04T17:56:46.7464501+01:00","level":"INFO","msg":"handler: started","stream_id":"212w6tma"}
+{"time":"2024-12-04T17:56:47.0028824+01:00","level":"INFO","msg":"Starting system monitor"}
