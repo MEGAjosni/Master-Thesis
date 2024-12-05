@@ -1,0 +1,17 @@
+{"time":"2024-12-04T18:07:58.663854455+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T18:07:58.66388685+01:00","level":"INFO","msg":"created symlink","path":"/zhome/32/9/137127/Master-Thesis/wandb/run-20241204_180758-iq7tporw/logs/debug-core.log"}
+{"time":"2024-12-04T18:07:58.778378761+01:00","level":"INFO","msg":"created new stream","id":"iq7tporw"}
+{"time":"2024-12-04T18:07:58.77842269+01:00","level":"INFO","msg":"stream: started","id":"iq7tporw"}
+{"time":"2024-12-04T18:07:58.778439491+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"iq7tporw"}
+{"time":"2024-12-04T18:07:58.778481292+01:00","level":"INFO","msg":"handler: started","stream_id":"iq7tporw"}
+{"time":"2024-12-04T18:07:58.778572721+01:00","level":"INFO","msg":"sender: started","stream_id":"iq7tporw"}
+{"time":"2024-12-04T18:07:59.293601413+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T18:15:57.406865267+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-04T18:15:57.407597639+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-04T18:15:58.300614252+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-04T18:15:58.407406479+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history, summary, console logs","runtime_seconds":0.105839553}],"total_operations":1}}
+{"time":"2024-12-04T18:15:59.748060013+01:00","level":"INFO","msg":"stream: closing","id":"iq7tporw"}
+{"time":"2024-12-04T18:15:59.748226611+01:00","level":"INFO","msg":"handler: closed","stream_id":"iq7tporw"}
+{"time":"2024-12-04T18:15:59.74823663+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"iq7tporw"}
+{"time":"2024-12-04T18:15:59.748257256+01:00","level":"INFO","msg":"sender: closed","stream_id":"iq7tporw"}
+{"time":"2024-12-04T18:15:59.752016952+01:00","level":"INFO","msg":"stream: closed","id":"iq7tporw"}

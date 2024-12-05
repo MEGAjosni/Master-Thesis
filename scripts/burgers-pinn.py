@@ -12,6 +12,7 @@ from scripts.train import train
 # Plotly
 import plotly.graph_objects as go
 import plotly.express as px
+import matplotlib.pyplot as plt
 
 ###############################################
 ### Generate data from Lotka-Volterra model ###
@@ -89,17 +90,12 @@ def plot_solution(u, G):
 
     U_pred = u(Z.to(device)).detach().cpu().numpy()
 
-    # Plot the results as a heatmap using Plotly
-    fig = px.imshow(
-        U_pred.reshape(1600, 400).T,
-        x=t,
-        y=x,
-        labels=dict(x="t", y="x", color="u"),
-        title="Burgers' Equation Solution",
-        color_continuous_scale='Viridis'
-    )
-
-    plots["Solution"] = fig
+    # Plot the results as a heatmap with matplotlib
+    plt.figure(figsize=(12, 6))
+    plt.imshow(U_pred.reshape(len(x), len(t)).T, aspect='auto', extent=[-1, 1, 0, 1], origin='lower')
+    plt.colorbar()
+    
+    plots["Solution"] = plt
 
     return plots
 
