@@ -1,1 +1,0 @@
-{"Epoch":0,"_runtime":11.9322743,"_timestamp":1.7333575906062334e+09,"BC Loss":1.2921935319900513,"_wandb":{"runtime":11},"Data Loss":NaN,"PDE Loss":1.2979605197906494,"_step":1,"Solution":{"_type":"plotly-file","sha256":"51997558ce658a4bbcc02ad5a927923e62bc3283a029a742d7f2317fd01b1b0e","size":9098,"path":"media/plotly/Solution_1_51997558ce658a4bbcc0.plotly.json"},"Loss":NaN}

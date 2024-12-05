@@ -1,4 +1,0 @@
-tensor([[0.]])
-tensor([[0.6931, 0.6931]], grad_fn=<SoftplusBackward0>)
-tensor([[1., 1.]])
-Epoch 0: Loss: 1.4030472040176392, IC Loss: 0.09415864944458008, PDE Loss: 1.1115325689315796, Data Loss: 0.19735600054264069

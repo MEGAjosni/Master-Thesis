@@ -1,4 +1,0 @@
-Beginning training...
-Running on: cuda
-[34m[1mwandb[0m: [33mWARNING[0m Ignored wandb.init() arg project when running a sweep.
-Training complete.

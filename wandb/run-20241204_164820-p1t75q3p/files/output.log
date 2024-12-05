@@ -1,9 +1,0 @@
-Beginning training...
-Running on: cuda
-Traceback (most recent call last):
-  File "/zhome/32/9/137127/Master-Thesis/scripts/lotka-volterra-upinn.py", line 246, in <module>
-    train(u, G, data, optimizer=torch.optim.AdamW, lr=wandb.config["learning_rate"], epochs=wandb.config["Epochs"], plotting=dict(log_plots=True, plot_interval=1000), save_model=dict(save=False, path='models/lotka-volterra', name='LV-UPINN'))
-  File "/zhome/32/9/137127/Master-Thesis/scripts/lotka-volterra-upinn.py", line 195, in train
-    if plotting["log_plots"] and epoch % plotting["plotting_interval"] == 0:
-                                         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
-KeyError: 'plotting_interval'

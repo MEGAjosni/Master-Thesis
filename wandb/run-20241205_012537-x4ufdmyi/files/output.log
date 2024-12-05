@@ -1,5 +1,0 @@
-torch.Size([10000])
-torch.Size([10000, 1])
-C:\Users\jonas\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\loss.py:538: UserWarning: Using a target size (torch.Size([10000, 1])) that is different to the input size (torch.Size([10000])). This will likely lead to incorrect results due to broadcasting. Please ensure they have the same size.
-  return F.mse_loss(input, target, reduction=self.reduction)
-Training complete.
