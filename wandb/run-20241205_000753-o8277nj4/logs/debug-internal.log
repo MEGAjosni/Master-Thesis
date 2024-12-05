@@ -1,0 +1,17 @@
+{"time":"2024-12-05T00:07:53.9208605+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-05T00:07:53.9208605+01:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\run-20241205_000753-o8277nj4\\logs\\debug-core.log"}
+{"time":"2024-12-05T00:07:54.033452+01:00","level":"INFO","msg":"created new stream","id":"o8277nj4"}
+{"time":"2024-12-05T00:07:54.033452+01:00","level":"INFO","msg":"handler: started","stream_id":"o8277nj4"}
+{"time":"2024-12-05T00:07:54.033452+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"o8277nj4"}
+{"time":"2024-12-05T00:07:54.0339485+01:00","level":"INFO","msg":"sender: started","stream_id":"o8277nj4"}
+{"time":"2024-12-05T00:07:54.0339485+01:00","level":"INFO","msg":"stream: started","id":"o8277nj4"}
+{"time":"2024-12-05T00:07:54.5096128+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-05T00:09:00.9195602+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-05T00:09:00.9200566+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-05T00:09:01.9289206+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"saving job artifact","runtime_seconds":0.6859664,"subtasks":[{"desc":"wandb-job.json","runtime_seconds":0.0371325,"progress":"6.3KB/6.3KB"}]}],"total_operations":1}}
+{"time":"2024-12-05T00:09:02.9784879+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-05T00:09:04.5860317+01:00","level":"INFO","msg":"stream: closing","id":"o8277nj4"}
+{"time":"2024-12-05T00:09:04.5860317+01:00","level":"INFO","msg":"handler: closed","stream_id":"o8277nj4"}
+{"time":"2024-12-05T00:09:04.5860317+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"o8277nj4"}
+{"time":"2024-12-05T00:09:04.586112+01:00","level":"INFO","msg":"sender: closed","stream_id":"o8277nj4"}
+{"time":"2024-12-05T00:09:04.586112+01:00","level":"INFO","msg":"stream: closed","id":"o8277nj4"}

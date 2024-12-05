@@ -1,0 +1,12 @@
+torch.Size([200, 1]) torch.Size([200, 1])
+torch.Size([0, 1]) torch.Size([0, 1])
+C:\Users\jonas\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\torch\nn\modules\loss.py:538: UserWarning: Using a target size (torch.Size([10000, 1])) that is different to the input size (torch.Size([10000, 10000])). This will likely lead to incorrect results due to broadcasting. Please ensure they have the same size.
+  return F.mse_loss(input, target, reduction=self.reduction)
+c:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\Master Thesis\Master-Thesis\scripts\burgers-pinn.py:97: UserWarning: The input coordinates to pcolor are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolor.
+  plt.pcolor(T, X, U_pred, cmap="rainbow")
+c:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\Master Thesis\Master-Thesis\scripts\burgers-pinn.py:98: MatplotlibDeprecationWarning: Getting the array from a PolyQuadMesh will return the full array in the future (uncompressed). To get this behavior now set the PolyQuadMesh with a 2D array .set_array(data2d).
+  plt.colorbar()
+C:\Users\jonas\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\plotly\matplotlylib\renderer.py:571: UserWarning:
+
+Dang! That path collection is out of this world. I totally don't know what to do with it yet! Plotly can only import path collections linked to 'data' coordinates
+Training complete.

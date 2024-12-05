@@ -1,0 +1,16 @@
+{"time":"2024-12-05T01:42:04.6186994+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-05T01:42:04.6186994+01:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\run-20241205_014204-wonrkk1r\\logs\\debug-core.log"}
+{"time":"2024-12-05T01:42:04.7307952+01:00","level":"INFO","msg":"created new stream","id":"wonrkk1r"}
+{"time":"2024-12-05T01:42:04.7307952+01:00","level":"INFO","msg":"stream: started","id":"wonrkk1r"}
+{"time":"2024-12-05T01:42:04.7307952+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"wonrkk1r"}
+{"time":"2024-12-05T01:42:04.7307952+01:00","level":"INFO","msg":"handler: started","stream_id":"wonrkk1r"}
+{"time":"2024-12-05T01:42:04.7307952+01:00","level":"INFO","msg":"sender: started","stream_id":"wonrkk1r"}
+{"time":"2024-12-05T01:42:05.1132122+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-05T01:44:05.513926+01:00","level":"INFO","msg":"stream: closing","id":"wonrkk1r"}
+{"time":"2024-12-05T01:44:05.513926+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-05T01:44:05.5150929+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-05T01:44:06.2013824+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-05T01:44:06.5408479+01:00","level":"INFO","msg":"handler: closed","stream_id":"wonrkk1r"}
+{"time":"2024-12-05T01:44:06.5408479+01:00","level":"INFO","msg":"sender: closed","stream_id":"wonrkk1r"}
+{"time":"2024-12-05T01:44:06.5408479+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"wonrkk1r"}
+{"time":"2024-12-05T01:44:06.5411423+01:00","level":"INFO","msg":"stream: closed","id":"wonrkk1r"}

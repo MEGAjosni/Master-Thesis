@@ -1,0 +1,49 @@
+2024-12-05 00:36:27,037 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Current SDK version is 0.18.7
+2024-12-05 00:36:27,039 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Configure stats pid to 24936
+2024-12-05 00:36:27,041 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Loading settings from C:\Users\jonas\.config\wandb\settings
+2024-12-05 00:36:27,042 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Loading settings from C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\Master Thesis\Master-Thesis\wandb\settings
+2024-12-05 00:36:27,044 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Loading settings from environment variables: {'project': 'Master-Thesis', 'entity': 'megajosni', 'root_dir': 'C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis', 'run_id': 'qyv6nneu', 'sweep_param_path': 'C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\sweep-7jedyjfy\\config-qyv6nneu.yaml', 'sweep_id': '7jedyjfy'}
+2024-12-05 00:36:27,047 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Applying setup settings: {'mode': None, '_disable_service': None}
+2024-12-05 00:36:27,049 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Inferring run settings from compute environment: {'program_relpath': 'scripts\\SweepLV.py', 'program_abspath': 'c:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\scripts\\SweepLV.py', 'program': 'c:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\scripts\\SweepLV.py'}
+2024-12-05 00:36:27,051 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Applying login settings: {}
+2024-12-05 00:36:27,052 INFO    Thread-290 (_run_job):24936 [wandb_init.py:_log_setup():533] Logging user logs to C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\Master Thesis\Master-Thesis\wandb\run-20241205_003627-qyv6nneu\logs\debug.log
+2024-12-05 00:36:27,054 INFO    Thread-290 (_run_job):24936 [wandb_init.py:_log_setup():534] Logging internal logs to C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\Master Thesis\Master-Thesis\wandb\run-20241205_003627-qyv6nneu\logs\debug-internal.log
+2024-12-05 00:36:27,055 INFO    Thread-290 (_run_job):24936 [wandb_init.py:init():619] calling init triggers
+2024-12-05 00:36:27,056 INFO    Thread-290 (_run_job):24936 [wandb_init.py:init():626] wandb.init called with sweep_config: {'epochs': 10000, 'hidden_size': 16, 'learning_rate': 0.0013075024866341758, 'num_layers': 4, 'weight_decay': 4.742164413003079e-10}
+config: {}
+2024-12-05 00:36:27,057 INFO    Thread-290 (_run_job):24936 [wandb_init.py:init():669] starting backend
+2024-12-05 00:36:27,058 INFO    Thread-290 (_run_job):24936 [wandb_init.py:init():673] sending inform_init request
+2024-12-05 00:36:27,066 INFO    Thread-290 (_run_job):24936 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=spawn, using: spawn
+2024-12-05 00:36:27,075 INFO    Thread-290 (_run_job):24936 [wandb_init.py:init():686] backend started and connected
+2024-12-05 00:36:27,103 INFO    Thread-290 (_run_job):24936 [wandb_run.py:_config_callback():1387] config_cb None None {'epochs': 10000, 'hidden_size': 16, 'learning_rate': 0.0013075024866341758, 'num_layers': 4, 'weight_decay': 4.742164413003079e-10}
+2024-12-05 00:36:27,105 INFO    Thread-290 (_run_job):24936 [wandb_init.py:init():781] updated telemetry
+2024-12-05 00:36:27,278 INFO    Thread-290 (_run_job):24936 [wandb_init.py:init():814] communicating run to backend with 90.0 second timeout
+2024-12-05 00:36:27,602 INFO    Thread-290 (_run_job):24936 [wandb_init.py:init():867] starting run threads in backend
+2024-12-05 00:36:28,022 INFO    Thread-290 (_run_job):24936 [wandb_run.py:_console_start():2456] atexit reg
+2024-12-05 00:36:28,025 INFO    Thread-290 (_run_job):24936 [wandb_run.py:_redirect():2305] redirect: wrap_raw
+2024-12-05 00:36:28,027 INFO    Thread-290 (_run_job):24936 [wandb_run.py:_redirect():2370] Wrapping output streams.
+2024-12-05 00:36:28,029 INFO    Thread-290 (_run_job):24936 [wandb_run.py:_redirect():2395] Redirects installed.
+2024-12-05 00:36:28,031 INFO    Thread-290 (_run_job):24936 [wandb_init.py:init():911] run started, returning control to user process
+2024-12-05 00:36:28,055 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Current SDK version is 0.18.7
+2024-12-05 00:36:28,057 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Configure stats pid to 24936
+2024-12-05 00:36:28,060 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Loading settings from C:\Users\jonas\.config\wandb\settings
+2024-12-05 00:36:28,062 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Loading settings from C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\Master Thesis\Master-Thesis\wandb\settings
+2024-12-05 00:36:28,063 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Loading settings from environment variables: {'project': 'Master-Thesis', 'entity': 'megajosni', 'root_dir': 'C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis', 'run_id': 'qyv6nneu', 'sweep_param_path': 'C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\sweep-7jedyjfy\\config-qyv6nneu.yaml', 'sweep_id': '7jedyjfy'}
+2024-12-05 00:36:28,065 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Applying setup settings: {'mode': None, '_disable_service': None}
+2024-12-05 00:36:28,066 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Inferring run settings from compute environment: {'program_relpath': 'scripts\\SweepLV.py', 'program_abspath': 'c:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\scripts\\SweepLV.py', 'program': 'c:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\scripts\\SweepLV.py'}
+2024-12-05 00:36:28,068 INFO    Thread-290 (_run_job):24936 [wandb_setup.py:_flush():79] Applying login settings: {}
+2024-12-05 00:36:28,070 INFO    Thread-290 (_run_job):24936 [wandb_init.py:_log_setup():533] Logging user logs to C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\Master Thesis\Master-Thesis\wandb\run-20241205_003628-qyv6nneu\logs\debug.log
+2024-12-05 00:36:28,073 INFO    Thread-290 (_run_job):24936 [wandb_init.py:_log_setup():534] Logging internal logs to C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\Master Thesis\Master-Thesis\wandb\run-20241205_003628-qyv6nneu\logs\debug-internal.log
+2024-12-05 00:36:28,075 INFO    Thread-290 (_run_job):24936 [wandb_init.py:init():619] calling init triggers
+2024-12-05 00:36:28,078 INFO    Thread-290 (_run_job):24936 [wandb_init.py:init():626] wandb.init called with sweep_config: {'epochs': 10000, 'hidden_size': 16, 'learning_rate': 0.0013075024866341758, 'num_layers': 4, 'weight_decay': 4.742164413003079e-10}
+config: {}
+2024-12-05 00:36:28,080 INFO    Thread-290 (_run_job):24936 [wandb_init.py:init():664] wandb.init() called when a run is still active
+2024-12-05 00:36:28,081 INFO    Thread-290 (_run_job):24936 [wandb_watch.py:_watch():71] Watching
+2024-12-05 00:36:28,083 INFO    Thread-290 (_run_job):24936 [wandb_watch.py:_watch():71] Watching
+2024-12-05 00:38:30,757 INFO    Thread-290 (_run_job):24936 [wandb_run.py:_finish():2155] finishing run megajosni/Master-Thesis/qyv6nneu
+2024-12-05 00:38:30,758 INFO    Thread-290 (_run_job):24936 [wandb_run.py:_atexit_cleanup():2420] got exitcode: 0
+2024-12-05 00:38:30,760 INFO    Thread-290 (_run_job):24936 [wandb_run.py:_restore():2402] restore
+2024-12-05 00:38:30,761 INFO    Thread-290 (_run_job):24936 [wandb_run.py:_restore():2408] restore done
+2024-12-05 00:38:34,332 INFO    Thread-290 (_run_job):24936 [wandb_run.py:_footer_history_summary_info():3960] rendering history
+2024-12-05 00:38:34,334 INFO    Thread-290 (_run_job):24936 [wandb_run.py:_footer_history_summary_info():3992] rendering summary
+2024-12-05 00:38:34,345 INFO    Thread-290 (_run_job):24936 [wandb_run.py:_footer_sync_info():3921] logging synced files

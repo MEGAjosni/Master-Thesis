@@ -1,0 +1,16 @@
+{"time":"2024-12-05T01:07:23.1838901+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-05T01:07:23.1838901+01:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\run-20241205_010723-ectxr8ip\\logs\\debug-core.log"}
+{"time":"2024-12-05T01:07:23.2959855+01:00","level":"INFO","msg":"created new stream","id":"ectxr8ip"}
+{"time":"2024-12-05T01:07:23.2959855+01:00","level":"INFO","msg":"stream: started","id":"ectxr8ip"}
+{"time":"2024-12-05T01:07:23.2959855+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"ectxr8ip"}
+{"time":"2024-12-05T01:07:23.2959855+01:00","level":"INFO","msg":"handler: started","stream_id":"ectxr8ip"}
+{"time":"2024-12-05T01:07:23.2964817+01:00","level":"INFO","msg":"sender: started","stream_id":"ectxr8ip"}
+{"time":"2024-12-05T01:07:23.5727539+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-05T01:07:34.4797957+01:00","level":"INFO","msg":"stream: closing","id":"ectxr8ip"}
+{"time":"2024-12-05T01:07:34.4797957+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-05T01:07:34.4802917+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-05T01:07:35.1463037+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-05T01:07:35.373966+01:00","level":"INFO","msg":"handler: closed","stream_id":"ectxr8ip"}
+{"time":"2024-12-05T01:07:35.373966+01:00","level":"INFO","msg":"sender: closed","stream_id":"ectxr8ip"}
+{"time":"2024-12-05T01:07:35.373966+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"ectxr8ip"}
+{"time":"2024-12-05T01:07:35.373966+01:00","level":"INFO","msg":"stream: closed","id":"ectxr8ip"}

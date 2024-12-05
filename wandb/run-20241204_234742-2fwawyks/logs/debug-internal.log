@@ -1,0 +1,17 @@
+{"time":"2024-12-04T23:47:42.3499192+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T23:47:42.3499192+01:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\run-20241204_234742-2fwawyks\\logs\\debug-core.log"}
+{"time":"2024-12-04T23:47:42.5121112+01:00","level":"INFO","msg":"created new stream","id":"2fwawyks"}
+{"time":"2024-12-04T23:47:42.5121112+01:00","level":"INFO","msg":"stream: started","id":"2fwawyks"}
+{"time":"2024-12-04T23:47:42.5121112+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"2fwawyks"}
+{"time":"2024-12-04T23:47:42.5126075+01:00","level":"INFO","msg":"handler: started","stream_id":"2fwawyks"}
+{"time":"2024-12-04T23:47:42.5126075+01:00","level":"INFO","msg":"sender: started","stream_id":"2fwawyks"}
+{"time":"2024-12-04T23:47:42.7844154+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T23:48:48.8441878+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-04T23:48:48.8441878+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-04T23:48:49.8575153+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"saving job artifact","runtime_seconds":0.6973761,"subtasks":[{"desc":"wandb-job.json","runtime_seconds":0.03202,"progress":"6.3KB/6.3KB"}]}],"total_operations":1}}
+{"time":"2024-12-04T23:48:51.0892956+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-04T23:48:52.4225863+01:00","level":"INFO","msg":"stream: closing","id":"2fwawyks"}
+{"time":"2024-12-04T23:48:52.4225863+01:00","level":"INFO","msg":"handler: closed","stream_id":"2fwawyks"}
+{"time":"2024-12-04T23:48:52.4225863+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"2fwawyks"}
+{"time":"2024-12-04T23:48:52.4225863+01:00","level":"INFO","msg":"sender: closed","stream_id":"2fwawyks"}
+{"time":"2024-12-04T23:48:52.4225863+01:00","level":"INFO","msg":"stream: closed","id":"2fwawyks"}

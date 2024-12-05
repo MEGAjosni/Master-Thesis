@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "c:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\Master Thesis\Master-Thesis\scripts\lotka-volterra-upinn.py", line 119, in <module>
+    train(
+  File "C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\Master Thesis\Master-Thesis\scripts\train.py", line 120, in train
+    for name, fig in plots.items():
+                     ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'items'

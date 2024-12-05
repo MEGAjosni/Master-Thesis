@@ -1,0 +1,17 @@
+{"time":"2024-12-05T00:25:46.5288124+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-05T00:25:46.5293084+01:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\run-20241205_002546-tw6bj3v0\\logs\\debug-core.log"}
+{"time":"2024-12-05T00:25:46.6409088+01:00","level":"INFO","msg":"created new stream","id":"tw6bj3v0"}
+{"time":"2024-12-05T00:25:46.6409088+01:00","level":"INFO","msg":"stream: started","id":"tw6bj3v0"}
+{"time":"2024-12-05T00:25:46.6409088+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"tw6bj3v0"}
+{"time":"2024-12-05T00:25:46.6414045+01:00","level":"INFO","msg":"handler: started","stream_id":"tw6bj3v0"}
+{"time":"2024-12-05T00:25:46.6414045+01:00","level":"INFO","msg":"sender: started","stream_id":"tw6bj3v0"}
+{"time":"2024-12-05T00:25:46.8819644+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-05T00:26:31.9564692+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-05T00:26:31.9569647+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-05T00:26:32.9588847+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"saving job artifact","runtime_seconds":0.8119517,"subtasks":[{"desc":"wandb-job.json","runtime_seconds":0.0098331,"progress":"6.3KB/6.3KB"}]},{"desc":"uploading config.yaml","runtime_seconds":0.6226794,"progress":"693B/693B"},{"desc":"uploading history, summary, console logs","runtime_seconds":0.5897438}],"total_operations":3}}
+{"time":"2024-12-05T00:26:34.1706133+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-05T00:26:35.5011643+01:00","level":"INFO","msg":"stream: closing","id":"tw6bj3v0"}
+{"time":"2024-12-05T00:26:35.5011643+01:00","level":"INFO","msg":"handler: closed","stream_id":"tw6bj3v0"}
+{"time":"2024-12-05T00:26:35.5011643+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"tw6bj3v0"}
+{"time":"2024-12-05T00:26:35.5018783+01:00","level":"INFO","msg":"sender: closed","stream_id":"tw6bj3v0"}
+{"time":"2024-12-05T00:26:35.5018783+01:00","level":"INFO","msg":"stream: closed","id":"tw6bj3v0"}

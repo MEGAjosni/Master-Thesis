@@ -1,0 +1,4 @@
+tensor(0.7369, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(0.0010, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(nan, device='cuda:0', grad_fn=<MseLossBackward0>)
+tensor(nan, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(nan, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(nan, device='cuda:0', grad_fn=<MseLossBackward0>)
+tensor(nan, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(nan, device='cuda:0', grad_fn=<MseLossBackward0>) tensor(nan, device='cuda:0', grad_fn=<MseLossBackward0>)
+Training complete.

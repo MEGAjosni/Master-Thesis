@@ -1,0 +1,17 @@
+{"time":"2024-12-04T18:16:32.6365188+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T18:16:32.6365188+01:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\run-20241204_181632-50sb4g0f\\logs\\debug-core.log"}
+{"time":"2024-12-04T18:16:32.7469298+01:00","level":"INFO","msg":"created new stream","id":"50sb4g0f"}
+{"time":"2024-12-04T18:16:32.7474262+01:00","level":"INFO","msg":"stream: started","id":"50sb4g0f"}
+{"time":"2024-12-04T18:16:32.7474262+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"50sb4g0f"}
+{"time":"2024-12-04T18:16:32.7474262+01:00","level":"INFO","msg":"handler: started","stream_id":"50sb4g0f"}
+{"time":"2024-12-04T18:16:32.7474262+01:00","level":"INFO","msg":"sender: started","stream_id":"50sb4g0f"}
+{"time":"2024-12-04T18:16:33.0152665+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T18:21:42.4302955+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-04T18:21:42.430791+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-04T18:21:43.2453737+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-04T18:21:43.4447656+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history, summary, console logs","runtime_seconds":0.1984011}],"total_operations":1}}
+{"time":"2024-12-04T18:21:44.5620357+01:00","level":"INFO","msg":"stream: closing","id":"50sb4g0f"}
+{"time":"2024-12-04T18:21:44.562092+01:00","level":"INFO","msg":"handler: closed","stream_id":"50sb4g0f"}
+{"time":"2024-12-04T18:21:44.562092+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"50sb4g0f"}
+{"time":"2024-12-04T18:21:44.562092+01:00","level":"INFO","msg":"sender: closed","stream_id":"50sb4g0f"}
+{"time":"2024-12-04T18:21:44.562092+01:00","level":"INFO","msg":"stream: closed","id":"50sb4g0f"}

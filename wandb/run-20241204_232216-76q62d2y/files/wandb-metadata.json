@@ -1,0 +1,60 @@
+{
+    "os": "Windows-10-10.0.19045-SP0",
+    "python": "3.12.7",
+    "heartbeatAt": "2024-12-04T22:22:17.192431",
+    "startedAt": "2024-12-04T22:22:16.473751",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--epochs=10000",
+        "--hidden_size=16",
+        "--learning_rate=0.00023821311900009835",
+        "--num_layers=4",
+        "--optimizer=AdamW",
+        "--weight_decay=9.72830762359407e-08"
+    ],
+    "state": "running",
+    "program": "C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\scripts\\SweepLV.py",
+    "codePathLocal": "scripts\\SweepLV.py",
+    "codePath": "scripts\\SweepLV.py",
+    "git": {
+        "remote": "https://github.com/MEGAjosni/Master-Thesis.git",
+        "commit": "c360c98ad4893dc508222d03bc507125b518917a"
+    },
+    "email": "s183529@dtu.dk",
+    "root": "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/Master Thesis/Master-Thesis",
+    "host": "Jonas-Desktop",
+    "username": "jonas",
+    "executable": "C:\\Users\\jonas\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 4200.0,
+        "min": 0.0,
+        "max": 4200.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 4200.0,
+            "min": 0.0,
+            "max": 4200.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 465.17597579956055,
+            "used": 264.098445892334
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total": 11811160064
+        }
+    ],
+    "memory": {
+        "total": 31.960033416748047
+    }
+}

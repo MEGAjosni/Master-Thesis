@@ -1,0 +1,12 @@
+wandb_version: 1
+
+epochs:
+  value: 10000
+hidden_size:
+  value: 16
+learning_rate:
+  value: 0.0016003969837607988
+num_layers:
+  value: 4
+weight_decay:
+  value: 1.152075257140358e-06

@@ -1,0 +1,17 @@
+{"time":"2024-12-04T23:33:07.2775759+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T23:33:07.2775759+01:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\run-20241204_233307-7xz3kxtz\\logs\\debug-core.log"}
+{"time":"2024-12-04T23:33:07.3876883+01:00","level":"INFO","msg":"created new stream","id":"7xz3kxtz"}
+{"time":"2024-12-04T23:33:07.3876883+01:00","level":"INFO","msg":"stream: started","id":"7xz3kxtz"}
+{"time":"2024-12-04T23:33:07.3881844+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"7xz3kxtz"}
+{"time":"2024-12-04T23:33:07.3881844+01:00","level":"INFO","msg":"handler: started","stream_id":"7xz3kxtz"}
+{"time":"2024-12-04T23:33:07.3881844+01:00","level":"INFO","msg":"sender: started","stream_id":"7xz3kxtz"}
+{"time":"2024-12-04T23:33:07.6555288+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T23:33:07.9159283+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-04T23:33:07.916424+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-04T23:33:08.9219389+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"saving job artifact","runtime_seconds":0.3651786},{"desc":"uploading output.log","runtime_seconds":0.1702494},{"desc":"uploading config.yaml","runtime_seconds":0.1702494,"progress":"633B/633B"}],"total_operations":3}}
+{"time":"2024-12-04T23:33:09.0578706+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-04T23:33:10.3619422+01:00","level":"INFO","msg":"stream: closing","id":"7xz3kxtz"}
+{"time":"2024-12-04T23:33:10.3619422+01:00","level":"INFO","msg":"handler: closed","stream_id":"7xz3kxtz"}
+{"time":"2024-12-04T23:33:10.3619422+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"7xz3kxtz"}
+{"time":"2024-12-04T23:33:10.3619422+01:00","level":"INFO","msg":"sender: closed","stream_id":"7xz3kxtz"}
+{"time":"2024-12-04T23:33:10.3622728+01:00","level":"INFO","msg":"stream: closed","id":"7xz3kxtz"}

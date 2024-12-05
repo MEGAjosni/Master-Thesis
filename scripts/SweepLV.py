@@ -2,13 +2,12 @@
 import torch
 
 # Custom imports
-import os
 import sys
 sys.path.append('./')
 from utils.NeuralNets import FNN, KAN
 from utils.DataGenerators import LotkaVolterra
 from utils.Utils import sample_with_noise, SoftAdapt
-from scripts.TrainLV import train
+from scripts.train import train
 
 # Plotly
 import plotly.graph_objects as go
@@ -29,16 +28,23 @@ sweep_config = {
     },
     'parameters': {
         'learning_rate': {
-            'values': [1e-4, 1e-3, 1e-2]  # Test these values
-        },
-        'hidden_layers': {
-            'values': [1, 2, 3, 4]  # Number of hidden layers
-        },
-        'hidden_size': {
-            'values': [8, 16, 32, 64]  # Size of each hidden layer
+            'distribution': 'log_uniform_values',
+            'min': 1e-4,
+            'max': 1e-2,
         },
         'weight_decay': {
-            'values': [0.0, 1e-5, 1e-4]  # Additional optional parameter
+            'distribution': 'log_uniform_values',
+            'min': 1e-12,
+            'max': 1e-2,
+        },
+        'num_layers': {
+            'value': 4  # Number of hidden layers
+        },
+        'hidden_size': {
+            'value': 16  # Size of each hidden layer
+        },
+        'epochs': {
+            'value': 10000  # Number of epochs to train     
         }
     }
 }
@@ -78,6 +84,16 @@ data = dict(
     t_c=t[train_idx].unsqueeze(-1).requires_grad_(True),
 )
 
+# Define pde residual
+def pde_residual(X, res, t, params):
+    dUdt = torch.cat([
+        torch.autograd.grad(outputs=X[:, i], inputs=t, grad_outputs=torch.ones_like(X[:, i]), create_graph=True)[0]
+        for i in range(X.shape[1])
+    ], dim=-1)
+    return torch.stack([
+        dUdt[:, 0] - params[0]*X[:, 0] + params[1]*X[:, 0]*X[:, 1] - res[:, 0],
+        dUdt[:, 1] + params[2]*X[:, 1] - res[:, 1]
+    ], dim=-1)
 
 # Sweep train function
 def sweep_train():
@@ -85,7 +101,7 @@ def sweep_train():
     config = wandb.config  # Access sweep parameters
 
     # Define model architectures with sweep params
-    hidden = [config.hidden_size] * config.hidden_layers
+    hidden = [config.hidden_size] * config.num_layers
     u = FNN(
         dims=[1, *hidden, 2],
         hidden_act=torch.nn.Tanh(),
@@ -106,13 +122,14 @@ def sweep_train():
     # Train the model
     train(
         u, G, data,
+        params=torch.tensor([alpha, beta, delta], dtype=torch.float32),
+        pde_residual=pde_residual,
         optimizer=torch.optim.AdamW,
-        lr=config.learning_rate,
-        weight_decay=config.weight_decay,
-        epochs=30000,
-        plotting=dict(log_plots=False, plot_interval=1000),
+        optimizer_args=dict(lr=config.learning_rate, weight_decay=config.weight_decay),
+        epochs=config.epochs,
         loss_tol_stop=1e-5,
+        log_wandb=dict(log=True, name=exp_name, project='Master-Thesis', log_plots=False)
     )
 
 # Run the sweep
-wandb.agent(sweep_id, function=sweep_train, count=10)  # Adjust count as needed
+wandb.agent(sweep_id, function=sweep_train)  # Adjust count as needed

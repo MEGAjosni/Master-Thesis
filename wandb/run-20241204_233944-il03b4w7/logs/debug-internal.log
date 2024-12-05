@@ -1,0 +1,17 @@
+{"time":"2024-12-04T23:39:44.8864476+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-04T23:39:44.8869439+01:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\run-20241204_233944-il03b4w7\\logs\\debug-core.log"}
+{"time":"2024-12-04T23:39:44.997552+01:00","level":"INFO","msg":"created new stream","id":"il03b4w7"}
+{"time":"2024-12-04T23:39:44.997552+01:00","level":"INFO","msg":"stream: started","id":"il03b4w7"}
+{"time":"2024-12-04T23:39:44.997552+01:00","level":"INFO","msg":"sender: started","stream_id":"il03b4w7"}
+{"time":"2024-12-04T23:39:44.997552+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"il03b4w7"}
+{"time":"2024-12-04T23:39:44.997552+01:00","level":"INFO","msg":"handler: started","stream_id":"il03b4w7"}
+{"time":"2024-12-04T23:39:45.2505115+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T23:40:33.0428855+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-04T23:40:33.0430963+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-04T23:40:34.0459261+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"saving job artifact","runtime_seconds":0.8265071,"subtasks":[{"desc":"wandb-job.json","runtime_seconds":0.1677833,"progress":"6.3KB/6.3KB"}]},{"desc":"uploading output.log","runtime_seconds":0.6460912,"progress":"191B/191B"}],"total_operations":2}}
+{"time":"2024-12-04T23:40:35.3854972+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-04T23:40:36.6870795+01:00","level":"INFO","msg":"stream: closing","id":"il03b4w7"}
+{"time":"2024-12-04T23:40:36.6870795+01:00","level":"INFO","msg":"handler: closed","stream_id":"il03b4w7"}
+{"time":"2024-12-04T23:40:36.6875754+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"il03b4w7"}
+{"time":"2024-12-04T23:40:36.687675+01:00","level":"INFO","msg":"sender: closed","stream_id":"il03b4w7"}
+{"time":"2024-12-04T23:40:36.687675+01:00","level":"INFO","msg":"stream: closed","id":"il03b4w7"}

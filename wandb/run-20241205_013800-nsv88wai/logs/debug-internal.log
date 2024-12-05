@@ -1,0 +1,16 @@
+{"time":"2024-12-05T01:38:00.7645858+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-05T01:38:00.7650826+01:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\run-20241205_013800-nsv88wai\\logs\\debug-core.log"}
+{"time":"2024-12-05T01:38:00.8861062+01:00","level":"INFO","msg":"created new stream","id":"nsv88wai"}
+{"time":"2024-12-05T01:38:00.886603+01:00","level":"INFO","msg":"stream: started","id":"nsv88wai"}
+{"time":"2024-12-05T01:38:00.886603+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"nsv88wai"}
+{"time":"2024-12-05T01:38:00.886603+01:00","level":"INFO","msg":"sender: started","stream_id":"nsv88wai"}
+{"time":"2024-12-05T01:38:00.886603+01:00","level":"INFO","msg":"handler: started","stream_id":"nsv88wai"}
+{"time":"2024-12-05T01:38:01.2392588+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-05T01:39:56.8737814+01:00","level":"INFO","msg":"stream: closing","id":"nsv88wai"}
+{"time":"2024-12-05T01:39:56.8737814+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-05T01:39:56.8752326+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-05T01:39:57.5454301+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-05T01:39:57.8573113+01:00","level":"INFO","msg":"handler: closed","stream_id":"nsv88wai"}
+{"time":"2024-12-05T01:39:57.8578074+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"nsv88wai"}
+{"time":"2024-12-05T01:39:57.858304+01:00","level":"INFO","msg":"sender: closed","stream_id":"nsv88wai"}
+{"time":"2024-12-05T01:39:57.858304+01:00","level":"INFO","msg":"stream: closed","id":"nsv88wai"}

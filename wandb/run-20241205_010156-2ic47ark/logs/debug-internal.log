@@ -1,0 +1,16 @@
+{"time":"2024-12-05T01:01:56.8417063+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-05T01:01:56.8422025+01:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\run-20241205_010156-2ic47ark\\logs\\debug-core.log"}
+{"time":"2024-12-05T01:01:56.9523139+01:00","level":"INFO","msg":"created new stream","id":"2ic47ark"}
+{"time":"2024-12-05T01:01:56.9523139+01:00","level":"INFO","msg":"stream: started","id":"2ic47ark"}
+{"time":"2024-12-05T01:01:56.9523139+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"2ic47ark"}
+{"time":"2024-12-05T01:01:56.9523139+01:00","level":"INFO","msg":"handler: started","stream_id":"2ic47ark"}
+{"time":"2024-12-05T01:01:56.9523139+01:00","level":"INFO","msg":"sender: started","stream_id":"2ic47ark"}
+{"time":"2024-12-05T01:01:57.2821543+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-05T01:05:54.8652061+01:00","level":"INFO","msg":"stream: closing","id":"2ic47ark"}
+{"time":"2024-12-05T01:05:54.8652061+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-05T01:05:54.8657789+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-05T01:05:56.8472235+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-05T01:05:57.0907579+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"2ic47ark"}
+{"time":"2024-12-05T01:05:57.0907579+01:00","level":"INFO","msg":"handler: closed","stream_id":"2ic47ark"}
+{"time":"2024-12-05T01:05:57.0907579+01:00","level":"INFO","msg":"sender: closed","stream_id":"2ic47ark"}
+{"time":"2024-12-05T01:05:57.0907579+01:00","level":"INFO","msg":"stream: closed","id":"2ic47ark"}

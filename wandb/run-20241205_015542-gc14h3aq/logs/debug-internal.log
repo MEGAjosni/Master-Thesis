@@ -1,0 +1,16 @@
+{"time":"2024-12-05T01:55:42.420535+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-05T01:55:42.420535+01:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\wandb\\run-20241205_015542-gc14h3aq\\logs\\debug-core.log"}
+{"time":"2024-12-05T01:55:42.531468+01:00","level":"INFO","msg":"created new stream","id":"gc14h3aq"}
+{"time":"2024-12-05T01:55:42.531468+01:00","level":"INFO","msg":"stream: started","id":"gc14h3aq"}
+{"time":"2024-12-05T01:55:42.531468+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"gc14h3aq"}
+{"time":"2024-12-05T01:55:42.531468+01:00","level":"INFO","msg":"sender: started","stream_id":"gc14h3aq"}
+{"time":"2024-12-05T01:55:42.531468+01:00","level":"INFO","msg":"handler: started","stream_id":"gc14h3aq"}
+{"time":"2024-12-05T01:55:42.9314232+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-05T01:56:50.145884+01:00","level":"INFO","msg":"stream: closing","id":"gc14h3aq"}
+{"time":"2024-12-05T01:56:50.145884+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-05T01:56:50.1463803+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-05T01:56:50.7852569+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-05T01:56:51.2138613+01:00","level":"INFO","msg":"handler: closed","stream_id":"gc14h3aq"}
+{"time":"2024-12-05T01:56:51.2138613+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"gc14h3aq"}
+{"time":"2024-12-05T01:56:51.2138613+01:00","level":"INFO","msg":"sender: closed","stream_id":"gc14h3aq"}
+{"time":"2024-12-05T01:56:51.2142681+01:00","level":"INFO","msg":"stream: closed","id":"gc14h3aq"}
