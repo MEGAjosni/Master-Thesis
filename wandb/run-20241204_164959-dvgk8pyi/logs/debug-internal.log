@@ -6,3 +6,13 @@
 {"time":"2024-12-04T16:49:59.253842432+01:00","level":"INFO","msg":"sender: started","stream_id":"dvgk8pyi"}
 {"time":"2024-12-04T16:49:59.253827823+01:00","level":"INFO","msg":"handler: started","stream_id":"dvgk8pyi"}
 {"time":"2024-12-04T16:49:59.574049414+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-04T21:21:45.249530553+01:00","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/files/megajosni/Master-Thesis/dvgk8pyi/file_stream"}
+{"time":"2024-12-05T00:32:34.74115193+01:00","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/files/megajosni/Master-Thesis/dvgk8pyi/file_stream"}
+{"time":"2024-12-05T02:18:30.660561951+01:00","level":"INFO","msg":"stream: closing","id":"dvgk8pyi"}
+{"time":"2024-12-05T02:18:30.660613321+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-05T02:18:30.662178481+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-05T02:18:33.50950583+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-05T02:18:33.796157343+01:00","level":"INFO","msg":"handler: closed","stream_id":"dvgk8pyi"}
+{"time":"2024-12-05T02:18:33.7961882+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"dvgk8pyi"}
+{"time":"2024-12-05T02:18:33.796226886+01:00","level":"INFO","msg":"sender: closed","stream_id":"dvgk8pyi"}
+{"time":"2024-12-05T02:18:33.797207916+01:00","level":"INFO","msg":"stream: closed","id":"dvgk8pyi"}

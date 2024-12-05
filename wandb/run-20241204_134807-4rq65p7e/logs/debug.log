@@ -23,3 +23,4 @@ config: {'learning_rate': 0.001, 'Archtechture': 'KAN', 'Problem': 'Lotka-Volter
 2024-12-04 13:48:08,635 INFO    MainThread:3964009 [wandb_run.py:_redirect():2370] Wrapping output streams.
 2024-12-04 13:48:08,635 INFO    MainThread:3964009 [wandb_run.py:_redirect():2395] Redirects installed.
 2024-12-04 13:48:08,638 INFO    MainThread:3964009 [wandb_init.py:init():911] run started, returning control to user process
+2024-12-05 02:34:16,463 WARNING MsgRouterThr:3964009 [router.py:message_loop():75] message_loop has been closed

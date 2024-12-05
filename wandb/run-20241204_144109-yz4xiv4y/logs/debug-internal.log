@@ -8,3 +8,56 @@
 {"time":"2024-12-04T14:41:09.887352392+01:00","level":"INFO","msg":"Starting system monitor"}
 {"time":"2024-12-04T14:42:55.59226768+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/megajosni/Master-Thesis/yz4xiv4y/file_stream"}
 {"time":"2024-12-04T14:42:55.592527932+01:00","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/megajosni/Master-Thesis/yz4xiv4y/file_stream: {\"error\":\"run Master-Thesis/yz4xiv4y not found while streaming file\"}"}
+{"time":"2024-12-05T02:15:20.41960687+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:15:20.420300532+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404 Not Found: {\"errors\":[{\"message\":\"run Master-Thesis/yz4xiv4y not found during createRunFiles\",\"path\":[\"createRunFiles\"]}],\"data\":{\"createRunFiles\":null}}"}
+{"time":"2024-12-05T02:15:29.769609829+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:15:29.769913072+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404 Not Found: {\"errors\":[{\"message\":\"run Master-Thesis/yz4xiv4y not found during createRunFiles\",\"path\":[\"createRunFiles\"]}],\"data\":{\"createRunFiles\":null}}"}
+{"time":"2024-12-05T02:15:39.138953826+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:15:39.139272765+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404 Not Found: {\"errors\":[{\"message\":\"run Master-Thesis/yz4xiv4y not found during createRunFiles\",\"path\":[\"createRunFiles\"]}],\"data\":{\"createRunFiles\":null}}"}
+{"time":"2024-12-05T02:15:48.480591209+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:15:48.480861474+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404 Not Found: {\"errors\":[{\"message\":\"run Master-Thesis/yz4xiv4y not found during createRunFiles\",\"path\":[\"createRunFiles\"]}],\"data\":{\"createRunFiles\":null}}"}
+{"time":"2024-12-05T02:15:57.771640153+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:15:57.772060529+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404 Not Found: {\"errors\":[{\"message\":\"run Master-Thesis/yz4xiv4y not found during createRunFiles\",\"path\":[\"createRunFiles\"]}],\"data\":{\"createRunFiles\":null}}"}
+{"time":"2024-12-05T02:16:06.959587713+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:16:06.959893434+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404 Not Found: {\"errors\":[{\"message\":\"run Master-Thesis/yz4xiv4y not found during createRunFiles\",\"path\":[\"createRunFiles\"]}],\"data\":{\"createRunFiles\":null}}"}
+{"time":"2024-12-05T02:16:16.425639541+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:16:16.425929208+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404 Not Found: {\"errors\":[{\"message\":\"run Master-Thesis/yz4xiv4y not found during createRunFiles\",\"path\":[\"createRunFiles\"]}],\"data\":{\"createRunFiles\":null}}"}
+{"time":"2024-12-05T02:16:25.731485612+01:00","level":"INFO","msg":"stream: closing","id":"yz4xiv4y"}
+{"time":"2024-12-05T02:16:25.73160409+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-05T02:16:25.732324758+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-05T02:16:25.875598579+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:16:25.922005981+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:16:25.922061821+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404 Not Found: {\"errors\":[{\"message\":\"run Master-Thesis/yz4xiv4y not found during createRunFiles\",\"path\":[\"createRunFiles\"]}],\"data\":{\"createRunFiles\":null}}"}
+{"time":"2024-12-05T02:16:28.095600158+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:16:32.875192742+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:16:42.211299755+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:16:59.829271487+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:17:32.140404196+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:18:32.284519723+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:19:32.426295144+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:20:32.568523607+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:21:32.708982545+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:22:32.850505817+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:23:32.998961601+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:24:33.139931678+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:25:33.288920159+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:26:25.736298366+01:00","level":"WARN","msg":"sender: taking a long time","seconds":600.000453203,"work":"WorkRecord(*service_go_proto.Request_Defer); Control(local:true always_send:true)"}
+{"time":"2024-12-05T02:26:33.438137865+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:27:33.58334176+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:28:33.724771341+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:29:33.864105644+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:30:34.011098921+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:31:34.156201076+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:32:34.301988793+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:32:34.302261984+01:00","level":"ERROR","msg":"sender: sendConfig:","error":"api: failed sending: POST https://api.wandb.ai/graphql giving up after 21 attempt(s)"}
+{"time":"2024-12-05T02:32:34.306848966+01:00","level":"INFO","msg":"sender: succeeded after taking longer than expected","seconds":968.57105029,"work":"WorkRecord(*service_go_proto.Request_Defer); Control(local:true always_send:true)"}
+{"time":"2024-12-05T02:32:34.497576721+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:32:34.497615142+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404 Not Found: {\"errors\":[{\"message\":\"run Master-Thesis/yz4xiv4y not found during createRunFiles\",\"path\":[\"createRunFiles\"]}],\"data\":{\"createRunFiles\":null}}"}
+{"time":"2024-12-05T02:32:34.776412692+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:32:34.783663823+01:00","level":"ERROR","msg":"sender: failed to save job artifact: ArtifactSaver.createManifest: returned error 404 Not Found: {\"errors\":[{\"message\":\"failed to find run Master-Thesis/yz4xiv4y\",\"path\":[\"createArtifactManifest\"]}],\"data\":{\"createArtifactManifest\":null}}"}
+{"time":"2024-12-05T02:32:34.836428466+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-05T02:32:34.836547341+01:00","level":"INFO","msg":"handler: closed","stream_id":"yz4xiv4y"}
+{"time":"2024-12-05T02:32:34.836574311+01:00","level":"INFO","msg":"sender: closed","stream_id":"yz4xiv4y"}
+{"time":"2024-12-05T02:32:34.83656951+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"yz4xiv4y"}
+{"time":"2024-12-05T02:32:34.836609785+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: api: failed sending: POST https://api.wandb.ai/graphql giving up after 1 attempt(s): context canceled"}
+{"time":"2024-12-05T02:32:34.838933906+01:00","level":"INFO","msg":"stream: closed","id":"yz4xiv4y"}

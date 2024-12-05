@@ -8,3 +8,42 @@
 {"time":"2024-12-04T14:24:50.789849031+01:00","level":"INFO","msg":"Starting system monitor"}
 {"time":"2024-12-04T14:42:51.489731369+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/megajosni/Master-Thesis/kozndzec/file_stream"}
 {"time":"2024-12-04T14:42:51.490005078+01:00","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/megajosni/Master-Thesis/kozndzec/file_stream: {\"error\":\"run Master-Thesis/kozndzec not found while streaming file\"}"}
+{"time":"2024-12-05T02:15:14.433611375+01:00","level":"INFO","msg":"stream: closing","id":"kozndzec"}
+{"time":"2024-12-05T02:15:14.433718395+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-05T02:15:14.435046944+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-05T02:15:14.695003524+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:15:14.738427254+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:15:14.738487694+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404 Not Found: {\"errors\":[{\"message\":\"run Master-Thesis/kozndzec not found during createRunFiles\",\"path\":[\"createRunFiles\"]}],\"data\":{\"createRunFiles\":null}}"}
+{"time":"2024-12-05T02:15:17.214668238+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:15:22.022841013+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:15:31.179982833+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:15:48.441778098+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:16:27.493966808+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:17:27.639857964+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:18:27.77994911+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:19:27.921851569+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:20:28.070317852+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:21:28.21753123+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:22:28.360139119+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:23:28.508996855+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:24:28.651000969+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:25:14.551513121+01:00","level":"WARN","msg":"sender: taking a long time","seconds":600.00083153,"work":"WorkRecord(*service_go_proto.Request_Defer); Control(local:true always_send:true)"}
+{"time":"2024-12-05T02:25:28.793648461+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:26:28.965415356+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:27:29.11259763+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:28:29.256383418+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:29:29.408122202+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:30:29.549564352+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:31:29.694886583+01:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:31:29.695257811+01:00","level":"ERROR","msg":"sender: sendConfig:","error":"api: failed sending: POST https://api.wandb.ai/graphql giving up after 21 attempt(s)"}
+{"time":"2024-12-05T02:31:29.731253729+01:00","level":"INFO","msg":"sender: succeeded after taking longer than expected","seconds":975.180606116,"work":"WorkRecord(*service_go_proto.Request_Defer); Control(local:true always_send:true)"}
+{"time":"2024-12-05T02:31:29.921306054+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:31:29.921361023+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404 Not Found: {\"errors\":[{\"message\":\"run Master-Thesis/kozndzec not found during createRunFiles\",\"path\":[\"createRunFiles\"]}],\"data\":{\"createRunFiles\":null}}"}
+{"time":"2024-12-05T02:31:30.251347572+01:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2024-12-05T02:31:30.256918053+01:00","level":"ERROR","msg":"sender: failed to save job artifact: ArtifactSaver.createManifest: returned error 404 Not Found: {\"errors\":[{\"message\":\"failed to find run Master-Thesis/kozndzec\",\"path\":[\"createArtifactManifest\"]}],\"data\":{\"createArtifactManifest\":null}}"}
+{"time":"2024-12-05T02:31:30.308904077+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-05T02:31:30.309024033+01:00","level":"INFO","msg":"handler: closed","stream_id":"kozndzec"}
+{"time":"2024-12-05T02:31:30.309047565+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"kozndzec"}
+{"time":"2024-12-05T02:31:30.309095575+01:00","level":"INFO","msg":"sender: closed","stream_id":"kozndzec"}
+{"time":"2024-12-05T02:31:30.309119382+01:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: api: failed sending: POST https://api.wandb.ai/graphql giving up after 1 attempt(s): context canceled"}
+{"time":"2024-12-05T02:31:30.310719683+01:00","level":"INFO","msg":"stream: closed","id":"kozndzec"}

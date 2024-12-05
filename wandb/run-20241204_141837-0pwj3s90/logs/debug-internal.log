@@ -5,3 +5,10 @@
 {"time":"2024-12-04T14:18:37.540333693+01:00","level":"INFO","msg":"handler: started","stream_id":"0pwj3s90"}
 {"time":"2024-12-04T14:18:37.5403375+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"0pwj3s90"}
 {"time":"2024-12-04T14:18:37.540347195+01:00","level":"INFO","msg":"sender: started","stream_id":"0pwj3s90"}
+{"time":"2024-12-05T02:15:14.349598199+01:00","level":"INFO","msg":"stream: closing","id":"0pwj3s90"}
+{"time":"2024-12-05T02:15:14.350481072+01:00","level":"INFO","msg":"handler: closed","stream_id":"0pwj3s90"}
+{"time":"2024-12-05T02:15:14.350493198+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"0pwj3s90"}
+{"time":"2024-12-05T02:15:14.34987931+01:00","level":"ERROR","msg":"sender: upsertConfig: RunRecord is nil"}
+{"time":"2024-12-05T02:15:14.35053938+01:00","level":"WARN","msg":"runwork: ignoring record after close","work":{"Record":{"RecordType":{"Request":{"RequestType":{"Defer":{"state":7}}}},"control":{"always_send":true}}}}
+{"time":"2024-12-05T02:15:14.350743079+01:00","level":"INFO","msg":"sender: closed","stream_id":"0pwj3s90"}
+{"time":"2024-12-05T02:15:14.356265731+01:00","level":"INFO","msg":"stream: closed","id":"0pwj3s90"}

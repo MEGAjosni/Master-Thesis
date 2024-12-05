@@ -1,0 +1,33 @@
+2024-12-04 18:50:00,697 INFO    Thread-23 (_run_job):416386 [wandb_setup.py:_flush():79] Current SDK version is 0.18.7
+2024-12-04 18:50:00,697 INFO    Thread-23 (_run_job):416386 [wandb_setup.py:_flush():79] Configure stats pid to 416386
+2024-12-04 18:50:00,697 INFO    Thread-23 (_run_job):416386 [wandb_setup.py:_flush():79] Loading settings from /zhome/32/9/137127/.config/wandb/settings
+2024-12-04 18:50:00,697 INFO    Thread-23 (_run_job):416386 [wandb_setup.py:_flush():79] Loading settings from /zhome/32/9/137127/Master-Thesis/wandb/settings
+2024-12-04 18:50:00,697 INFO    Thread-23 (_run_job):416386 [wandb_setup.py:_flush():79] Loading settings from environment variables: {'project': 'Master-Thesis', 'entity': 'megajosni', 'root_dir': '/zhome/32/9/137127/Master-Thesis', 'run_id': 'kfy8pqsj', 'sweep_param_path': '/zhome/32/9/137127/Master-Thesis/wandb/sweep-w6tniqsw/config-kfy8pqsj.yaml', 'sweep_id': 'w6tniqsw'}
+2024-12-04 18:50:00,697 INFO    Thread-23 (_run_job):416386 [wandb_setup.py:_flush():79] Applying setup settings: {'mode': None, '_disable_service': None}
+2024-12-04 18:50:00,697 INFO    Thread-23 (_run_job):416386 [wandb_setup.py:_flush():79] Inferring run settings from compute environment: {'program_relpath': 'scripts/SweepLV.py', 'program_abspath': '/zhome/32/9/137127/Master-Thesis/scripts/SweepLV.py', 'program': '/zhome/32/9/137127/Master-Thesis/scripts/SweepLV.py'}
+2024-12-04 18:50:00,697 INFO    Thread-23 (_run_job):416386 [wandb_setup.py:_flush():79] Applying login settings: {}
+2024-12-04 18:50:00,697 INFO    Thread-23 (_run_job):416386 [wandb_init.py:_log_setup():533] Logging user logs to /zhome/32/9/137127/Master-Thesis/wandb/run-20241204_185000-kfy8pqsj/logs/debug.log
+2024-12-04 18:50:00,697 INFO    Thread-23 (_run_job):416386 [wandb_init.py:_log_setup():534] Logging internal logs to /zhome/32/9/137127/Master-Thesis/wandb/run-20241204_185000-kfy8pqsj/logs/debug-internal.log
+2024-12-04 18:50:00,697 INFO    Thread-23 (_run_job):416386 [wandb_init.py:init():619] calling init triggers
+2024-12-04 18:50:00,698 INFO    Thread-23 (_run_job):416386 [wandb_init.py:init():626] wandb.init called with sweep_config: {'hidden_layers': 4, 'hidden_size': 32, 'learning_rate': 0.01, 'weight_decay': 0.0001}
+config: {}
+2024-12-04 18:50:00,698 INFO    Thread-23 (_run_job):416386 [wandb_init.py:init():669] starting backend
+2024-12-04 18:50:00,698 INFO    Thread-23 (_run_job):416386 [wandb_init.py:init():673] sending inform_init request
+2024-12-04 18:50:00,707 INFO    Thread-23 (_run_job):416386 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-12-04 18:50:00,707 INFO    Thread-23 (_run_job):416386 [wandb_init.py:init():686] backend started and connected
+2024-12-04 18:50:00,726 INFO    Thread-23 (_run_job):416386 [wandb_run.py:_config_callback():1387] config_cb None None {'hidden_layers': 4, 'hidden_size': 32, 'learning_rate': 0.01, 'weight_decay': 0.0001}
+2024-12-04 18:50:00,729 INFO    Thread-23 (_run_job):416386 [wandb_init.py:init():781] updated telemetry
+2024-12-04 18:50:00,742 INFO    Thread-23 (_run_job):416386 [wandb_init.py:init():814] communicating run to backend with 90.0 second timeout
+2024-12-04 18:50:01,304 INFO    Thread-23 (_run_job):416386 [wandb_init.py:init():867] starting run threads in backend
+2024-12-04 18:50:01,404 INFO    Thread-23 (_run_job):416386 [wandb_run.py:_console_start():2456] atexit reg
+2024-12-04 18:50:01,404 INFO    Thread-23 (_run_job):416386 [wandb_run.py:_redirect():2305] redirect: wrap_raw
+2024-12-04 18:50:01,404 INFO    Thread-23 (_run_job):416386 [wandb_run.py:_redirect():2370] Wrapping output streams.
+2024-12-04 18:50:01,404 INFO    Thread-23 (_run_job):416386 [wandb_run.py:_redirect():2395] Redirects installed.
+2024-12-04 18:50:01,405 INFO    Thread-23 (_run_job):416386 [wandb_init.py:init():911] run started, returning control to user process
+2024-12-04 18:51:10,959 INFO    Thread-23 (_run_job):416386 [wandb_run.py:_finish():2155] finishing run megajosni/Master-Thesis/kfy8pqsj
+2024-12-04 18:51:10,959 INFO    Thread-23 (_run_job):416386 [wandb_run.py:_atexit_cleanup():2420] got exitcode: 0
+2024-12-04 18:51:10,960 INFO    Thread-23 (_run_job):416386 [wandb_run.py:_restore():2402] restore
+2024-12-04 18:51:10,960 INFO    Thread-23 (_run_job):416386 [wandb_run.py:_restore():2408] restore done
+2024-12-04 18:51:13,265 INFO    Thread-23 (_run_job):416386 [wandb_run.py:_footer_history_summary_info():3960] rendering history
+2024-12-04 18:51:13,267 INFO    Thread-23 (_run_job):416386 [wandb_run.py:_footer_history_summary_info():3992] rendering summary
+2024-12-04 18:51:13,277 INFO    Thread-23 (_run_job):416386 [wandb_run.py:_footer_sync_info():3921] logging synced files
