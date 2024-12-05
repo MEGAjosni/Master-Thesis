@@ -56,7 +56,6 @@ hidden = [20] * 3
 u = FNN(
     dims=[2, *hidden, 1],
     hidden_act=torch.nn.Tanh(),
-    output_act=torch.nn.Softplus(),
 )
 G = FNN(
     dims=[1, *hidden, 1],
@@ -76,8 +75,7 @@ def pde_residual(U, res, z, params):
     Uxx = torch.autograd.grad(outputs=Ux, inputs=z, grad_outputs=torch.ones_like(Ux), create_graph=True)[0].T[1]
     return (Ut + U.squeeze() * Ux - params[0] * Uxx).unsqueeze(-1)
 
-# Make plotting function
-
+# Make plotting function #TODO: Make this work Properly
 def plot_solution(u, G):
     device = next(u.parameters()).device # Get the device of the model
     plots = dict()
