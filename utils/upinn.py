@@ -14,10 +14,17 @@ import  tempfile
 folder_temp = tempfile.TemporaryDirectory()
 os.chmod(folder_temp.name, 0o777)
 
-#####################
-### Training loop ###
-#####################
-def train(
+
+class UPINN:
+
+    def __init__(self, u, G):
+        self.u = u
+        self.G = G        
+
+
+
+
+    def train(
         u: torch.nn.Module,
         G: torch.nn.Module,
         data: dict,
@@ -84,7 +91,7 @@ def train(
             optimizer.zero_grad()
 
             # Boundary condition loss
-            bc_loss = torch.nn.MSELoss()(u(z_b), U_b) if U_b.numel() > 0 else torch.tensor(0).to(device) # No boundary conditions
+            bc_loss = torch.nn.MSELoss()(u(z_b), U_b)
 
             # Data loss
             data_loss = torch.nn.MSELoss()(u(z_d), U_d) if U_d.numel() > 0 else torch.tensor(0).to(device) # No data

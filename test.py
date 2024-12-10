@@ -1,4 +1,7 @@
-import torch
+class testclass:
 
-# Check if CUDA is available
-print(torch.cuda.is_available())
+    def __init__(self):
+        pass
+
+    @property
+    def a
