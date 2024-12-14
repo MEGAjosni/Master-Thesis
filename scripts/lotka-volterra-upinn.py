@@ -33,16 +33,16 @@ train_idx = torch.arange(0, train_test*N, dtype=torch.long)
 test_idx = torch.arange(train_test*N, N, dtype=torch.long)
 
 # Sample subset and add noise
-t_d, X_d = sample_with_noise(10, t[train_idx], X, epsilon=5e-3)
+t_d, X_d = sample_with_noise(10, t[train_idx], X, epsilon=0.0)
 
 # Move the data to the device and convert to float
 
 data = dict(
-    t_b=torch.tensor([[0.0]]),
-    X_b=LV.X0.unsqueeze(0),
-    t_d=t_d.unsqueeze(-1),
-    X_d=X_d,
-    t_c=t[train_idx].unsqueeze(-1).requires_grad_(True),
+    z_b=torch.tensor([[0.0]]),
+    U_b=LV.X0.unsqueeze(0),
+    z_d=t_d.unsqueeze(-1),
+    U_d=X_d,
+    z_c=t[train_idx].unsqueeze(-1).requires_grad_(True),
 )
 
 # Define model architectures with sweep params
@@ -118,13 +118,15 @@ def plot_solution(u, G):
     return plots
 
 
+print(data)
+
 # Train the model
 train(
     u, G, data,
     torch.tensor([alpha, beta, delta], dtype=torch.float32),
     pde_residual,
     optimizer=torch.optim.AdamW,
-    optimizer_args=dict(lr=1e-3, weight_decay=1e-4),
+    optimizer_args=dict(lr=3e-3, weight_decay=3e-10),
     epochs=30000,
     loss_tol_stop=1e-5,
     log_wandb=dict(log=True, name='LV-UPINN-FNN', project='Master-Thesis', log_plots=True, plot_interval=1000, plot_fn=plot_solution)
