@@ -1,11 +1,11 @@
 {
   "os":  "Windows-10-10.0.19045-SP0",
   "python":  "3.12.8",
-  "startedAt":  "2024-12-16T01:31:16.240601Z",
+  "startedAt":  "2024-12-16T02:06:37.126755Z",
   "program":  "c:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\scripts\\testLV.ipynb",
   "git":  {
     "remote":  "https://github.com/MEGAjosni/Master-Thesis.git",
-    "commit":  "0ab40b80fafd21492d38bfdaa64474e0fa91ef61"
+    "commit":  "5d7bf3952b46ed22536dd2305991aa6aa826e5dc"
   },
   "email":  "s183529@dtu.dk",
   "root":  "c:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\scripts",
@@ -20,7 +20,7 @@
   "disk":  {
     "/":  {
       "total":  "499478900736",
-      "used":  "410758504448"
+      "used":  "423306694656"
     }
   },
   "memory":  {

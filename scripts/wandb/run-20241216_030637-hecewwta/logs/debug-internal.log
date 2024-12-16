@@ -1,0 +1,9 @@
+{"time":"2024-12-16T03:06:37.1292347+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-16T03:06:37.1292347+01:00","level":"INFO","msg":"created symlink","path":"c:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\scripts\\wandb\\run-20241216_030637-hecewwta\\logs\\debug-core.log"}
+{"time":"2024-12-16T03:06:37.2487712+01:00","level":"INFO","msg":"created new stream","id":"hecewwta"}
+{"time":"2024-12-16T03:06:37.2487712+01:00","level":"INFO","msg":"stream: started","id":"hecewwta"}
+{"time":"2024-12-16T03:06:37.2487712+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"hecewwta"}
+{"time":"2024-12-16T03:06:37.2487712+01:00","level":"INFO","msg":"handler: started","stream_id":"hecewwta"}
+{"time":"2024-12-16T03:06:37.2487712+01:00","level":"INFO","msg":"sender: started","stream_id":"hecewwta"}
+{"time":"2024-12-16T03:06:37.6399824+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-16T03:06:57.6441797+01:00","level":"ERROR","msg":"monitor: cpu: error sampling metrics: couldn't find pid: 21796"}

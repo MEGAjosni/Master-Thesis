@@ -3,7 +3,8 @@ import torch
 
 # Custom imports
 import os
-from .bvp import BVP
+from tqdm import tqdm
+from .BVP import BVP
 
 # Weights and Biases
 import wandb
@@ -56,8 +57,6 @@ class UPINN:
         self.bvp = bvp
 
 
-
-
     def train(
             self,
             data_points: torch.Tensor = None,
@@ -104,11 +103,14 @@ class UPINN:
             wandb.init(project=log_wandb["project"], name=log_wandb["name"])
             wandb.watch(u)
             wandb.watch(G)
+            epoch_iterator = range(epochs)
+        else:
+            epoch_iterator = tqdm(range(epochs))
 
         # Initialize previous losses for SoftAdapt
         prev_losses = torch.zeros(3).to(device)
 
-        for epoch in range(epochs):
+        for epoch in epoch_iterator:
 
             def closure():
                 optimizer.zero_grad()
@@ -142,6 +144,13 @@ class UPINN:
                         "lambda_bc": lambda_[0].item(),
                         "lambda_pde": lambda_[1].item(),
                         "lambda_data": lambda_[2].item(),
+                    })
+                else:
+                    epoch_iterator.set_postfix({
+                        "Loss": loss.item(),
+                        "BC Loss": bc_loss.item(),
+                        "PDE Loss": pde_loss.item(),
+                        "Data Loss": data_loss.item(),
                     })
 
                 # Backpropagate

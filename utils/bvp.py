@@ -21,6 +21,12 @@ class BVP:
         for attr in self.__dict__.keys():
             if torch.is_tensor(getattr(self, attr)):
                 setattr(self, attr, getattr(self, attr).to(device))
+    
+    def requires_grad_(self, requires_grad=True):
+        # Change the requires_grad attribute of all torch.nn.Parameter attributes to the given value
+        for attr in self.__dict__.keys():
+            if isinstance(getattr(self, attr), torch.nn.Parameter):
+                getattr(self, attr).requires_grad_(requires_grad)
 
     @abstractmethod
     def f(self, z, U):
