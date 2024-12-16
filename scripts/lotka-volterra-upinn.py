@@ -4,10 +4,10 @@ import torch
 # Custom imports
 import sys
 sys.path.append('./')
-from utils.architectures import FNN, KAN
+from utils.NeuralNets import FNN, KAN
 from utils.DataGenerators import LotkaVolterra
 from utils.Utils import sample_with_noise
-from utils.train import train
+from scripts.train import train
 
 # Plotly
 import plotly.graph_objects as go
@@ -33,7 +33,7 @@ train_idx = torch.arange(0, train_test*N, dtype=torch.long)
 test_idx = torch.arange(train_test*N, N, dtype=torch.long)
 
 # Sample subset and add noise
-t_d, X_d = sample_with_noise(10, t[train_idx], X, epsilon=5e-3)
+t_d, X_d = sample_with_noise(10, t[train_idx], X, epsilon=0.0)
 
 # Move the data to the device and convert to float
 
@@ -118,14 +118,16 @@ def plot_solution(u, G):
     return plots
 
 
+print(data)
+
 # Train the model
 train(
     u, G, data,
     torch.tensor([alpha, beta, delta], dtype=torch.float32),
     pde_residual,
     optimizer=torch.optim.AdamW,
-    optimizer_args=dict(lr=1e-3, weight_decay=1e-4),
-    epochs=1000,
+    optimizer_args=dict(lr=3e-3, weight_decay=3e-10),
+    epochs=30000,
     loss_tol_stop=1e-5,
     log_wandb=dict(log=True, name='LV-UPINN-FNN', project='Master-Thesis', log_plots=True, plot_interval=1000, plot_fn=plot_solution)
 )

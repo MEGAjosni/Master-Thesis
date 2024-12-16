@@ -54,5 +54,4 @@ class BVP:
         # This method must be implemented
         # It should return the boundary residual
         # If there are both Dirichlet and Neumann boundary conditions, stack them on top of each other
-        pass  
-
+        pass
