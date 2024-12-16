@@ -1,0 +1,9 @@
+{"time":"2024-12-16T02:28:36.8104237+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-16T02:28:36.8109193+01:00","level":"INFO","msg":"created symlink","path":"c:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\scripts\\wandb\\run-20241216_022836-kixvnv33\\logs\\debug-core.log"}
+{"time":"2024-12-16T02:28:36.9249991+01:00","level":"INFO","msg":"created new stream","id":"kixvnv33"}
+{"time":"2024-12-16T02:28:36.9249991+01:00","level":"INFO","msg":"stream: started","id":"kixvnv33"}
+{"time":"2024-12-16T02:28:36.9249991+01:00","level":"INFO","msg":"sender: started","stream_id":"kixvnv33"}
+{"time":"2024-12-16T02:28:36.9249991+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"kixvnv33"}
+{"time":"2024-12-16T02:28:36.9249991+01:00","level":"INFO","msg":"handler: started","stream_id":"kixvnv33"}
+{"time":"2024-12-16T02:28:37.3122764+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-16T02:29:42.3221895+01:00","level":"INFO","msg":"Pausing system monitor"}

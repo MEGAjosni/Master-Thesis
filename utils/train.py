@@ -7,7 +7,12 @@ import sys
 sys.path.append('./')
 from utils.Utils import SoftAdapt
 
+# Weights and Biases
 import wandb
+os.environ["WANDB_MODE"] = "online" # Only log to WandB online
+import  tempfile
+folder_temp = tempfile.TemporaryDirectory()
+os.chmod(folder_temp.name, 0o777)
 
 #####################
 ### Training loop ###
@@ -15,6 +20,7 @@ import wandb
 def train(
         u: torch.nn.Module,
         G: torch.nn.Module,
+        system: system.System,
         data: dict,
         params: torch.Tensor,
         pde_residual, # Function that returns the PDE residual
@@ -22,6 +28,7 @@ def train(
         optimizer_args: dict = dict(lr=1e-3, weight_decay=0.0),
         scheduler: torch.optim.Optimizer = None,
         scheduler_args: dict = None,
+        loss_fn: torch.nn.Module = torch.nn.MSELoss(),
         epochs: int = 1000,
         loss_tol_stop: float = None,    # Stop training if loss is below this value
         device: torch.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu'),
@@ -34,18 +41,9 @@ def train(
     print("Running on:", device)
 
     # Move the model to the device
+    system.to(device)
     u.to(device); G.to(device)
 
-    # Unpack data and move to device        
-    z_b = data["z_b"].to(device)                      # Boundary points
-    U_b = data["U_b"].to(device)
-
-    z_d = data["z_d"].to(device)                      # Data points
-    U_d = data["U_d"].to(device)
-
-    z_c = data["z_c"].to(device).requires_grad_(True) # Collocation points
-
-    
     # Initialize optimizer
     optimizer = optimizer([*u.parameters(), *G.parameters()], **optimizer_args)
     
@@ -61,7 +59,7 @@ def train(
 
     # Setup WandB logging
     if log_wandb["log"]:
-        wandb.init(project=log_wandb["project"], name=log_wandb["name"])
+        wandb.init(project=log_wandb["project"], name=log_wandb["name"], dir=folder_temp)
         wandb.watch(u)
         wandb.watch(G)
 
@@ -79,15 +77,13 @@ def train(
             optimizer.zero_grad()
 
             # Boundary condition loss
-            bc_loss = torch.nn.MSELoss()(u(z_b), U_b)
+            bc_loss = loss_fn(*system.evaluate_boundary(u)) if U_b.numel() > 0 else torch.tensor(0).to(device) # No boundary conditions
 
             # Data loss
-            data_loss = torch.nn.MSELoss()(u(z_d), U_d) if U_d.numel() > 0 else torch.tensor(0).to(device) # No data
+            data_loss = loss_fn(u(z_d), U_d) if U_d.numel() > 0 else torch.tensor(0).to(device) # No data
 
             # PDE loss
-            U_c = u(z_c)
-            res = G(U_c)
-            pde_loss = torch.nn.MSELoss()(pde_residual(U_c, res, z_c, params), torch.zeros_like(U_c))
+            pde_loss = loss_fn(system.pde_residual(u, params), G(u(system.z_c)))
 
             # Total loss
             cur_losses = torch.stack([bc_loss, pde_loss, data_loss])

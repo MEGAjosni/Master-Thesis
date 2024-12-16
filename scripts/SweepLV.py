@@ -4,10 +4,10 @@ import torch
 # Custom imports
 import sys
 sys.path.append('./')
-from utils.NeuralNets import FNN, KAN
+from utils.architectures import FNN, KAN
 from utils.DataGenerators import LotkaVolterra
 from utils.Utils import sample_with_noise, SoftAdapt
-from scripts.train import train
+from utils.train import train
 
 # Plotly
 import plotly.graph_objects as go

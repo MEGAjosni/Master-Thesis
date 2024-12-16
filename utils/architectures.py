@@ -69,6 +69,12 @@ class FNN(nn.Module):
 #         return self.output_act_fn(x) + x
     
 
+##############################################################################################################
+### Courtesy of akaashdash: https://github.com/Blealtan/efficient-kan/blob/master/src/efficient_kan/kan.py ###
+##############################################################################################################
+import torch
+import torch.nn.functional as F
+import math
 
 class KANLinear(torch.nn.Module):
     def __init__(
@@ -81,7 +87,7 @@ class KANLinear(torch.nn.Module):
         scale_base=1.0,
         scale_spline=1.0,
         enable_standalone_scale_spline=True,
-        base_activation=torch.nn.SiLU,
+        base_activation=torch.sin,
         grid_eps=0.02,
         grid_range=[-1, 1],
     ):
@@ -316,10 +322,12 @@ class KAN(torch.nn.Module):
         base_activation=torch.nn.SiLU,
         grid_eps=0.02,
         grid_range=[-1, 1],
+        scale_fn=lambda x: x,
     ):
         super(KAN, self).__init__()
         self.grid_size = grid_size
         self.spline_order = spline_order
+        self.scale_fn = scale_fn
 
         self.layers = torch.nn.ModuleList()
         for in_features, out_features in zip(layers_hidden, layers_hidden[1:]):
@@ -339,6 +347,7 @@ class KAN(torch.nn.Module):
             )
 
     def forward(self, x: torch.Tensor, update_grid=False):
+        x = self.scale_fn(x)
         for layer in self.layers:
             if update_grid:
                 layer.update_grid(x)
