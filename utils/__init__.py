@@ -1,4 +1,5 @@
-from .Architectures import FNN, KAN
-from .BVP import BVP
-from .UPINN import UPINN
-from .DataGenerators import LotkaVolterra
+from .Architectures import *
+from .BVP import *
+from .UPINN import *
+from .DataGenerators import *
+from .Plotters import *

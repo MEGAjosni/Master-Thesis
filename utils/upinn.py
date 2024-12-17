@@ -26,6 +26,18 @@ def SoftAdapt(cur_losses, prev_losses, beta=0, loss_weigthed=False):
 
 
 
+class DeadZoneLinear(torch.nn.Module):
+    def __init__(self, a=0.1):
+        super(DeadZoneLinear, self).__init__()
+        self.a = a  # The range [-a, a] where the function outputs 0
+
+    def forward(self, x):
+        return torch.where(x > self.a, x - self.a, 
+                           torch.where(x < -self.a, x + self.a, torch.tensor(0.0, device=x.device)))
+
+
+
+
 class UPINN:
 
     def __init__(self,
@@ -63,17 +75,21 @@ class UPINN:
             data_target: torch.Tensor = None,
             boundary_points: torch.Tensor = None,
             collocation_points: torch.Tensor = None,
+            lambda_reg: float = 0.0,
+            priotize_pde: float = 1.0,
             boundary_refiner: callable = lambda z, loss: z,
             collocation_refiner: callable = lambda z, loss: z,
-            loss_fn: torch.nn.Module = torch.nn.MSELoss(),
-            optimizer: torch.optim.Optimizer = torch.optim.Adam,
+            loss_fn_bc: torch.nn.Module = torch.nn.MSELoss(),
+            loss_fn_data: torch.nn.Module = torch.nn.MSELoss(),
+            loss_fn_pde: torch.nn.Module = torch.nn.MSELoss(),
+            optimizer: torch.optim.Optimizer = torch.optim.AdamW,
             optimizer_args: dict = dict(lr=1e-3, weight_decay=0.0),
             scheduler: torch.optim.Optimizer = None,
             scheduler_args: dict = None,
             epochs: int = 1000,
             loss_tol: float = None,    # Stop training if loss is below this value
             device: torch.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu'),
-            beta_softadapt: float = 0.1,
+            beta_softadapt: float = 0.0,
             save_model: dict = dict(save=False, path='models/lotka-volterra', name='LV-UPINN'),
             log_wandb: dict = dict(name='UPINN', project='Master-Thesis', plotter=None, plot_interval=1000)
     ):
@@ -109,6 +125,7 @@ class UPINN:
 
         # Initialize previous losses for SoftAdapt
         prev_losses = torch.zeros(3).to(device)
+        loss = 1.0
 
         for epoch in epoch_iterator:
 
@@ -117,15 +134,19 @@ class UPINN:
 
                 # Boundary condition loss
                 bc_residual = bvp.g(boundary_points, u(boundary_points)) if boundary_points is not None else torch.tensor(0).to(device) # No boundary conditions
-                bc_loss = loss_fn(bc_residual, torch.zeros_like(bc_residual)) # Enforce boundary conditions
+                bc_loss = loss_fn_bc(bc_residual, torch.zeros_like(bc_residual)) # Enforce boundary conditions
 
                 # Data loss
-                data_loss = loss_fn(u(data_points), data_target) if data_points is not None else torch.tensor(0).to(device) # No data
+                data_loss = loss_fn_data(u(data_points), data_target) if data_points is not None else torch.tensor(0).to(device) # No data
+                # data_loss = torch.mean(torch.mean(DeadZoneLinear(0.05)(torch.abs(u(data_points) - data_target)), dim=0))
 
                 # PDE loss
                 U_c = u(collocation_points)
                 res = G(U_c)
-                pde_loss = loss_fn(bvp.f(collocation_points, u(collocation_points)), res)
+                pde_loss = priotize_pde*loss_fn_pde(bvp.f(collocation_points, u(collocation_points)), res)
+
+                # Regularization loss
+                reg_loss = torch.mean(torch.abs(res))
 
                 # Total loss
                 cur_losses = torch.stack([bc_loss, pde_loss, data_loss])
@@ -140,25 +161,33 @@ class UPINN:
                         "BC Loss": bc_loss.item(),
                         "PDE Loss": pde_loss.item(),
                         "Data Loss": data_loss.item(),
+                        "Reg Loss": reg_loss.item(),
                         **{key: value.item() for key, value in [param for param in bvp.params.items() if isinstance(param[1], torch.nn.Parameter)]},
                         "lambda_bc": lambda_[0].item(),
                         "lambda_pde": lambda_[1].item(),
                         "lambda_data": lambda_[2].item(),
+                        "lambda_reg": lambda_reg,
                     })
                 else:
                     epoch_iterator.set_postfix({
-                        "Loss": loss.item(),
-                        "BC Loss": bc_loss.item(),
-                        "PDE Loss": pde_loss.item(),
-                        "Data Loss": data_loss.item(),
+                        "Loss": round(loss.item(), 6),
+                        "BC Loss": round(bc_loss.item(), 6),
+                        "PDE Loss": round(pde_loss.item(), 6),
+                        "Data Loss": round(data_loss.item(), 6),
+                        "Reg Loss": round(reg_loss.item(), 6),
+                        "LR_reg": round(lambda_reg, 3),
+                        **{key: round(value.item(), 3) for key, value in [param for param in bvp.params.items() if isinstance(param[1], torch.nn.Parameter)]},
                     })
 
                 # Backpropagate
-                loss.backward(retain_graph=True)
+                nn_params = [param for param in bvp.params.values() if isinstance(param, torch.nn.Parameter)]
+                lambda_param = 0.01
+                params_loss = torch.sum(torch.nn.ReLU()(-torch.stack(nn_params))) if len(nn_params) > 0 else torch.tensor(0).to(device)
+                (loss + lambda_param*params_loss + lambda_reg*reg_loss).backward(retain_graph=True)
 
                 return loss, bc_loss, pde_loss, data_loss, cur_losses.clone()
 
-
+            # Perform optimization step and update learning rate
             loss, bc_loss, pde_loss, data_loss, prev_losses = optimizer.step(closure)  # Pass the closure to the optimizer
             scheduler.step(loss.item()) if scheduler is not None else None
 

@@ -10,7 +10,7 @@ def sample_with_noise(N, t, X, epsilon=5e-3):
     X_bar = torch.mean(X, dim=0)
 
     # Sample N evenly spaced points from the data
-    idx = torch.linspace(0, len(t)-1, N, dtype=torch.int)
+    idx = torch.linspace(len(t)//N, len(t)-1, N, dtype=torch.int)
     t, X = t[idx], X[idx]
 
     # Add noise to the data
