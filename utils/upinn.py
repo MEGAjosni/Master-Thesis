@@ -90,7 +90,7 @@ class UPINN:
             loss_tol: float = None,    # Stop training if loss is below this value
             device: torch.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu'),
             beta_softadapt: float = 0.0,
-            save_model: dict = dict(save=False, path='models/lotka-volterra', name='LV-UPINN'),
+            save_model: dict = None,
             log_wandb: dict = dict(name='UPINN', project='Master-Thesis', plotter=None, plot_interval=1000)
     ):
 
@@ -212,7 +212,7 @@ class UPINN:
         print("Training complete.")
 
         # Save the model
-        if save_model["save"]:
+        if save_model is not None:
             print("Saving model...")
             torch.save(u.state_dict(), os.path.join(save_model["path"], save_model["name"] + '_u.pth'))
             torch.save(G.state_dict(), os.path.join(save_model["path"], save_model["name"] + '_G.pth'))
