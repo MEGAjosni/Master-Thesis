@@ -40,3 +40,33 @@ class LV_Plotter:
 
         plots["Missing Terms"] = fig
         return plots
+    
+
+class Burger_Plotter:
+
+    def __init__(self):
+        pass
+
+
+    def __call__(self, u, G):
+        device = next(u.parameters()).device
+
+        # Evaluate the model on a grid
+        x = torch.linspace(-1, 1, 1000)
+        t = torch.linspace(0, 1, 1000)
+        X, T = torch.meshgrid(x, t)
+        Z = torch.cat([T.reshape(-1, 1), X.reshape(-1, 1)], dim=1)
+
+        u_pred = u(Z.to(device)).cpu().detach().numpy()
+        u_pred = u_pred.reshape(1000, 1000)
+
+        # Plot the results as a heatmap
+        import matplotlib.pyplot as plt
+        plt.figure(figsize=(16, 4))
+        plt.pcolor(T, X, u_pred, cmap="rainbow")
+        plt.colorbar()
+        plt.xlabel("t")
+        plt.ylabel("x")
+        plt.title("Burgers' Equation")
+        
+        return dict(Heatmap=plt)

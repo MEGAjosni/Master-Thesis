@@ -67,6 +67,11 @@ class UPINN:
         self.u = u
         self.G = G
         self.bvp = bvp
+    
+    def to(self, device):
+        self.u.to(device)
+        self.G.to(device)
+        self.bvp.to(device)
 
 
     def train(
@@ -127,30 +132,32 @@ class UPINN:
         prev_losses = torch.zeros(3).to(device)
         loss = 1.0
 
+        variable_log = dict(loss=None, bc_loss=None, pde_loss=None, data_loss=None, prev_losses=prev_losses)
+
         for epoch in epoch_iterator:
 
             def closure():
                 optimizer.zero_grad()
 
                 # Boundary condition loss
-                bc_residual = bvp.g(boundary_points, u(boundary_points)) if boundary_points is not None else torch.tensor(0).to(device) # No boundary conditions
+                bc_residual = bvp.g(boundary_points, u(boundary_points)) if boundary_points is not None else torch.tensor(0.0).to(device) # No boundary conditions
                 bc_loss = loss_fn_bc(bc_residual, torch.zeros_like(bc_residual)) # Enforce boundary conditions
 
                 # Data loss
-                data_loss = loss_fn_data(u(data_points), data_target) if data_points is not None else torch.tensor(0).to(device) # No data
+                data_loss = loss_fn_data(u(data_points), data_target) if data_points is not None else torch.tensor(0.0).to(device) # No data
                 # data_loss = torch.mean(torch.mean(DeadZoneLinear(0.05)(torch.abs(u(data_points) - data_target)), dim=0))
 
                 # PDE loss
                 U_c = u(collocation_points)
                 res = G(U_c)
-                pde_loss = priotize_pde*loss_fn_pde(bvp.f(collocation_points, u(collocation_points)), res)
+                pde_loss = priotize_pde*loss_fn_pde(bvp.f(collocation_points, U_c), res)
 
                 # Regularization loss
                 reg_loss = torch.mean(torch.abs(res))
 
                 # Total loss
                 cur_losses = torch.stack([bc_loss, pde_loss, data_loss])
-                lambda_ = SoftAdapt(cur_losses, prev_losses, beta=beta_softadapt)   # SoftAdapt weights
+                lambda_ = SoftAdapt(cur_losses, variable_log["prev_losses"], beta=beta_softadapt)   # SoftAdapt weights
                 loss = torch.dot(lambda_, cur_losses)
 
                 if log_wandb is not None:
@@ -185,15 +192,21 @@ class UPINN:
                 params_loss = torch.sum(torch.nn.ReLU()(-torch.stack(nn_params))) if len(nn_params) > 0 else torch.tensor(0).to(device)
                 (loss + lambda_param*params_loss + lambda_reg*reg_loss).backward(retain_graph=True)
 
-                return loss, bc_loss, pde_loss, data_loss, cur_losses.clone()
+                variable_log["loss"] = loss.item()
+                variable_log["bc_loss"] = bc_loss.item()
+                variable_log["pde_loss"] = pde_loss.item()
+                variable_log["data_loss"] = data_loss.item()
+                variable_log["current_losses"] = cur_losses.clone()
+
+                return loss
 
             # Perform optimization step and update learning rate
-            loss, bc_loss, pde_loss, data_loss, prev_losses = optimizer.step(closure)  # Pass the closure to the optimizer
+            loss = optimizer.step(closure)  # Pass the closure to the optimizer
             scheduler.step(loss.item()) if scheduler is not None else None
 
             # Refine boundary and collocation points
-            boundary_points = boundary_refiner(boundary_points, bc_loss)
-            collocation_points = collocation_refiner(collocation_points, pde_loss)
+            boundary_points = boundary_refiner(boundary_points, variable_log["bc_loss"])
+            collocation_points = collocation_refiner(collocation_points, variable_log["pde_loss"])
 
             # Plot solution
             if log_wandb is not None:
