@@ -187,10 +187,10 @@ class UPINN:
                     })
 
                 # Backpropagate
-                nn_params = [param for param in bvp.params.values() if isinstance(param, torch.nn.Parameter)]
-                lambda_param = 0.01
-                params_loss = torch.sum(torch.nn.ReLU()(-torch.stack(nn_params))) if len(nn_params) > 0 else torch.tensor(0).to(device)
-                (loss + lambda_param*params_loss + lambda_reg*reg_loss).backward(retain_graph=True)
+                # nn_params = [param for param in bvp.params.values() if isinstance(param, torch.nn.Parameter)]
+                # lambda_param = 0.01
+                # params_loss = torch.sum(torch.nn.ReLU()(-torch.stack(nn_params))) if len(nn_params) > 0 else torch.tensor(0).to(device)
+                (loss + lambda_reg*reg_loss).backward(retain_graph=True)
 
                 variable_log["loss"] = loss.item()
                 variable_log["bc_loss"] = bc_loss.item()
