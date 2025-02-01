@@ -17,8 +17,8 @@ class UPINN:
 
     def __init__(self,
         u: torch.nn.Module,
-        F: torch.nn.Module,
-        G: torch.nn.Module,
+        F: torch.nn.Module = None,
+        G: torch.nn.Module = None,
         data_points: tuple = None,
         initial_points: tuple = None,
         boundary_points: tuple = None,
@@ -59,8 +59,16 @@ class UPINN:
     
         # Torch modules
         self.u = u
-        self.F = F
-        self.G = G
+        if F is None:
+            print('[Info]: Initializing NN model (Known dynamics F unspecified; Setting F and G to 0.0.')
+            self.F = lambda x: torch.tensor(0.0); self.G = lambda x: torch.tensor(0.0)
+            print(self.G)
+        elif G is None:
+            print('[Info]: Initializing PINN model (Residual network G unspecified; Setting G to 0.0)')
+            self.F = F; self.G = lambda x: torch.tensor(0.0)
+        else:
+            print('[Info]: Initializing UPINN model')
+            self.F, self.G = F, G
 
         # Training data
         self.data_points = (torch.empty(0, u.layers[0].in_features), torch.empty(0, u.layers[-1].out_features)) if data_points is None else data_points
