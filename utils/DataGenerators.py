@@ -31,5 +31,5 @@ class LotkaVolterra:
         return [dxdt, dydt]
     
     def solve(self, t):
-        out = odeint(self.f, self.X0, t, (self.alpha, self.beta, self.gamma, self.delta))
+        out = odeint(self.f, self.X0, t.squeeze(), (self.alpha, self.beta, self.gamma, self.delta))
         return torch.tensor(out, dtype=torch.float32)

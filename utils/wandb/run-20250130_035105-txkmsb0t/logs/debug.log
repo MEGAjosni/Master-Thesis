@@ -1,0 +1,76 @@
+2025-01-30 03:51:05,624 INFO    MainThread:4008 [wandb_setup.py:_flush():79] Current SDK version is 0.18.7
+2025-01-30 03:51:05,624 INFO    MainThread:4008 [wandb_setup.py:_flush():79] Configure stats pid to 4008
+2025-01-30 03:51:05,624 INFO    MainThread:4008 [wandb_setup.py:_flush():79] Loading settings from C:\Users\jonas\.config\wandb\settings
+2025-01-30 03:51:05,624 INFO    MainThread:4008 [wandb_setup.py:_flush():79] Loading settings from c:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\Master Thesis\Master-Thesis\utils\wandb\settings
+2025-01-30 03:51:05,624 INFO    MainThread:4008 [wandb_setup.py:_flush():79] Loading settings from environment variables: {}
+2025-01-30 03:51:05,624 INFO    MainThread:4008 [wandb_setup.py:_flush():79] Applying setup settings: {'mode': None, '_disable_service': None}
+2025-01-30 03:51:05,626 INFO    MainThread:4008 [wandb_setup.py:_flush():79] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2025-01-30 03:51:05,626 INFO    MainThread:4008 [wandb_setup.py:_flush():79] Applying login settings: {}
+2025-01-30 03:51:05,626 INFO    MainThread:4008 [wandb_init.py:_log_setup():533] Logging user logs to c:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\Master Thesis\Master-Thesis\utils\wandb\run-20250130_035105-txkmsb0t\logs\debug.log
+2025-01-30 03:51:05,626 INFO    MainThread:4008 [wandb_init.py:_log_setup():534] Logging internal logs to c:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\Master Thesis\Master-Thesis\utils\wandb\run-20250130_035105-txkmsb0t\logs\debug-internal.log
+2025-01-30 03:51:05,626 INFO    MainThread:4008 [wandb_init.py:_jupyter_setup():479] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x0000016614DC2630>
+2025-01-30 03:51:05,627 INFO    MainThread:4008 [wandb_init.py:init():619] calling init triggers
+2025-01-30 03:51:05,627 INFO    MainThread:4008 [wandb_init.py:init():626] wandb.init called with sweep_config: {}
+config: {}
+2025-01-30 03:51:05,627 INFO    MainThread:4008 [wandb_init.py:init():669] starting backend
+2025-01-30 03:51:05,627 INFO    MainThread:4008 [wandb_init.py:init():673] sending inform_init request
+2025-01-30 03:51:05,632 INFO    MainThread:4008 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=spawn, using: spawn
+2025-01-30 03:51:05,633 INFO    MainThread:4008 [wandb_init.py:init():686] backend started and connected
+2025-01-30 03:51:05,648 INFO    MainThread:4008 [wandb_run.py:_label_probe_notebook():1339] probe notebook
+2025-01-30 03:51:05,649 INFO    MainThread:4008 [wandb_init.py:init():781] updated telemetry
+2025-01-30 03:51:05,715 INFO    MainThread:4008 [wandb_init.py:init():814] communicating run to backend with 90.0 second timeout
+2025-01-30 03:51:06,314 INFO    MainThread:4008 [wandb_init.py:init():867] starting run threads in backend
+2025-01-30 03:51:09,310 WARNING MainThread:4008 [wandb_init.py:init():1260] interrupted
+Traceback (most recent call last):
+  File "C:\Users\jonas\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\wandb\sdk\wandb_init.py", line 1256, in init
+    return wi.init()
+           ^^^^^^^^^
+  File "C:\Users\jonas\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\wandb\sdk\wandb_init.py", line 910, in init
+    run._on_start()
+  File "C:\Users\jonas\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\wandb\sdk\wandb_run.py", line 2496, in _on_start
+    self._backend.interface.publish_python_packages(working_set())
+  File "C:\Users\jonas\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\wandb\sdk\interface\interface.py", line 301, in publish_python_packages
+    for pkg in working_set:
+               ^^^^^^^^^^^
+  File "C:\Users\jonas\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\wandb\util.py", line 1928, in working_set
+    yield InstalledDistribution(key=d.metadata["Name"], version=d.version)
+                                    ^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2288.0_x64__qbz5n2kfra8p0\Lib\importlib\metadata\__init__.py", line 444, in metadata
+    self.read_text('METADATA')
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2288.0_x64__qbz5n2kfra8p0\Lib\importlib\metadata\__init__.py", line 819, in read_text
+    return self._path.joinpath(filename).read_text(encoding='utf-8')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2288.0_x64__qbz5n2kfra8p0\Lib\pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2288.0_x64__qbz5n2kfra8p0\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen codecs>", line 309, in __init__
+KeyboardInterrupt
+2025-01-30 03:51:10,586 INFO    MainThread:4008 [jupyter.py:save_ipynb():387] not saving jupyter notebook
+2025-01-30 03:51:10,586 INFO    MainThread:4008 [wandb_init.py:_pause_backend():444] pausing backend
+2025-01-30 03:51:33,979 INFO    MainThread:4008 [wandb_init.py:_resume_backend():449] resuming backend
+2025-01-30 03:51:34,025 INFO    MainThread:4008 [jupyter.py:save_ipynb():387] not saving jupyter notebook
+2025-01-30 03:51:34,025 INFO    MainThread:4008 [wandb_init.py:_pause_backend():444] pausing backend
+2025-01-30 03:51:35,815 INFO    MainThread:4008 [wandb_init.py:_resume_backend():449] resuming backend
+2025-01-30 03:51:35,820 INFO    MainThread:4008 [jupyter.py:save_ipynb():387] not saving jupyter notebook
+2025-01-30 03:51:35,820 INFO    MainThread:4008 [wandb_init.py:_pause_backend():444] pausing backend
+2025-01-30 03:51:37,723 INFO    MainThread:4008 [wandb_init.py:_resume_backend():449] resuming backend
+2025-01-30 03:51:37,730 INFO    MainThread:4008 [jupyter.py:save_ipynb():387] not saving jupyter notebook
+2025-01-30 03:51:37,730 INFO    MainThread:4008 [wandb_init.py:_pause_backend():444] pausing backend
+2025-01-30 03:51:37,921 INFO    MainThread:4008 [wandb_init.py:_resume_backend():449] resuming backend
+2025-01-30 03:51:37,927 INFO    MainThread:4008 [jupyter.py:save_ipynb():387] not saving jupyter notebook
+2025-01-30 03:51:37,927 INFO    MainThread:4008 [wandb_init.py:_pause_backend():444] pausing backend
+2025-01-30 03:51:38,108 INFO    MainThread:4008 [wandb_init.py:_resume_backend():449] resuming backend
+2025-01-30 03:51:38,116 INFO    MainThread:4008 [jupyter.py:save_ipynb():387] not saving jupyter notebook
+2025-01-30 03:51:38,116 INFO    MainThread:4008 [wandb_init.py:_pause_backend():444] pausing backend
+2025-01-30 03:51:38,295 INFO    MainThread:4008 [wandb_init.py:_resume_backend():449] resuming backend
+2025-01-30 03:51:38,304 INFO    MainThread:4008 [jupyter.py:save_ipynb():387] not saving jupyter notebook
+2025-01-30 03:51:38,304 INFO    MainThread:4008 [wandb_init.py:_pause_backend():444] pausing backend
+2025-01-30 03:51:59,702 INFO    MainThread:4008 [wandb_init.py:_resume_backend():449] resuming backend
+2025-01-30 03:51:59,709 INFO    MainThread:4008 [jupyter.py:save_ipynb():387] not saving jupyter notebook
+2025-01-30 03:51:59,709 INFO    MainThread:4008 [wandb_init.py:_pause_backend():444] pausing backend
+2025-01-30 03:52:00,475 INFO    MainThread:4008 [wandb_init.py:_resume_backend():449] resuming backend
+2025-01-30 03:52:00,480 INFO    MainThread:4008 [jupyter.py:save_ipynb():387] not saving jupyter notebook
+2025-01-30 03:52:00,481 INFO    MainThread:4008 [wandb_init.py:_pause_backend():444] pausing backend

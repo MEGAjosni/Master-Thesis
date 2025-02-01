@@ -1,0 +1,42 @@
+{
+  "os":  "Windows-10-10.0.19045-SP0",
+  "python":  "3.12.8",
+  "startedAt":  "2025-01-30T02:52:19.166827Z",
+  "program":  "c:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\utils\\train_test.ipynb",
+  "git":  {
+    "remote":  "https://github.com/MEGAjosni/Master-Thesis.git",
+    "commit":  "fb1c30e5375d55a9ce354c3c545be7f307079436"
+  },
+  "email":  "s183529@dtu.dk",
+  "root":  "c:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\Master Thesis\\Master-Thesis\\utils",
+  "host":  "Jonas-Desktop",
+  "username":  "jonas",
+  "executable":  "C:\\Users\\jonas\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe",
+  "codePathLocal":  "train_test.ipynb",
+  "cpu_count":  4,
+  "cpu_count_logical":  8,
+  "gpu":  "NVIDIA GeForce RTX 2080 Ti",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "499478900736",
+      "used":  "306357899264"
+    }
+  },
+  "memory":  {
+    "total":  "34316824576"
+  },
+  "cpu":  {
+    "count":  4,
+    "countLogical":  8
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA GeForce RTX 2080 Ti",
+      "memoryTotal":  "11811160064",
+      "cudaCores":  4352,
+      "architecture":  "Turing"
+    }
+  ],
+  "cudaVersion":  "12.7"
+}
