@@ -4,6 +4,7 @@ import torch
 # Custom imports
 import os
 from tqdm import tqdm
+from itertools import count
 
 # Weights and Biases
 import wandb
@@ -11,6 +12,14 @@ os.environ["WANDB_MODE"] = "online" # Only log to WandB online
 import  tempfile
 folder_temp = tempfile.TemporaryDirectory()
 os.chmod(folder_temp.name, 0o777)
+
+
+class NullWork(torch.nn.Module):
+    """ A class to represent absence of Network or Operator """
+    def __init__(self):
+        super(NullWork, self).__init__()
+    def forward(self, x):
+        return torch.tensor(0.0)
 
 
 class UPINN:
@@ -34,7 +43,7 @@ class UPINN:
         u: torch.nn.Module (Trainable)
             Surrogate: Neural Network estimating the solution of the PDE
 
-        F: torch.nn.Module (May contain trainable parameters or unknown terms modelled by Neural Networks e.g. source, forcing, etc)
+        F: torch.nn.Module (May contain trainable parameters or unknown terms modelled by trainable Neural Networks e.g. source, forcing, etc)
             Operator: Compute the known dynamics of the system
 
         G: torch.nn.Module (Trainable)
@@ -60,21 +69,20 @@ class UPINN:
         # Torch modules
         self.u = u
         if F is None:
-            print('[Info]: Initializing NN model (Known dynamics F unspecified; Setting F and G to 0.0.')
-            self.F = lambda x: torch.tensor(0.0); self.G = lambda x: torch.tensor(0.0)
-            print(self.G)
+            print('[Info]: Initializing NN model (Known dynamics F unspecified; Setting F and G to 0.0)')
+            self.F = NullWork(); self.G = NullWork()
         elif G is None:
             print('[Info]: Initializing PINN model (Residual network G unspecified; Setting G to 0.0)')
-            self.F = F; self.G = lambda x: torch.tensor(0.0)
+            self.F = F; self.G = NullWork()
         else:
             print('[Info]: Initializing UPINN model')
             self.F, self.G = F, G
 
         # Training data
-        self.data_points = (torch.empty(0, u.layers[0].in_features), torch.empty(0, u.layers[-1].out_features)) if data_points is None else data_points
-        self.initial_points = (torch.empty(0, u.layers[0].in_features), torch.empty(0, u.layers[-1].out_features)) if initial_points is None else initial_points
-        self.boundary_points = (torch.empty(0, u.layers[0].in_features), torch.empty(0, u.layers[-1].out_features)) if boundary_points is None else boundary_points
-        self.collocation_points = torch.empty(0, u.layers[0].in_features) if collocation_points is None else collocation_points
+        self.data_points = (empty_input, empty_output) if data_points is None else data_points
+        self.initial_points = (empty_input, empty_output) if initial_points is None else initial_points
+        self.boundary_points = (empty_input, empty_output) if boundary_points is None else boundary_points
+        self.collocation_points = empty_input if collocation_points is None else collocation_points
         self.collocation_points.requires_grad = True
 
         # Logging
@@ -93,7 +101,10 @@ class UPINN:
         self.collocation_points = self.collocation_points.to(device)
     
     # Set model mode
-    def train(self): self.u.train(); self.F.train(); self.G.train()
+    def train(self):
+        self.u.train()
+        self.F.train()
+        self.G.train()
     def eval(self): self.u.eval(); self.F.eval(); self.G.eval()
     
     # Forward pass
@@ -179,8 +190,8 @@ class UPINN:
             log_wandb: dict = dict(name='UPINN', project='Master-Thesis', plotter=None, plot_interval=1000)
     ):
 
-        print("Beginning training...")
-        print("Running on:", device)
+        print("[Info]: Beginning training...")
+        print("[Info]: Running on:", device)
 
         # Move the model and data to the device
         self.train()
@@ -213,31 +224,45 @@ class UPINN:
             # Zero the gradients
             optimizer.zero_grad()
 
-            # Closure
+            # Compute loss
             loss = self.closure()
 
             # Backpropagate
             loss.backward(retain_graph=True)
 
-            # Step
+            # Take optimization step
             optimizer.step()
 
             # Stopping criterion
             if loss.item() < loss_tol:
-                print(f"Loss below tolerance at epoch {epoch}. Terminating training.")
+                print(f"[Info]: Loss below tolerance at epoch {epoch}. Terminating training.")
                 break
+            if torch.isnan(loss):
+                raise RuntimeError(f"Loss became NaN at epoch {epoch}/{epochs}. Terminating training.")
         
-        print("Training complete.")
-        print("Moving model to CPU...")
+        print("[Info]: Training complete.")
+        print("[Info]: Moving model to CPU...")
         self.eval()
         self.to(torch.device('cpu'))
 
-        # Save the model
-        if save_model is not None:
-            print("Saving model at", save_model["path"])
-            torch.save(self.u.state_dict(), os.path.join(save_model["path"], save_model["name"] + '_u.pth'))
-            torch.save(self.F.state_dict(), os.path.join(save_model["path"], save_model["name"] + '_F.pth'))
-            torch.save(self.G.state_dict(), os.path.join(save_model["path"], save_model["name"] + '_G.pth'))
+        if save_model:
+
+            # Ensure save directory exists
+            os.makedirs(save_model["path"], exist_ok=True)
+            save_path = os.path.join(save_model["path"], save_model["name"])
+
+            # Find available filename
+            name_not_available = lambda suffix: any(os.path.exists(save_path + suffix + ext) for ext in ['_u.pth', '_F.pth', '_G.pth'])
+            suffix = str(next((i for i in count(1) if not name_not_available(str(i))), '')) if name_not_available('') else ''
+            if suffix: print(f"[Info]: Model name already exists in save directory. Enumerating model as {suffix}")
+
+            # Save the model
+            try:
+                for key in ['u', 'F', 'G']: torch.save(getattr(self, key).state_dict(), f"{save_path}{suffix}_{key}.pth")
+                print(f"[Info]: Model saved successfully with name {save_model['name']}{suffix} at {save_model['path']}")
+            except FileNotFoundError:
+                print("[Error]: Failed to save model.")
+
 
 # class UPINN:
 
