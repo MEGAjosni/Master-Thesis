@@ -1,6 +1,7 @@
 import torch
 import numpy as np
 import pysindy as ps
+from sklearn.model_selection import TimeSeriesSplit
 
 # Disable Warning for sindy
 import warnings
@@ -32,77 +33,28 @@ class DeadZoneLinear(torch.nn.Module):
     def forward(self, x):
         return torch.where(x > self.a, x - self.a, 
                            torch.where(x < -self.a, x + self.a, torch.tensor(0.0, device=x.device)))
-    
 
-def cv_sindy(X, t, X_dot, degree=2, taus=np.linspace(0.1, 1.0, 100), n_splits=5, feature_names=None):
-    """
-    Performs time series cross-validation to find the best tau for SINDy model selection.
 
-    Parameters:
-    - X: np.ndarray, input data
-    - t: np.ndarray, time points
-    - X_dot: np.ndarray, derivative of X with respect to time
-    - degree: int, polynomial degree for SINDy library (default: 2)
-    - taus: np.ndarray, range of tau values to test (default: np.linspace(0.1, 1.0, 100))
-    - n_splits: int, number of time series cross-validation splits (default: 5)
-    - feature_names: list, names of features for SINDy model (default: ['x', 'y'])
+# # # # # # # # # # # # # # # # # # # #
+#                                     #
+#    SSSS  III  N   N  DDDD   y   y   #
+#   S       I   NN  N  D   D   y y    #
+#    SSS    I   N N N  D   D    y     #
+#       S   I   N  NN  D   D    y     #
+#   SSSS   III  N   N  DDDD     y     #
+#                                     #
+# # # # # # # # # # # # # # # # # # # #
 
-    Returns:
-    - final_model: trained SINDy model with the best tau
-    - best_tau: float, best tau value found
-    """
 
-    # Define SINDy library
-    lib = ps.PolynomialLibrary(degree=degree)
+class SINDy_sklearn(ps.SINDy):
+    '''
+    Class wrapper for SINDy to make it more compatible with sklearn.
+    Changes:
+        Z = [t, X]
+        y = X_dot
+    '''
+    def fit(self, Z, y, **fit_kwargs):
+        return super(SINDy_sklearn, self).fit(x=Z[:, 1:], t=Z[:, 0], x_dot=y, **fit_kwargs)
 
-    # Define cross-validation split size
-    split_size = len(X) // (n_splits + 1)  # Ensures valid train-test splits
-
-    mean_scores = np.zeros_like(taus)
-
-    warnings.filterwarnings("ignore", category=UserWarning)
-    for i, tau in enumerate(taus):
-        scores = []  # Store scores for each time split
-
-        # Perform time series cross-validation
-        for split in range(n_splits):
-            train_end = split_size * (split + 1)
-            test_start = train_end
-            test_end = test_start + split_size
-
-            # Define train and test indices
-            train_idx = np.arange(0, train_end)
-            test_idx = np.arange(test_start, min(test_end, len(X)))
-
-            # Initialize the SINDy model with the current tau
-            model = ps.SINDy(
-                feature_library=lib,
-                optimizer=ps.STLSQ(threshold=tau),
-                feature_names=feature_names
-            )
-
-            # Fit the model on the training set
-            model.fit(x=X[train_idx], t=t[train_idx], x_dot=X_dot[train_idx])
-
-            # Score the model on the testing set
-            scores.append(model.score(X[test_idx], t=t[test_idx], x_dot=X_dot[test_idx]))
-
-        # Compute the mean score across all splits for this tau
-        mean_scores[i] = np.mean(scores)
-
-    warnings.filterwarnings("default", category=UserWarning)
-
-    # Find the best tau
-    best_tau = taus[np.argmax(mean_scores)]
-
-    # Train the final model with the best tau
-    final_model = ps.SINDy(
-        feature_library=lib,
-        optimizer=ps.STLSQ(threshold=best_tau),
-        feature_names=feature_names
-    )
-
-    final_model.fit(x=X, t=t, x_dot=X_dot)
-
-    return final_model, best_tau
-   
+    def score(self, Z, y, **score_kwargs):
+        return super(SINDy_sklearn, self).score(t=Z[:, 0], x=Z[:, 1:], x_dot=y, **score_kwargs)
