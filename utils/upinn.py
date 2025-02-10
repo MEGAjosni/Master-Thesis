@@ -5,6 +5,10 @@ import torch
 import os
 from tqdm import tqdm
 from itertools import count
+import traceback
+import sys
+sys.path.append('../utils')
+from Utils import SoftAdapt
 
 # Weights and Biases
 import wandb
@@ -22,7 +26,7 @@ class NullWork(torch.nn.Module):
         return torch.tensor(0.0)
 
 
-class UPINN:
+class UPINN(torch.nn.Module):
 
     def __init__(self,
         u: torch.nn.Module,
@@ -67,6 +71,8 @@ class UPINN:
             Default: Empty tensor
         """
     
+        super(UPINN, self).__init__()
+
         # Torch modules
         self.u = u
         if F is None:
@@ -78,6 +84,7 @@ class UPINN:
         else:
             print('[Info]: Initializing UPINN model')
             self.F, self.G = F, G
+        self.device = torch.device('cpu')
 
         # Training data
         empty_input = torch.empty(0, self.u.layers[0].in_features)
@@ -95,54 +102,61 @@ class UPINN:
 
     # Move model and data to device
     def to(self, device):
-        self.u.to(device)
-        self.F.to(device)
-        self.G.to(device)
+        super(UPINN, self).to(device)
         self.data_points = (self.data_points[0].to(device), self.data_points[1].to(device))
         self.initial_points = (self.initial_points[0].to(device), self.initial_points[1].to(device))
         self.boundary_points = (self.boundary_points[0].to(device), self.boundary_points[1].to(device))
         self.collocation_points = self.collocation_points.to(device)
     
-    # Set model mode
-    def train(self): self.u.train(); self.F.train(); self.G.train()
-    def eval(self): self.u.eval(); self.F.eval(); self.G.eval()
-    
     # Save model
-    def save(self, name, path=''):
+    def save(self, name, path='', overwrite=False, save_architecture=True, save_individual_models=False):
 
         # Ensure save directory exists
         os.makedirs(path, exist_ok=True) if path else None
         save_path = os.path.join(path, name)
 
         # Find available filename
-        name_not_available = lambda suffix: any(os.path.exists(save_path + suffix + ext) for ext in ['_u.pth', '_F.pth', '_G.pth'])
-        suffix = str(next((i for i in count(1) if not name_not_available(str(i))), '')) if name_not_available('') else ''
-        if suffix: print(f"[Info]: Model name already exists in save directory. Enumerating model as {suffix}")
+        extensions = ['_u.pt', '_F.pt', '_G.pt'] if save_individual_models else ['.pt']
+        if overwrite: suffix = ''
+        else:
+            name_not_available = lambda suffix: any(os.path.exists(save_path + suffix + ext) for ext in extensions)
+            suffix = str(next((i for i in count(1) if not name_not_available(str(i))), '')) if name_not_available('') else ''
+            if suffix: print(f"[Info]: {name} already exists in save directory. Enumerating model as {suffix}. To overwrite, set overwrite=True.")
 
         # Save the model
         try:
-            for key in ['u', 'F', 'G']: torch.save(getattr(self, key).state_dict(), f"{save_path}{suffix}_{key}.pth")
-            with open(f"{save_path}{suffix}_architecture.txt", 'w') as f: f.write(f"u: {self.u}\nF: {self.F}\nG: {self.G}")
-            print(f"[Info]: Model saved successfully with name {name}{suffix} at {path if path else 'current directory'}")
+            for key in ['u', 'F', 'G']: torch.save(getattr(self, key).state_dict(), f"{save_path}{suffix}_{key}.pt") if save_individual_models else torch.save(self.state_dict(), f"{save_path}{suffix}.pt")
+            with open(f"{save_path}{suffix}_architecture.txt", 'w') as f: f.write(f"u: {self.u}\nF: {self.F}\nG: {self.G}") if save_architecture else None
+            print(f"[Info]: Successfully saved {'models individually' if save_individual_models else 'total model'} with name {name}{suffix} at {path if path else 'current directory'}")
             
-        except FileNotFoundError:
-            print("[Error]: Failed to save model.")
+        except FileNotFoundError: print("[Error]: Failed to save model.")
     
     
     # Load model
-    def load(self, name, path=''):
+    def load(self, name, path='', load_individual_models=False):
 
         # Check if model exists
-        if not all(os.path.exists(os.path.join(path, f"{name}_{key}.pth")) for key in ['u', 'F', 'G']):
-            print("[Error]: Model not found.")
-            return
+        exists = any(os.path.exists(os.path.join(path, f"{name}_{key}.pt")) for key in ['u', 'F', 'G']) if load_individual_models else os.path.exists(os.path.join(path, f"{name}.pt"))
+        if not exists: print("[Error]: Model not found."); return
         
         # Load the model
         try:
-            for key in ['u', 'F', 'G']:
-                getattr(self, key).load_state_dict(torch.load(os.path.join(path, f"{name}_{key}.pth"), weights_only=True))
-            print(f"[Info]: Model loaded successfully from {path if path else 'current directory'}")
-        except FileNotFoundError:
+            if load_individual_models:
+                for key in ['u', 'F', 'G']: getattr(self, key).load_state_dict(torch.load(os.path.join(path, f"{name}_{key}.pt"), weights_only=True))
+                print(f"[Info]: Model with name {name} loaded successfully from {path or 'current directory'}")
+            else:
+                params = torch.load(os.path.join(path, f"{name}.pt"), weights_only=True)
+                try: self.load_state_dict(params)
+                except:
+                    # If failed to load, try loading individual models
+                    for key in ['u', 'F', 'G']:
+                        try: getattr(self, key).load_state_dict({k[len(key)+1:]: v for k, v in params.items() if k.startswith(key)})
+                        except:
+                            print(f"[Error]: Failed to load {key} model. Check compatibility with {name}_architecture.txt")
+                            # Print out the error message that triggered the exception
+                            traceback.print_exc()
+
+        except:
             print("[Error]: Failed to load model.")
 
 
@@ -153,7 +167,7 @@ class UPINN:
     
     def predict_residual(self, X):
         with torch.no_grad():
-            return self.G(self.u(X))
+            return self.G(X)
         
     def evaluate_known_dynamics(self, X):
         with torch.no_grad():
@@ -163,6 +177,7 @@ class UPINN:
     def refine_initial_points(self): pass
     def refine_boundary_points(self): pass
     def refine_collocation_points(self): pass
+    def refine_points(self): self.refine_initial_points(); self.refine_boundary_points(); self.refine_collocation_points()
 
     # Default loss functions
     def init_loss(self):
@@ -189,9 +204,17 @@ class UPINN:
     # Default closure: Can be modified
     def closure(self):
 
+        # Zero the gradients
+        self.optimizer.zero_grad()
+
         # Total loss
         init_loss, bc_loss, data_loss, pde_loss = self.init_loss(), self.bc_loss(), self.data_loss(), self.pde_loss()
-        loss = init_loss + bc_loss + data_loss + pde_loss
+        lambdas = SoftAdapt()(torch.tensor([init_loss, bc_loss, data_loss, pde_loss]))
+
+        loss = lambdas[0]*init_loss + lambdas[1]*bc_loss + lambdas[2]*data_loss + lambdas[3]*pde_loss
+
+        # Backpropagate
+        loss.backward(retain_graph=True)
 
         # Log
         self.log.update({
@@ -208,20 +231,15 @@ class UPINN:
             # Log in scientific notation to 6 decimal places
             self.epoch_iterator.set_postfix({k: f"{v:.2e}" for k, v in self.log.items()})
 
-        # Refine points
-        self.refine_initial_points()
-        self.refine_boundary_points()
-        self.refine_collocation_points()
-
         return loss
     
     # Train the model
     def train_loop(
             self,
             optimizer: torch.optim.Optimizer = torch.optim.Adam,
-            optimizer_args: dict = dict(lr=1e-3),
+            optimizer_kwargs: dict = dict(),
             scheduler: torch.optim.Optimizer = None,
-            scheduler_args: dict = dict(),
+            scheduler_kwargs: dict = dict(),
             epochs: int = 1000,
             loss_tol: float = -torch.inf,    # Stop training if loss is below this value
             device: torch.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu'),
@@ -230,22 +248,19 @@ class UPINN:
             log_wandb: dict = dict(name='UPINN', project='Master-Thesis', plotter=None, plot_interval=1000)
     ):
 
-        print("[Info]: Beginning training...")
-
         # Move the model and data to the device
         self.train()
-        self.to(device)
+        self.to(device); self.device = device
         
         # Setup optimizer
-        optimizer = optimizer([
-            {'params': self.u.parameters()},
-            {'params': self.F.parameters()},
-            {'params': self.G.parameters()}
-        ], **optimizer_args)
-             
+        self.optimizer = optimizer([
+            *self.u.parameters(), *self.G.parameters(), *self.F.parameters(),
+        ], **optimizer_kwargs)
+        print(f"[Info]: Training {epochs} epoch(s) on {self.device} using {self.optimizer.__class__.__name__} optimizer.")
+
         # Setup learning rate scheduler
         if scheduler is not None:
-            scheduler = scheduler(optimizer, **scheduler_args)
+            scheduler = scheduler(optimizer, **scheduler_kwargs)
 
         # Setup monitoring - Either WandB (online-dashboard) or tqdm (local-terminal)
         if log_wandb is not None and self.log_to_wandb:
@@ -259,18 +274,10 @@ class UPINN:
 
         # Training loop
         for epoch in self.epoch_iterator:
-            
-            # Zero the gradients
-            optimizer.zero_grad()
-
-            # Compute loss
-            loss = self.closure()
-
-            # Backpropagate
-            loss.backward(retain_graph=True)
+            self.epoch = epoch
 
             # Take optimization step
-            optimizer.step()
+            loss = self.optimizer.step(self.closure)
 
             # Stopping criterion
             if loss.item() < loss_tol:
@@ -279,10 +286,9 @@ class UPINN:
             if torch.isnan(loss):
                 raise RuntimeError(f"Loss became NaN at epoch {epoch}/{epochs}. Terminating training.")
         
-        print("[Info]: Training complete.")
-        print("[Info]: Moving model to CPU...")
+        # print("[Info]: Training complete.")
         self.eval()
-        self.to(torch.device('cpu'))
+        self.to(torch.device('cpu')); self.device = torch.device('cpu')
 
         if save_name: self.save(save_name, save_path)
 
@@ -477,8 +483,8 @@ class UPINN:
 #         # Save the model
 #         if save_model is not None:
 #             print("Saving model...")
-#             torch.save(u.state_dict(), os.path.join(save_model["path"], save_model["name"] + '_u.pth'))
-#             torch.save(G.state_dict(), os.path.join(save_model["path"], save_model["name"] + '_G.pth'))
+#             torch.save(u.state_dict(), os.path.join(save_model["path"], save_model["name"] + '_u.pt'))
+#             torch.save(G.state_dict(), os.path.join(save_model["path"], save_model["name"] + '_G.pt'))
 
 
 
@@ -651,7 +657,7 @@ class UPINN:
 # #         # Save the model
 # #         if save_model["save"]:
 # #             print("Saving model...")
-# #             torch.save(u.state_dict(), os.path.join(save_model["path"], save_model["name"] + '_u.pth'))
-# #             torch.save(G.state_dict(), os.path.join(save_model["path"], save_model["name"] + '_G.pth'))
+# #             torch.save(u.state_dict(), os.path.join(save_model["path"], save_model["name"] + '_u.pt'))
+# #             torch.save(G.state_dict(), os.path.join(save_model["path"], save_model["name"] + '_G.pt'))
 
             
