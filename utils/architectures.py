@@ -7,12 +7,24 @@ import math
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
+
+class ScalingLayer(nn.Module):
+    def __init__(self, scale_init_value=1, bias_init_value=0):
+        super().__init__()
+        self.scale = nn.Parameter(torch.FloatTensor([scale_init_value]))
+        self.bias = nn.Parameter(torch.FloatTensor([bias_init_value]))
+
+    def forward(self, input):
+        return input * self.scale + self.bias
+
+
 # FEEDFORWARD NEURAL NETWORK
 class FNN(nn.Module):
     def __init__(self, dims, hidden_act=nn.Tanh(), output_act=nn.Identity(), weight_init=xavier_normal_, bias_init=zeros_, scale_fn=lambda x: x):
 
         super(FNN, self).__init__()
 
+        self.scalinglayer = ScalingLayer()
         self.dims = dims
         self.layers = nn.ModuleList([nn.Linear(dims[i], dims[i+1]) for i in range(len(dims)-1)])
         self.hidden_act_fn = hidden_act
@@ -32,6 +44,7 @@ class FNN(nn.Module):
     
     def forward(self, x):
         x = self.scale_fn(x)
+        x = self.scalinglayer(x)
         for i, layer in enumerate(self.layers):
             x = layer(x)
             if i < len(self.layers)-1:
