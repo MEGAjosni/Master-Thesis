@@ -206,7 +206,7 @@ class UPINN(torch.nn.Module):
         if self.collocation_points is not None:
             U_c = self.u(self.collocation_points)
             res = self.F(self.F_input(self.collocation_points, U_c))
-            pde_loss = torch.nn.MSELoss()(self.N(self.collocation_points, U_c), res) if self.collocation_points.shape[0] > 0 else torch.tensor(0.0)
+            pde_loss = torch.nn.MSELoss()(self.N(self.collocation_points, U_c), -res) if self.collocation_points.shape[0] > 0 else torch.tensor(0.0)
         else: pde_loss = torch.tensor(0.0)
         return pde_loss
     

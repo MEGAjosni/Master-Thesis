@@ -20,36 +20,45 @@ class ScalingLayer(nn.Module):
 
 # FEEDFORWARD NEURAL NETWORK
 class FNN(nn.Module):
-    def __init__(self, dims, hidden_act=nn.Tanh(), output_act=nn.Identity(), weight_init=xavier_normal_, bias_init=zeros_, scale_fn=lambda x: x):
+    def __init__(self, dims, hidden_act=nn.Tanh(), output_act=nn.Identity(), weight_init=xavier_normal_, bias_init=zeros_):
 
         super(FNN, self).__init__()
 
         self.scalinglayer = ScalingLayer()
         self.dims = dims
-        self.layers = nn.ModuleList([nn.Linear(dims[i], dims[i+1]) for i in range(len(dims)-1)])
-        self.hidden_act_fn = hidden_act
-        self.output_act_fn = output_act
-        self.scale_fn = scale_fn
+
+        input_dim = dims[0]
+        output_dim = dims[-1]
+        hidden_dims = dims[1:-1]
+
+        self.layers = nn.ModuleList()
+        self.layers.append(ScalingLayer())
+        in_dim = input_dim
+        for out_dim in hidden_dims:
+            self.layers.append(nn.Linear(in_dim, out_dim))
+            self.layers.append(hidden_act)
+            in_dim = out_dim
+        self.layers.append(nn.Linear(in_dim, output_dim))
+        self.layers.append(output_act)
+            
         self.inititialize_weights(weight_init, bias_init)
 
 
     def inititialize_weights(self, weight_init, bias_init):
         if weight_init:
             for layer in self.layers:
-                weight_init(layer.weight)
+                if isinstance(layer, nn.Linear):
+                    weight_init(layer.weight)
         if bias_init:
             for layer in self.layers:
-                bias_init(layer.bias)
+                if isinstance(layer, nn.Linear):
+                    bias_init(layer.bias)
 
     
     def forward(self, x):
-        x = self.scale_fn(x)
-        x = self.scalinglayer(x)
-        for i, layer in enumerate(self.layers):
+        for layer in self.layers:
             x = layer(x)
-            if i < len(self.layers)-1:
-                x = self.hidden_act_fn(x)
-        return self.output_act_fn(x)
+        return x
     
 
 # class ResNet(nn.Module):
