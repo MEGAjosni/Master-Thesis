@@ -61,35 +61,41 @@ class FNN(nn.Module):
         return x
     
 
-# class ResNet(nn.Module):
-#     def __init__(self, dims, hidden_act=nn.Tanh(), output_act=nn.Identity(), weight_init=None, bias_init=None, scale_fn=lambda x: x):
-#         super(ResNet, self).__init__()
 
-#         self.dims = dims
-#         self.layers = nn.ModuleList([nn.Linear(dims[i], dims[i+1]) for i in range(len(dims)-1)])
-#         self.hidden_act_fn = hidden_act
-#         self.output_act_fn = output_act
-#         self.scale_fn = scale_fn
-#         self.inititialize_weights(weight_init, bias_init)
+class ResNetBlock(nn.Module):
+    """Residual Block with skip connection"""
+    def __init__(self, in_features, depth=1, activation=nn.Tanh()):
+        super(ResNetBlock, self).__init__()
+
+        self.layers = nn.ModuleList()
+        for _ in range(depth):
+            self.layers.append(nn.Linear(in_features, in_features))
+            self.layers.append(activation)
+
+    def forward(self, x):
+        x_in = x
+        for layer in self.layers:
+            x = layer(x)
+        return x_in + x
+
+class ResNet(nn.Module):
+
+    def __init__(self, input_dim=2, hidden_dim=64, output_dim=1, num_blocks=5, block_size=2, activation=nn.Tanh()):
+        super(ResNet, self).__init__()
+        self.input_layer = nn.Linear(input_dim, hidden_dim)
+        self.res_blocks = nn.Sequential(*[ResNetBlock(hidden_dim, block_size, activation) for _ in range(num_blocks)])
+        self.output_layer = nn.Linear(hidden_dim, output_dim)
+        self.activation = activation
+
+    def forward(self, x):
+        x = self.activation(self.input_layer(x))
+        x = self.res_blocks(x)
+        return self.output_layer(x)
 
 
-#     def inititialize_weights(self, weight_init, bias_init):
-#         if weight_init:
-#             for layer in self.layers:
-#                 weight_init(layer.weight)
-#         if bias_init:
-#             for layer in self.layers:
-#                 bias_init(layer.bias)
 
-    
-#     def forward(self, x):
-#         x = self.scale_fn(x)
-#         for i, layer in enumerate(self.layers):
-#             x = layer(x)
-#             if i < len(self.layers)-1:
-#                 x = self.hidden_act_fn(x)
-#         return self.output_act_fn(x) + x
-    
+
+
 
 ##############################################################################################################
 ### Courtesy of akaashdash: https://github.com/Blealtan/efficient-kan/blob/master/src/efficient_kan/kan.py ###
