@@ -1,6 +1,12 @@
 # Master-Thesis
-Repository for all code produced as part of my Master Thesis on Universal Physics-Informed Neural Networks (UPINNs)
+Repository for all code produced as part of my Master Thesis on Universal Physics-Informed Neural Networks (UPINNs).
 
+The repository contains experiment scripts and model files for the following systems:
+- Lotka-Volterra Equations
+- SIR Model
+- Burgers' Viscous Equation
+- Navier-Stokes Equations
+- Continuity Equation (Plasma)
 
 ## Load a trained model
 To load a model with name ```modelname``` at path ```path/to/models```, use the following code:
