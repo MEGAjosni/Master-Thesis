@@ -64,8 +64,8 @@ class SINDy_sklearn(ps.SINDy):
         y = X_dot
     '''
     def fit(self, Z, y, **fit_kwargs):
-        return super(SINDy_sklearn, self).fit(x=Z[1], t=Z[0], x_dot=y, **fit_kwargs)
+        return super(SINDy_sklearn, self).fit(x=Z[:, 1:], t=Z[:, 0], x_dot=y, **fit_kwargs)
 
     def score(self, Z, y, **score_kwargs):
-        return super(SINDy_sklearn, self).score(x=Z[1], t=Z[0], x_dot=y, **score_kwargs)
+        return super(SINDy_sklearn, self).score(x=Z[:, 1:], t=Z[:, 0], x_dot=y, **score_kwargs)
     

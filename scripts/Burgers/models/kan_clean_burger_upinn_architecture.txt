@@ -1,0 +1,15 @@
+u: KAN(
+  (layers): ModuleList(
+    (0-2): 3 x KANLinear(
+      (base_activation): SiLU()
+    )
+  )
+)
+N: SparseBurger()
+F: KAN(
+  (layers): ModuleList(
+    (0-2): 3 x KANLinear(
+      (base_activation): SiLU()
+    )
+  )
+)

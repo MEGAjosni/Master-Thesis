@@ -20,7 +20,7 @@ class ScalingLayer(nn.Module):
 
 # FEEDFORWARD NEURAL NETWORK
 class FNN(nn.Module):
-    def __init__(self, dims, hidden_act=nn.Tanh(), output_act=nn.Identity(), weight_init=xavier_normal_, bias_init=zeros_):
+    def __init__(self, dims, hidden_act=nn.Tanh(), output_act=nn.Identity(), weight_init=xavier_normal_, bias_init=zeros_, scaling=True):
 
         super(FNN, self).__init__()
 
@@ -32,7 +32,7 @@ class FNN(nn.Module):
         hidden_dims = dims[1:-1]
 
         self.layers = nn.ModuleList()
-        self.layers.append(ScalingLayer())
+        if scaling: self.layers.append(ScalingLayer())
         in_dim = input_dim
         for out_dim in hidden_dims:
             self.layers.append(nn.Linear(in_dim, out_dim))
@@ -61,7 +61,7 @@ class FNN(nn.Module):
         return x
     
 
-
+# RESIDUAL NEURAL NETWORK
 class ResNetBlock(nn.Module):
     """Residual Block with skip connection"""
     def __init__(self, in_features, depth=1, activation=nn.Tanh()):
@@ -80,17 +80,19 @@ class ResNetBlock(nn.Module):
 
 class ResNet(nn.Module):
 
-    def __init__(self, input_dim=2, hidden_dim=64, output_dim=1, num_blocks=5, block_size=2, activation=nn.Tanh()):
+    def __init__(self, input_dim=2, hidden_dim=64, output_dim=1, num_blocks=5, block_size=2, activation=nn.Tanh(), output_activation=nn.Identity()):
         super(ResNet, self).__init__()
         self.input_layer = nn.Linear(input_dim, hidden_dim)
         self.res_blocks = nn.Sequential(*[ResNetBlock(hidden_dim, block_size, activation) for _ in range(num_blocks)])
         self.output_layer = nn.Linear(hidden_dim, output_dim)
         self.activation = activation
+        self.output_activation = output_activation
 
     def forward(self, x):
         x = self.activation(self.input_layer(x))
         x = self.res_blocks(x)
-        return self.output_layer(x)
+        x = self.output_activation(self.output_layer(x))
+        return x
 
 
 
@@ -100,10 +102,8 @@ class ResNet(nn.Module):
 ##############################################################################################################
 ### Courtesy of akaashdash: https://github.com/Blealtan/efficient-kan/blob/master/src/efficient_kan/kan.py ###
 ##############################################################################################################
-import torch
-import torch.nn.functional as F
-import math
 
+# KAN
 class KANLinear(torch.nn.Module):
     def __init__(
         self,
@@ -115,7 +115,7 @@ class KANLinear(torch.nn.Module):
         scale_base=1.0,
         scale_spline=1.0,
         enable_standalone_scale_spline=True,
-        base_activation=torch.sin,
+        base_activation=torch.nn.SiLU,
         grid_eps=0.02,
         grid_range=[-1, 1],
     ):
@@ -350,12 +350,10 @@ class KAN(torch.nn.Module):
         base_activation=torch.nn.SiLU,
         grid_eps=0.02,
         grid_range=[-1, 1],
-        scale_fn=lambda x: x,
     ):
         super(KAN, self).__init__()
         self.grid_size = grid_size
         self.spline_order = spline_order
-        self.scale_fn = scale_fn
 
         self.layers = torch.nn.ModuleList()
         for in_features, out_features in zip(layers_hidden, layers_hidden[1:]):
@@ -375,7 +373,6 @@ class KAN(torch.nn.Module):
             )
 
     def forward(self, x: torch.Tensor, update_grid=False):
-        x = self.scale_fn(x)
         for layer in self.layers:
             if update_grid:
                 layer.update_grid(x)

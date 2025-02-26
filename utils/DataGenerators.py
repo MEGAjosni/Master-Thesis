@@ -83,6 +83,8 @@ def sample_collocation_points(N, n_dims, lb, ub, method='sobol', verbose=False):
         print(f"[Info]: The {n_dims}-root of {N} is not an integer, sample will contain {m**n_dims} points instead.") if root % 1 != 0 and verbose else None
         grid = torch.linspace(0, 1, m)
         Zc = torch.cartesian_prod(*[grid]*n_dims)
+        if n_dims == 1:
+            Zc = Zc.unsqueeze(1)
 
     else:
         raise ValueError(f"Invalid sample method: {method}\nChoose from ['sobol', 'lhs', 'uniform', 'grid']")

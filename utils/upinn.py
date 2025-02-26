@@ -97,10 +97,13 @@ class UPINN(torch.nn.Module):
         self.optimizer = torch.optim.AdamW([*self.u.parameters(), *self.F.parameters(), *self.N.parameters()], lr=1e-3)
         self.scheduler = None
         self.softadapt_kwargs = dict()
+        self.lambdas = torch.tensor([1.0, 1.0, 1.0])
+        self.softadapt_interval = 50
 
         # Logging
         self.log = dict()
         self.log_to_wandb = False
+        self.epoch = 0
 
 
     # Move model and data to device
@@ -166,6 +169,18 @@ class UPINN(torch.nn.Module):
             print("[Error]: Failed to load model.")
 
 
+    def freeze_F(self):
+        self.F.requires_grad_(False)
+    
+    def unfreeze_F(self):
+        self.F.requires_grad_(True)
+
+    def freeze_N(self):
+        self.N.requires_grad_(False)
+    
+    def unfreeze_N(self):
+        self.N.requires_grad_(True)
+
     # Forward pass
     def predict(self, X):
         with torch.no_grad():
@@ -206,7 +221,8 @@ class UPINN(torch.nn.Module):
         if self.collocation_points is not None:
             U_c = self.u(self.collocation_points)
             res = self.F(self.F_input(self.collocation_points, U_c))
-            pde_loss = torch.nn.MSELoss()(self.N(self.collocation_points, U_c), -res) if self.collocation_points.shape[0] > 0 else torch.tensor(0.0)
+            known = self.N(self.collocation_points, U_c)
+            pde_loss = torch.nn.MSELoss()(known, -res) if self.collocation_points.shape[0] > 0 else torch.tensor(0.0)
         else: pde_loss = torch.tensor(0.0)
         return pde_loss
     
@@ -214,8 +230,9 @@ class UPINN(torch.nn.Module):
         bc_loss = self.bc_loss()
         data_loss = self.data_loss()
         pde_loss = self.pde_loss()
-        lambdas = SoftAdapt(**self.softadapt_kwargs)(torch.tensor([bc_loss, data_loss, pde_loss]))
-        loss = lambdas[0]*bc_loss + lambdas[1]*data_loss + lambdas[2]*pde_loss
+        if self.epoch % self.softadapt_interval == 0 and len(self.softadapt_kwargs) > 0:
+            self.lambdas = SoftAdapt(**self.softadapt_kwargs)(torch.tensor([bc_loss, data_loss, pde_loss]))
+        loss = self.lambdas[0]*bc_loss + self.lambdas[1]*data_loss + self.lambdas[2]*pde_loss
 
         return loss, bc_loss, data_loss, pde_loss
 
@@ -232,9 +249,16 @@ class UPINN(torch.nn.Module):
         # Backpropagate
         loss.backward(retain_graph=True)
 
-        # Log
-        self.log.update(dict(L=loss.item(), L_bc=bc_loss.item(), L_data=data_loss.item(), L_pde=pde_loss.item()))
-        wandb.log(self.log) if self.log_to_wandb else self.epoch_iterator.set_postfix({k: f"{v:.2e}" for k, v in self.log.items()})
+        # Log the losses
+        self.log.setdefault('bc_loss', []).append(bc_loss.item())
+        self.log.setdefault('data_loss', []).append(data_loss.item())
+        self.log.setdefault('pde_loss', []).append(pde_loss.item())
+        self.log.setdefault('loss', []).append(loss.item())
+
+        log = {k: v[-1] for k, v in self.log.items()}
+
+        # Log to WandB or tqdm
+        wandb.log(log) if self.log_to_wandb else self.epoch_iterator.set_postfix({k: f"{v:.2e}" for k, v in log.items()})
 
         return loss
     
@@ -250,8 +274,10 @@ class UPINN(torch.nn.Module):
             device: torch.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu'),
             save_name: dict = None,
             save_path = '',
-            log_wandb_kwargs: dict = dict(name='UPINN', project='Master-Thesis')
+            log_wandb_kwargs: dict = dict(name='UPINN', project='Master-Thesis'),
+            softadapt_interval: int = None,
     ):
+        if softadapt_interval: self.softadapt_interval = softadapt_interval
 
         # Move the model and data to the device
         self.train()
@@ -275,7 +301,7 @@ class UPINN(torch.nn.Module):
 
         # Training loop
         for epoch in self.epoch_iterator:
-            self.epoch = epoch
+            self.epoch += 1
 
             # Take optimization step
             loss = self.optimizer.step(self.closure)

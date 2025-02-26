@@ -1,0 +1,28 @@
+u: MultKAN(
+  (act_fun): ModuleList(
+    (0-2): 3 x KANLayer(
+      (base_fun): SiLU()
+    )
+  )
+  (base_fun): SiLU()
+  (symbolic_fun): ModuleList(
+    (0-2): 3 x Symbolic_KANLayer()
+  )
+)
+N: SparseLV()
+F: FNN(
+  (scalinglayer): ScalingLayer()
+  (layers): ModuleList(
+    (0): ScalingLayer()
+    (1): Linear(in_features=2, out_features=16, bias=True)
+    (2): Tanh()
+    (3): Linear(in_features=16, out_features=16, bias=True)
+    (4): Tanh()
+    (5): Linear(in_features=16, out_features=16, bias=True)
+    (6): Tanh()
+    (7): Linear(in_features=16, out_features=16, bias=True)
+    (8): Tanh()
+    (9): Linear(in_features=16, out_features=2, bias=True)
+    (10): Identity()
+  )
+)
