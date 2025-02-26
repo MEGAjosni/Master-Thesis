@@ -3,9 +3,9 @@ Repository for all code produced as part of my Master Thesis on Universal Physic
 
 
 ## Load a trained model
-The model ```model.pt``` at path ```path/to/models``` can be loaded using the following code:
+To load a model with name ```modelname``` at path ```path/to/models```, use the following code:
 ```python
-upinn_model.load(path='path/to/models', name='model.pt')
+UPINN.load(path='path/to/models', name='modelname')
 ```
 
-Note! This requires instantiating a ```UPINN``` model object with the same architecture as the model to be loaded. Models saved with the ```UPINN.save()``` have an associated ```model_architecture.txt``` file containing a printout of the model architecture.
+Note! This requires instantiating a ```UPINN``` model object with the same architecture as the model to be loaded. Saving a model with ```UPINN.save()``` also create an associated ```modelname_architecture.txt``` file containing a printout of the model architecture.
