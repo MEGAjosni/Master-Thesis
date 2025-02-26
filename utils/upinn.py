@@ -8,7 +8,7 @@ from itertools import count
 import traceback
 import sys
 sys.path.append('../utils')
-from Utils import SoftAdapt
+from utils import SoftAdapt
 
 # Weights and Biases
 import wandb

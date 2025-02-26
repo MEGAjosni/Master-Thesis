@@ -44,6 +44,45 @@ def RAD_sampler(candidate_points, residuals, N_RAD, k=1.0, c=1.0):
     return candidate_points[idx]
 
 
+def sample_collocation_points(N, n_dims, lb, ub, method='sobol', verbose=False):
+    """
+    Sample N collocation points from the domain [lb, ub]
+    """
+
+    if method == 'sobol':
+        sobol = torch.quasirandom.SobolEngine(dimension=n_dims)
+        Zc = sobol.draw(n=N, dtype=torch.float32)
+    
+    elif method == 'lhs':
+        hypercube = qmc.LatinHypercube(d=n_dims)
+        Zc = torch.tensor(hypercube.random(n=N), dtype=torch.float32)
+    
+    elif method == 'uniform':
+        Zc = torch.rand(N, n_dims)
+    
+    elif method == 'grid':
+        # Will not generate N points if N is not a perfect square
+        root = N**(1/n_dims)
+        m = int(np.ceil(N**(1/n_dims)))
+        print(f"[Info]: The {n_dims}-root of {N} is not an integer, sample will contain {m**n_dims} points instead.") if root % 1 != 0 and verbose else None
+        grid = torch.linspace(0, 1, m)
+        Zc = torch.cartesian_prod(*[grid]*n_dims)
+        if n_dims == 1:
+            Zc = Zc.unsqueeze(1)
+
+    else:
+        raise ValueError(f"Invalid sample method: {method}\nChoose from ['sobol', 'lhs', 'uniform', 'grid']")
+
+    
+    # Scale the points to the domain [lb, ub]
+    lb = torch.tensor(lb)
+    ub = torch.tensor(ub)
+    Zc = lb + (ub - lb) * Zc
+
+    return Zc
+
+
+
 
 # # # # # # # # # # # # # # # # # # # #
 #                                     #

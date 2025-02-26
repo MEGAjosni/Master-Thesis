@@ -1,4 +1,3 @@
-from .Architectures import *
-from .UPINN import *
-from .DataGenerators import *
-from .Utils import *
+from .architectures import *
+from .upinn import *
+from .utils import *
