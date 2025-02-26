@@ -8,4 +8,4 @@ To load a model with name ```modelname``` at path ```path/to/models```, use the 
 UPINN.load(path='path/to/models', name='modelname')
 ```
 
-Note! This requires instantiating a ```UPINN``` model object with the same architecture as the model to be loaded. Saving a model with ```UPINN.save()``` also create an associated ```modelname_architecture.txt``` file containing a printout of the model architecture.
+Note! This requires instantiating a ```UPINN``` model object with the same architecture as the model to be loaded. Saving a model with ```UPINN.save()``` creates an associated ```modelname_architecture.txt``` file containing a printout of the model architecture.
