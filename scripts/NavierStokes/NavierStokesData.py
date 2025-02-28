@@ -2,6 +2,9 @@ import scipy.io
 import numpy as np
 import torch
 
+def compute_grad(outputs, inputs):
+    return torch.autograd.grad(outputs, inputs, grad_outputs=torch.ones_like(outputs), create_graph=True, retain_graph=True)[0]
+
 class NavierStokesData:
     def __init__(self, samplesize=5000):
 
@@ -41,7 +44,99 @@ class NavierStokesData:
         idx = np.random.choice(N*T, samplesize, replace=False)
         self.Zd = self.Zd_full[idx]
         self.Ud = self.Ud_full[idx]
+    
 
+    def get_quantities(self, model, t=10):
+
+        slice_shape = (50, 100)
+        lambda2 = 0.01
+
+        x = torch.linspace(1, 8, slice_shape[1])
+        y = torch.linspace(-2, 2, slice_shape[0])
+        X, Y = torch.meshgrid(x, y)
+        T = torch.ones_like(X) * t
+        Z = torch.stack([X.T, Y.T, T.T], dim=2).reshape(-1, 3).requires_grad_(True)
+        U = model.u(Z)
+        U_np = U.detach().numpy().reshape(*X.shape, 2)
+
+        ###############
+        # PREDICTIONS #
+        ###############
+
+        # Predicted preassure
+        pz_pred = compute_grad(U[:, 1:2], Z)
+        px_pred = pz_pred[:, 0].reshape(slice_shape).detach().numpy()
+        py_pred = pz_pred[:, 1].reshape(slice_shape).detach().numpy()
+        p_pred = U_np[..., 1].T
+
+        # Predicted velocity field and vorticity
+        Psi_Z = compute_grad(U[..., 0], Z)
+        psi_x = Psi_Z[:, 0]
+        psi_y = Psi_Z[:, 1]
+
+        u_pred = psi_y
+        v_pred = -psi_x
+
+        u_y_pred = compute_grad(u_pred, Z)[:, 1].detach().numpy().reshape(slice_shape)
+        v_x_pred = compute_grad(v_pred, Z)[:, 0].detach().numpy().reshape(slice_shape)
+
+        omega_pred = v_x_pred - u_y_pred
+        u_pred = u_pred.detach().numpy().reshape(slice_shape)
+        v_pred = v_pred.detach().numpy().reshape(slice_shape)
+
+        # Predicted pressure field
+        p_pred = U[:, 1:2].detach().numpy().T.reshape(slice_shape)
+
+        # Predicted residuals
+        res_pred = model.F(model.F_input(Z, U))
+        res_f_pred = res_pred[:, 0:1].detach().numpy().reshape(slice_shape)
+        res_g_pred = res_pred[:, 1:2].detach().numpy().reshape(slice_shape)
+
+
+        ############
+        # SOLUTION #
+        ############
+
+        # Mask for the current time step
+        mask = self.Zd_full[:, 2] == t
+
+        # True preassure gradients
+        p_true = self.Ud_full[mask, 2].reshape(slice_shape)
+        p_x_true = np.gradient(p_true, x, axis=1)
+        p_y_true = np.gradient(p_true, y, axis=0)
+
+        # True velocity field and vorticity
+        u_true = self.Ud_full[mask, 0].reshape(slice_shape)
+        v_true = self.Ud_full[mask, 1].reshape(slice_shape)
+
+        u_y_true = np.gradient(u_true, y, axis=0)
+        v_x_true = np.gradient(v_true, x, axis=1)
+        omega_true = v_x_true - u_y_true
+
+        # True residuals
+        res_true_f = - lambda2 * (np.gradient(np.gradient(u_true, x, axis=1), x, axis=1) + np.gradient(np.gradient(u_true, y, axis=0), y, axis=0))
+        res_true_g = - lambda2 * (np.gradient(np.gradient(v_true, x, axis=1), x, axis=1) + np.gradient(np.gradient(v_true, y, axis=0), y, axis=0))
+
+        return {
+            "x": x,
+            "y": y,
+            "u_pred": u_pred,
+            "v_pred": v_pred,
+            "p_pred": p_pred,
+            "px_pred": px_pred,
+            "py_pred": py_pred,
+            "omega_pred": omega_pred,
+            "f_res_pred": res_f_pred,
+            "g_res_pred": res_g_pred,
+            "u_true": u_true,
+            "v_true": v_true,
+            "p_true": p_true,
+            "px_true": p_x_true,
+            "py_true": p_y_true,
+            "omega_true": omega_true,
+            "f_res_true": res_true_f,
+            "g_res_true": res_true_g,
+        }
 
 
 
