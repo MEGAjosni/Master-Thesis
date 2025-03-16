@@ -2,6 +2,7 @@ import torch
 import numpy as np
 import pysindy as ps
 from sklearn.model_selection import TimeSeriesSplit
+from scipy.stats import qmc
 
 # Disable Warning for sindy
 import warnings
@@ -9,20 +10,18 @@ def warn(*args, **kwargs): pass
 warnings.warn = warn
 
 class SoftAdapt(torch.nn.Module):
-    def __init__(self, beta=0.0, loss_weigthed=False):
+    def __init__(self, beta=0.0, loss_weighted=False):
         super(SoftAdapt, self).__init__()
         self.beta = beta
-        self.loss_weigthed = loss_weigthed
+        self.loss_weigthed = loss_weighted
         self.prev_losses = 0.0
 
     def forward(self, losses):
         self.prev_losses = losses
         s = losses - self.prev_losses
         t = torch.exp(self.beta*s)
-        if self.loss_weigthed:
-            return losses*t / torch.sum(losses*t)
-        else:
-            return t / torch.sum(t)
+        new_lambdas = losses*t / torch.sum(losses*t) if self.loss_weigthed else t / torch.sum(t)
+        return new_lambdas
 
 
 class DeadZoneLinear(torch.nn.Module):
@@ -40,6 +39,13 @@ def RAD_sampler(candidate_points, residuals, N_RAD, k=1.0, c=1.0):
     error_eq = torch.pow(residuals, k) / torch.pow(residuals, k).mean() + c
     err_eq_normalized = error_eq / error_eq.sum()
     idx = torch.multinomial(err_eq_normalized.squeeze(), N_RAD, replacement=False)
+
+    return candidate_points[idx]
+
+
+def RAR_sampler(candidate_points, residuals, N_RAR):
+    residuals = torch.abs(residuals)
+    idx = torch.argsort(residuals.squeeze(), descending=True)[:N_RAR]
 
     return candidate_points[idx]
 
@@ -79,9 +85,10 @@ def sample_collocation_points(N, n_dims, lb, ub, method='sobol', verbose=False):
     ub = torch.tensor(ub)
     Zc = lb + (ub - lb) * Zc
 
-    return Zc
+    return Zc.to(torch.float32)
 
-
+def compute_grad(outputs, inputs):
+    return torch.autograd.grad(outputs, inputs, grad_outputs=torch.ones_like(outputs), create_graph=True, retain_graph=True)[0]
 
 
 # # # # # # # # # # # # # # # # # # # #

@@ -6,7 +6,7 @@ def compute_grad(outputs, inputs):
     return torch.autograd.grad(outputs, inputs, grad_outputs=torch.ones_like(outputs), create_graph=True, retain_graph=True)[0]
 
 class NavierStokesData:
-    def __init__(self, samplesize=5000):
+    def __init__(self, samplesize=5000, noise_level=0.0):
 
         # Load Data
         data = scipy.io.loadmat('data/cylinder_nektar_wake.mat')
@@ -44,6 +44,9 @@ class NavierStokesData:
         idx = np.random.choice(N*T, samplesize, replace=False)
         self.Zd = self.Zd_full[idx]
         self.Ud = self.Ud_full[idx]
+
+        # Add noise
+        self.Ud += noise_level * torch.mean(abs(self.Ud)) * torch.randn_like(self.Ud)
     
 
     def get_quantities(self, model, t=10):
@@ -74,15 +77,15 @@ class NavierStokesData:
         psi_x = Psi_Z[:, 0]
         psi_y = Psi_Z[:, 1]
 
-        u_pred = psi_y
-        v_pred = -psi_x
+        u_pred_ = psi_y
+        v_pred_ = -psi_x
 
-        u_y_pred = compute_grad(u_pred, Z)[:, 1].detach().numpy().reshape(slice_shape)
-        v_x_pred = compute_grad(v_pred, Z)[:, 0].detach().numpy().reshape(slice_shape)
+        u_y_pred_ = compute_grad(u_pred_, Z)[:, 1].detach().numpy().reshape(slice_shape)
+        v_x_pred_ = compute_grad(v_pred_, Z)[:, 0].detach().numpy().reshape(slice_shape)
 
-        omega_pred = v_x_pred - u_y_pred
-        u_pred = u_pred.detach().numpy().reshape(slice_shape)
-        v_pred = v_pred.detach().numpy().reshape(slice_shape)
+        omega_pred = v_x_pred_ - u_y_pred_
+        u_pred = u_pred_.detach().numpy().reshape(slice_shape)
+        v_pred = v_pred_.detach().numpy().reshape(slice_shape)
 
         # Predicted pressure field
         p_pred = U[:, 1:2].detach().numpy().T.reshape(slice_shape)
@@ -117,6 +120,31 @@ class NavierStokesData:
         res_true_f = - lambda2 * (np.gradient(np.gradient(u_true, x, axis=1), x, axis=1) + np.gradient(np.gradient(u_true, y, axis=0), y, axis=0))
         res_true_g = - lambda2 * (np.gradient(np.gradient(v_true, x, axis=1), x, axis=1) + np.gradient(np.gradient(v_true, y, axis=0), y, axis=0))
 
+
+        ############
+        # EXPECTED #
+        ############
+
+        # Expected residuals
+        u_x_exp = compute_grad(u_pred_, Z)[:, 0]
+        u_y_exp = compute_grad(u_pred_, Z)[:, 1]
+        v_x_exp = compute_grad(v_pred_, Z)[:, 0]
+        v_y_exp = compute_grad(v_pred_, Z)[:, 1]
+
+        u_xx_pred = compute_grad(u_x_exp, Z)[:, 0].detach().numpy().reshape(slice_shape)
+        u_yy_pred = compute_grad(u_y_exp, Z)[:, 1].detach().numpy().reshape(slice_shape)
+        v_xx_pred = compute_grad(v_x_exp, Z)[:, 0].detach().numpy().reshape(slice_shape)
+        v_yy_pred = compute_grad(v_y_exp, Z)[:, 1].detach().numpy().reshape(slice_shape)
+
+        res_exp_f = - lambda2 * (u_xx_pred + u_yy_pred)
+        res_exp_g = - lambda2 * (v_xx_pred + v_yy_pred)
+
+
+
+
+
+
+
         return {
             "x": x,
             "y": y,
@@ -136,6 +164,8 @@ class NavierStokesData:
             "omega_true": omega_true,
             "f_res_true": res_true_f,
             "g_res_true": res_true_g,
+            "f_res_exp": res_exp_f,
+            "g_res_exp": res_exp_g
         }
 
 

@@ -1,0 +1,18 @@
+u: StackedNN(
+  (nets): ModuleList(
+    (0-7): 8 x FNN(
+      (scalinglayer): ScalingLayer()
+      (layers): ModuleList(
+        (0): ScalingLayer()
+        (1): Linear(in_features=2, out_features=16, bias=True)
+        (2): Tanh()
+        (3): Linear(in_features=16, out_features=16, bias=True)
+        (4): Tanh()
+        (5): Linear(in_features=16, out_features=1, bias=True)
+        (6): Identity()
+      )
+    )
+  )
+)
+N: Continuity()
+F: NullWork()

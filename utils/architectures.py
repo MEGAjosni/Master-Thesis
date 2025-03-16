@@ -20,10 +20,11 @@ class ScalingLayer(nn.Module):
 
 # FEEDFORWARD NEURAL NETWORK
 class FNN(nn.Module):
-    def __init__(self, dims, hidden_act=nn.Tanh(), output_act=nn.Identity(), weight_init=xavier_normal_, bias_init=zeros_, scaling=True):
+    def __init__(self, dims, hidden_act=nn.Tanh(), output_act=nn.Identity(), weight_init=xavier_normal_, bias_init=zeros_, scaling=True, input_transform=None):
 
         super(FNN, self).__init__()
 
+        self.input_transform = input_transform if input_transform else None
         self.scalinglayer = ScalingLayer()
         self.dims = dims
 
@@ -56,6 +57,8 @@ class FNN(nn.Module):
 
     
     def forward(self, x):
+        if self.input_transform:
+            x = self.input_transform(x)
         for layer in self.layers:
             x = layer(x)
         return x
@@ -93,6 +96,20 @@ class ResNet(nn.Module):
         x = self.res_blocks(x)
         x = self.output_activation(self.output_layer(x))
         return x
+
+
+
+# STACKED NETWORK
+class StackedNN(nn.Module):
+    def __init__(self, nets):
+        super(StackedNN, self).__init__()
+        self.nets = nn.ModuleList(nets)
+    
+    def forward(self, x):
+        return torch.cat([net(x) for net in self.nets], dim=1)
+
+
+
 
 
 

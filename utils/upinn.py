@@ -8,7 +8,7 @@ from itertools import count
 import traceback
 import sys
 sys.path.append('../utils')
-from utils import SoftAdapt
+from utils import SoftAdapt, RAD_sampler, RAR_sampler, sample_collocation_points
 
 # Weights and Biases
 import wandb
@@ -20,10 +20,12 @@ os.chmod(folder_temp.name, 0o777)
 
 class NullWork(torch.nn.Module):
     """ A class to represent absence of Network or Operator """
-    def __init__(self):
+    def __init__(self, out_dim=1):
         super(NullWork, self).__init__()
+        self.out_dim = out_dim
+    
     def forward(self, x):
-        return torch.tensor(0.0, device=x.device)
+        return torch.zeros(x.shape[0], self.out_dim, device=x.device)
 
 
 class UPINN(torch.nn.Module):
@@ -35,12 +37,13 @@ class UPINN(torch.nn.Module):
         boundary_points: tuple = None,
         data_points: tuple = None,
         collocation_points: torch.Tensor = None,
+        inductive_bias: bool = True,
     ):
         """
         A class to train Universal Physics-Informed Neural Networks (UPINNs) for solving PDEs.
         
         The class assumes the PDE to be of the form,
-            x = (t, x1, x2, ..., xn), u = u(x)
+            x = (x1, x2, ..., xn), u = u(x)
             N(x, u) + F(x, u) = 0
         where N is the known dynamics of the system and F is the unknown dynamics.
 
@@ -88,9 +91,9 @@ class UPINN(torch.nn.Module):
         # self.boundary_points = (empty_input, empty_output) if boundary_points is None else boundary_points
         # self.collocation_points = empty_input if collocation_points is None else collocation_points
         # self.collocation_points.requires_grad = True
-        self.data_points = data_points
-        self.boundary_points = boundary_points
-        self.collocation_points = collocation_points
+        self.data_points = data_points; self.N_data = len(data_points[0]) if data_points is not None else None
+        self.boundary_points = boundary_points; self.N_boundary = len(boundary_points[0]) if boundary_points is not None else None
+        self.collocation_points = collocation_points; self.N_coll = len(collocation_points) if collocation_points is not None else None
         if self.collocation_points is not None: self.collocation_points.requires_grad = True
 
         # Training
@@ -99,6 +102,7 @@ class UPINN(torch.nn.Module):
         self.softadapt_kwargs = dict()
         self.lambdas = torch.tensor([1.0, 1.0, 1.0])
         self.softadapt_interval = 50
+        self.inductive_bias = inductive_bias
 
         # Logging
         self.log = dict()
@@ -126,7 +130,7 @@ class UPINN(torch.nn.Module):
         if overwrite: suffix = ''
         else:
             name_not_available = lambda suffix: any(os.path.exists(save_path + suffix + ext) for ext in extensions)
-            suffix = str(next((i for i in count(1) if not name_not_available(str(i))), '')) if name_not_available('') else ''
+            suffix = '_' + str(next((i for i in count(1) if not name_not_available(str(i))), '')) if name_not_available('') else ''
             if suffix: print(f"[Info]: {name} already exists in save directory. Enumerating model as {suffix}. To overwrite, set overwrite=True.")
 
         # Save the model
@@ -169,17 +173,30 @@ class UPINN(torch.nn.Module):
             print("[Error]: Failed to load model.")
 
 
-    def freeze_F(self):
-        self.F.requires_grad_(False)
+    def freeze(self, model='all'):
+        if model == 'all':
+            self.requires_grad_(False)
+        elif model == 'u':
+            self.u.requires_grad_(False)
+        elif model == 'N':
+            self.N.requires_grad_(False)
+        elif model == 'F':
+            self.F.requires_grad_(False)
+        else:
+            raise ValueError(f"Invalid model: {model}. Choose from ['all', 'u', 'N', 'F']")
     
-    def unfreeze_F(self):
-        self.F.requires_grad_(True)
+    def unfreeze(self, model='all'):
+        if model == 'all':
+            self.requires_grad_(True)
+        elif model == 'u':
+            self.u.requires_grad_(True)
+        elif model == 'N':
+            self.N.requires_grad_(True)
+        elif model == 'F':
+            self.F.requires_grad_(True)
+        else:
+            raise ValueError(f"Invalid model: {model}. Choose from ['all', 'u', 'N', 'F']")
 
-    def freeze_N(self):
-        self.N.requires_grad_(False)
-    
-    def unfreeze_N(self):
-        self.N.requires_grad_(True)
 
     # Forward pass
     def predict(self, X):
@@ -188,16 +205,48 @@ class UPINN(torch.nn.Module):
     
     def predict_residual(self, X):
         with torch.no_grad():
-            return self.F(self.predict(X))
+            return self.F(self.F_input(X, self.u(X)))
         
     def evaluate_known_dynamics(self, X):
         with torch.no_grad():
             return self.N(X, self.u(X))
 
-    # Functions to be implemented by the user if needed
-    def refine_boundary_points(self): pass
-    def refine_collocation_points(self): pass
-    def refine_points(self): self.refine_boundary_points(); self.refine_collocation_points()
+
+    # Adaptive refinement of collocation points
+    def refine_collocation_points(self, method, lb, ub, N_new=None, N_candidates=None, N_max=None, method_kwargs=dict(), sample_method='sobol'):
+
+        if N_new is None: N_new = self.N_coll
+        if N_candidates is None: N_candidates = 50*N_new
+        if N_max is None: N_max = 5*self.N_coll # Maximum number of allowed collocation points
+
+        if N_new > N_candidates: raise ValueError("N_new should be less than or equal to N_candidates.")
+
+        # Sample candidate points
+        Xc = sample_collocation_points(N_candidates, len(lb), lb=lb, ub=ub, method=sample_method).requires_grad_(True).float()
+
+        # Compute the residual
+        u = self.u(Xc)
+        pde_loss = abs(self.N(Xc, u) + self.F(self.F_input(Xc, u)))
+        residuals = torch.sum(pde_loss, dim=1)
+
+        if method == 'RAD':
+            # Replaces all collocation points with new points
+            if method_kwargs == {}: method_kwargs = dict(k=0.5, c=0.1) # Use recommended default values from: Wu, C., Zhu, M., Tan, Q., Kartha, Y., & Lu, L. (2023). https://doi.org/10.1016/J.CMA.2022.115671
+            self.collocation_points = RAD_sampler(Xc, residuals, N_new, **method_kwargs)
+        
+        elif method == 'RAR':
+            # Appends new points to the existing collocation points
+            if len(self.collocation_points) < N_max:
+                self.collocation_points = torch.cat([self.collocation_points, RAR_sampler(Xc, residuals, N_new, **method_kwargs)])
+
+        elif method == 'RAR-D':
+            # Appends new points to the existing collocation points
+            if len(self.collocation_points) < N_max:
+                self.collocation_points = torch.cat([self.collocation_points, RAD_sampler(Xc, residuals, N_new, **method_kwargs)])
+
+        else:
+            raise ValueError(f"Invalid method: {method}. Choose from ['RAD', 'RAR', 'RAR-D']")
+        
 
     # Default loss functions
     def bc_loss(self):
@@ -214,8 +263,8 @@ class UPINN(torch.nn.Module):
         else: data_loss = torch.tensor(0.0)
         return data_loss
 
-    def F_input(self, X, U):
-        return U
+    def F_input(self, Z, U):
+        return torch.cat([Z, U], dim=1)
 
     def pde_loss(self):
         if self.collocation_points is not None:
@@ -267,28 +316,24 @@ class UPINN(torch.nn.Module):
             self,
             epochs: int = 1000,
             optimizer: torch.optim.Optimizer = None,
-            optimizer_kwargs: dict = dict(),
             scheduler: torch.optim.Optimizer = None,
-            scheduler_kwargs: dict = dict(),
             loss_tol: float = -torch.inf,    # Stop training if loss is below this value
             device: torch.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu'),
-            save_name: dict = None,
-            save_path = '',
             log_wandb_kwargs: dict = dict(name='UPINN', project='Master-Thesis'),
-            softadapt_interval: int = None,
     ):
-        if softadapt_interval: self.softadapt_interval = softadapt_interval
 
         # Move the model and data to the device
         self.train()
         self.to(device); self.device = device
         
         # Setup optimizer
-        if optimizer: self.optimizer = optimizer([*self.u.parameters(), *self.F.parameters(), *self.N.parameters()], **optimizer_kwargs)
+        # if optimizer: self.optimizer = optimizer([*self.u.parameters(), *self.F.parameters(), *self.N.parameters()], **optimizer_kwargs)
+        if optimizer: self.optimizer = optimizer
         print(f"[Info]: Training {epochs} epoch(s) on {self.device} using {self.optimizer.__class__.__name__} optimizer.")
 
         # Setup learning rate scheduler
-        if scheduler: self.scheduler = scheduler(self.optimizer, **scheduler_kwargs)
+        # if scheduler: self.scheduler = scheduler(self.optimizer, **scheduler_kwargs)
+        if scheduler: self.scheduler = scheduler
 
         # Setup monitoring - Either WandB (online-dashboard) or tqdm (local-terminal)
         if self.log_to_wandb:
@@ -315,8 +360,6 @@ class UPINN(torch.nn.Module):
         # print("[Info]: Training complete.")
         self.eval()
         self.to(torch.device('cpu')); self.device = torch.device('cpu')
-
-        if save_name: self.save(save_name, save_path)
     
     def plot():
         raise NotImplementedError("Method not implemented.")

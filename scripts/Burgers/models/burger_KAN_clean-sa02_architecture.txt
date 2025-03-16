@@ -1,0 +1,23 @@
+u: MultKAN(
+  (act_fun): ModuleList(
+    (0-2): 3 x KANLayer(
+      (base_fun): SiLU()
+    )
+  )
+  (base_fun): SiLU()
+  (symbolic_fun): ModuleList(
+    (0-2): 3 x Symbolic_KANLayer()
+  )
+)
+N: SparseBurger()
+F: MultKAN(
+  (act_fun): ModuleList(
+    (0-2): 3 x KANLayer(
+      (base_fun): SiLU()
+    )
+  )
+  (base_fun): SiLU()
+  (symbolic_fun): ModuleList(
+    (0-2): 3 x Symbolic_KANLayer()
+  )
+)
