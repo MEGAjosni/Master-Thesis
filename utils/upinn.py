@@ -199,17 +199,14 @@ class UPINN(torch.nn.Module):
 
 
     # Forward pass
-    def predict(self, X):
-        with torch.no_grad():
-            return self.u(X)
+    def predict_solution(self, X):
+        return self.u(X)
     
     def predict_residual(self, X):
-        with torch.no_grad():
-            return self.F(self.F_input(X, self.u(X)))
+        return self.F(self.F_input(X, self.u(X)))
         
-    def evaluate_known_dynamics(self, X):
-        with torch.no_grad():
-            return self.N(X, self.u(X))
+    def evaluate_known(self, X):
+        return self.N(X, self.u(X))
 
 
     # Adaptive refinement of collocation points
